@@ -1,5 +1,7 @@
 # Staff
 
+## Teachers
+
 <!-- 1 column per row for smaller screens and 3 columns per row for larger screens with gutter of 2-->
 <div class="row row-cols-1 row-cols-md-3 g-2">
     <div class="col">

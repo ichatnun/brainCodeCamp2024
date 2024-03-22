@@ -6,8 +6,9 @@ parts:
   - caption: General Information
     chapters:
       - file: GeneralInfo/schedule
-      - file: GeneralInfo/OH_staff
-      # - file: GeneralInfo/OH_teams
+      - file: GeneralInfo/on-site-meetups
+      - file: GeneralInfo/staff
+      - file: GeneralInfo/OH-teams
       - file: GeneralInfo/datasets
       - file: GeneralInfo/graduation_requirements
 
@@ -73,7 +74,6 @@ parts:
       - file: Prereqs/BBB2BCC/BBB2BCC
         sections:
           - file: Prereqs/BBB2BCC/DataVisualization
-          # - file: Prereqs/BBB2BCC/DimensionalityReduction
           # - file: Prereqs/BBB2BCC/NeuroscienceData
           - file: Prereqs/BBB2BCC/Modeling
 
@@ -112,18 +112,72 @@ parts:
   - caption: Deep Learning (Week 4)
     chapters:
       - file: Fundamentals/DeepLearning/deep_learning_intro
+      - file: Fundamentals/DeepLearning/deep_learning_fundamentals
+      - file: Fundamentals/DeepLearning/intro_pytorch
+      - file: Fundamentals/DeepLearning/concentration_prediction_with_EEG
+      - file: Fundamentals/DeepLearning/cnn_cdt_pytorch
+      - file: Fundamentals/DeepLearning/deep_learning_outro
+
+  - caption: Modality Exploration (Week 5)
+    chapters:
+      - file: Fundamentals/ModalityExploration/EEG/eeg
+        title: EEG (modality 1)
         sections:
-          - file: Fundamentals/DeepLearning/deep_learning_fundamentals
-          - file: Fundamentals/DeepLearning/intro_pytorch
-          - file: Fundamentals/DeepLearning/concentration_prediction_with_EEG
-          - file: Fundamentals/DeepLearning/cnn_cdt_pytorch
-      # - file: Fundamentals/DeepLearning/deep_learning_part2_intro
-      #   title: DL Part 2 (Week 8)
-      #   sections:
-      #     - file: Fundamentals/DeepLearning/object_detection_transformer
-      #     - file: Fundamentals/DeepLearning/breast_cancer_segmentation_transformers
-      #     - file: Fundamentals/DeepLearning/thai_food_classification_transformers
-      #     - file: Fundamentals/DeepLearning/deep_learning_outro
+          - file: Fundamentals/ModalityExploration/EEG/eeg_code_part1
+      - file: Fundamentals/ModalityExploration/fMRI/fmri
+        title: fMRI (modality 2)
+        sections:
+          - file: Fundamentals/ModalityExploration/fMRI/fmri_code_part1
+
+  - caption: Assignments (Weeks 6-7)
+    chapters:
+      - file: Fundamentals/ModalityExploration/Assignments/EEG-assignment/eeg-assignment
+        title: EEG (modality 1)
+      - file: Fundamentals/ModalityExploration/Assignments/fMRI-assignment/fmri-assignment
+        title: fMRI (modality 2)
+
+  - caption: Applications (Weeks 8-12)
+    chapters:
+      - file: Applications/MiniProjects
+
+  - caption: Extra Lectures
+    chapters:
+      - file: ExtraResources/SignalProcessing/signal_processing_intro
+        title: Signal Processing
+        sections:
+          - file: ExtraResources/SignalProcessing/signal_processing_part1_sampling_averaging
+          - file: ExtraResources/SignalProcessing/signal_processing_part2_dft
+          - file: ExtraResources/SignalProcessing/signal_processing_part3_STFT
+          - file: ExtraResources/SignalProcessing/signal_processing_part4_application
+          - file: ExtraResources/SignalProcessing/signal_processing_outro
+      - file: ExtraResources/RecurrentNeuralNetwork
+      - file: ExtraResources/AttentionTransformer
+      - file: ExtraResources/GraphNeuralNetwork
+      - file: ExtraResources/ReinforcementLearning
+      - file: ExtraResources/Statistics
+      - file: ExtraResources/DimensionalityReduction
+
+  - caption: Extra Coding
+    chapters:
+      - file: ExtraResources/HandsOnDeepLearningWithPytorch
+      - file: ExtraResources/DeepLearningApplications/object_detection_transformer
+      - file: ExtraResources/DeepLearningApplications/breast_cancer_segmentation_transformers
+      - file: ExtraResources/DeepLearningApplications/thai_food_classification_transformers
+
+  - caption: Previous Offerings
+    chapters:
+      - file: PreviousOfferings/BCC2023/bcc2023
+        sections:
+          - file: PreviousOfferings/BCC2023/graduates
+          - file: PreviousOfferings/BCC2023/projects
+
+  # - file: Fundamentals/DeepLearning/deep_learning_part2_intro
+  #   title: DL Part 2 (Week 8)
+  #   sections:
+  #     - file: Fundamentals/DeepLearning/object_detection_transformer
+  #     - file: Fundamentals/DeepLearning/breast_cancer_segmentation_transformers
+  #     - file: Fundamentals/DeepLearning/thai_food_classification_transformers
+  #     - file: Fundamentals/DeepLearning/deep_learning_outro
 
   # - caption: Signal Processing (Week 9)
   #   chapters:
@@ -133,22 +187,3 @@ parts:
   #     - file: Fundamentals/SignalProcessing/signal_processing_part3_STFT
   #     - file: Fundamentals/SignalProcessing/signal_processing_part4_application
   #     - file: Fundamentals/SignalProcessing/signal_processing_outro
-
-  - caption: Applications (Weeks 10-12)
-    chapters:
-      - file: Applications/MiniProjects
-
-  - caption: Extra Resources
-    chapters:
-      - file: ExtraResources/HandsOnDeepLearningWithPytorch
-      - file: ExtraResources/RecurrentNeuralNetwork
-      - file: ExtraResources/AttentionTransformer
-      - file: ExtraResources/GraphNeuralNetwork
-      - file: ExtraResources/ReinforcementLearning
-      - file: ExtraResources/Statistics
-  - caption: Previous Offerings
-    chapters:
-      - file: PreviousOfferings/BCC2023/bcc2023
-        sections:
-          - file: PreviousOfferings/BCC2023/graduates
-          - file: PreviousOfferings/BCC2023/projects
