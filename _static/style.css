@@ -1,0 +1,21 @@
+.staff-image-container {
+    height: 400px; /* Fix the height to 400px */
+    width: 100%; /* Make the container fill the full width */
+    overflow: scroll; /* Hide the content that exceeds the parent element */ 
+  }
+  
+.staff-image-container img {
+    height: 50%; /* Set the maximum height to 50% of the parent */  
+    object-fit: contain;  /* Maintain aspect ratio with resizing */
+  }
+
+.project-image-container {
+    height: 400px; /* Explicitly set height to 100px */
+    width: 100%; /* Make the container fill the full width */
+    overflow: scroll;
+  }
+  
+.project-image-container img {
+    max-height: 70%; /* Set the maximum height to 70% of the parent */ 
+    object-fit: cover; /* Maintain aspect ratio with resizing */
+  }

@@ -1,0 +1,55 @@
+name: publish-book
+
+on: 
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  
+# This job installs dependencies, build the book, and pushes it to `gh-pages`
+jobs:
+  build-and-deploy-book:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+          
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install jupyter-book ghp-import
+          
+      - name: Clean book
+        run: |
+          jupyter-book clean .
+          
+      - name: Build book
+        run: |
+          jupyter-book build .
+      
+      # run only if branch is main
+      - name: Deploy 🚀
+        if: github.ref == 'refs/heads/main'
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: _build/html
+
+      - name: Deploy https://course-braincodecamp.web.app/
+        if: github.ref == 'refs/heads/course'
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BRAINCODEQUIZ }}'
+          projectId: braincodequiz
+          target: braincodequiz
+          channelId: live

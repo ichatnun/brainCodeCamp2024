@@ -1,0 +1,162 @@
+# Table of contents
+format: jb-book
+root: intro
+
+parts:
+  - caption: General Information
+    chapters:
+      - file: GeneralInfo/OH_schedule
+      - file: GeneralInfo/OH_staff
+      - file: GeneralInfo/OH_teams
+      - file: GeneralInfo/datasets
+      - file: GeneralInfo/graduation_requirements
+      - file: GeneralInfo/projects
+  - caption: Brain Building Blocks
+    chapters:
+      - file: Fundamentals/BrainBuildingBlocks/Session1/S1_Intro
+        sections:
+          - file: Fundamentals/BrainBuildingBlocks/Session1/S1L1_HelloBrain
+          - file: Fundamentals/BrainBuildingBlocks/Session1/S1L2_EssentialNeuroanatomy
+          - file: Fundamentals/BrainBuildingBlocks/Session1/S1L3_FunctionalAreaAndNetwork
+          - file: Fundamentals/BrainBuildingBlocks/Session1/S1L4_LanguageOfTheBrain
+      - file: Fundamentals/BrainBuildingBlocks/Session2/S2_Intro
+        sections:
+          - file: Fundamentals/BrainBuildingBlocks/Session2/S2L1_IntroBrainScienceToolbox
+          - file: Fundamentals/BrainBuildingBlocks/Session2/S2L2_EraOfLocalization
+          - file: Fundamentals/BrainBuildingBlocks/Session2/S2L3_MeasuringImmeasurable
+          - file: Fundamentals/BrainBuildingBlocks/Session2/S2L4_SneakPeekInsideTheBlackBox
+          - file: Fundamentals/BrainBuildingBlocks/Session2/S2L5_JourneyIntoTheBrain
+      - file: Fundamentals/BrainBuildingBlocks/Session3/S3_Intro
+        sections:
+          - file: Fundamentals/BrainBuildingBlocks/Session3/S3L1_ConnectingBrainAndBehavior
+          - file: Fundamentals/BrainBuildingBlocks/Session3/S3L2_SingleNeuronStudies
+          - file: Fundamentals/BrainBuildingBlocks/Session3/S3L3_EEGStudies
+          - file: Fundamentals/BrainBuildingBlocks/Session3/S3L4_fMRIStudies
+      - file: Fundamentals/BrainBuildingBlocks/Session4/S4_Intro
+        sections:
+          - file: Fundamentals/BrainBuildingBlocks/Session4/S4L1_SolveTheBrainSignal
+          - file: Fundamentals/BrainBuildingBlocks/Session4/S4L2_NeuralFiring
+          - file: Fundamentals/BrainBuildingBlocks/Session4/S4L3_EEGSignal
+          - file: Fundamentals/BrainBuildingBlocks/Session4/S4L4_fMRISignal
+
+      - file: Fundamentals/BrainBuildingBlocks/Session5/S5_Intro
+        sections:
+          - file: Fundamentals/BrainBuildingBlocks/Session5/S5L1_TopographicOrganization
+          - file: Fundamentals/BrainBuildingBlocks/Session5/S5L2_BiologicalNeuron
+          - file: Fundamentals/BrainBuildingBlocks/Session5/S5L3_NeuralPopulationTuning
+          - file: Fundamentals/BrainBuildingBlocks/Session5/S5L4_NeuralRepresentation
+          - file: Fundamentals/BrainBuildingBlocks/Session5/S5L5_HowDoesBrainDecide
+      - file: Fundamentals/BrainBuildingBlocks/Session6/S6_Intro
+        sections:
+          - file: Fundamentals/BrainBuildingBlocks/Session6/S6L1_DataHandlingAndExploration
+          - file: Fundamentals/BrainBuildingBlocks/Session6/S6L2_GoalsOfModeling
+          - file: Fundamentals/BrainBuildingBlocks/Session6/S6L3_TypesOfModeling
+          - file: Fundamentals/BrainBuildingBlocks/Session6/S6L4_ModelEvaluation
+      - file: Fundamentals/BrainBuildingBlocks/Session7/S7_Intro
+        sections:
+          - file: Fundamentals/BrainBuildingBlocks/Session7/S7L1_AIAndBI
+          - file: Fundamentals/BrainBuildingBlocks/Session7/S7L2_AIAndBI2
+          - file: Fundamentals/BrainBuildingBlocks/Session7/S7L3_SupervisedDeepLearning
+          - file: Fundamentals/BrainBuildingBlocks/Session7/S7L4_ReinforcementLearning
+          - file: Fundamentals/BrainBuildingBlocks/Session7/S7L5_UnsupervisedLearning
+          - file: Fundamentals/BrainBuildingBlocks/Session7/S7L6_LanguageModels
+      - file: Fundamentals/BrainBuildingBlocks/Session8/S8_Intro
+        sections:
+          - file: Fundamentals/BrainBuildingBlocks/Session8/S8L1_DiagnosisAndMonitoring
+          - file: Fundamentals/BrainBuildingBlocks/Session8/S8L4_ComputationalNeuropsychiatry
+      - file: Fundamentals/BrainBuildingBlocks/Session9/S9_Intro
+        sections:
+          - file: Fundamentals/BrainBuildingBlocks/Session9/S9L2_BrainComputerInterface
+
+  - caption: Prerequisites
+    chapters:
+      - file: Fundamentals/Prereqs/BBB2BCC/PrereqBCC
+        sections:
+          - file: Fundamentals/Prereqs/BBB2BCC/DataVisualization
+          - file: Fundamentals/Prereqs/BBB2BCC/DimensionalityReduction
+          - file: Fundamentals/Prereqs/BBB2BCC/NeuroscienceData
+          - file: Fundamentals/Prereqs/BBB2BCC/Modeling
+
+      - file: Fundamentals/Prereqs/Coding/PrereqCoding
+        sections:
+          - file: Fundamentals/Prereqs/Coding/00_basic_python
+          - file: Fundamentals/Prereqs/Coding/01_numpy
+
+  - caption: Welcome to Brain Code Camp! (Week 1)
+    chapters:
+      - file: Fundamentals/WelcomeToBrainCodeCamp/Intro
+
+  - caption: Prerequisites & Project Idea Exploration (Week 2)
+    chapters:
+      - file: Fundamentals/PrereqAndProjectExploration/Intro
+
+  - caption: Intro to Modeling and Model Selection (Week 3)
+    chapters:
+      - file: Fundamentals/IntroToModeling/modeling_intro
+      - file: Fundamentals/IntroToModeling/modeling_part1_simple_linear_model
+      - file: Fundamentals/IntroToModeling/modeling_part2_poly_overfit_regularization
+      - file: Fundamentals/IntroToModeling/modeling_part3_data_splitting
+      - file: Fundamentals/IntroToModeling/modeling_outro
+
+  - caption: Dimensionality Reduction (Week 4)
+    chapters:
+      - file: Fundamentals/DimensionalityReduction/dim_reduct_intro
+      - file: Fundamentals/DimensionalityReduction/dim_reduct_part1_basics
+      - file: Fundamentals/DimensionalityReduction/dim_reduct_part2_pca
+      - file: Fundamentals/DimensionalityReduction/dim_reduct_part3_pca_CDT_images
+      - file: Fundamentals/DimensionalityReduction/dim_reduct_part4_nonlinear_methods
+      - file: Fundamentals/DimensionalityReduction/dim_reduct_outro
+
+  - caption: Machine Learning (Weeks 5-6)
+    chapters:
+      - file: Fundamentals/MachineLearning/ml_part1_intro
+        title: ML Part 1 (Week 5)
+        sections:
+          - file: Fundamentals/MachineLearning/intro_to_machine_learning
+          - file: Fundamentals/MachineLearning/logistic_regression
+          - file: Fundamentals/MachineLearning/svm
+      - file: Fundamentals/MachineLearning/ml_part2_intro
+        title: ML Part 2 (Week 6)
+        sections:
+          - file: Fundamentals/MachineLearning/decision_tree_random_forest
+          - file: Fundamentals/MachineLearning/knn
+          - file: Fundamentals/MachineLearning/ml_part2_outro
+
+  - caption: Deep Learning (Weeks 7-8)
+    chapters:
+      - file: Fundamentals/DeepLearning/deep_learning_intro
+        title: DL Part 1 (Week 7)
+        sections:
+          - file: Fundamentals/DeepLearning/deep_learning_fundamentals
+          - file: Fundamentals/DeepLearning/intro_pytorch
+          - file: Fundamentals/DeepLearning/concentration_prediction_with_EEG
+          - file: Fundamentals/DeepLearning/cnn_cdt_pytorch
+      - file: Fundamentals/DeepLearning/deep_learning_part2_intro
+        title: DL Part 2 (Week 8)
+        sections:
+          - file: Fundamentals/DeepLearning/object_detection_transformer
+          - file: Fundamentals/DeepLearning/breast_cancer_segmentation_transformers
+          - file: Fundamentals/DeepLearning/thai_food_classification_transformers
+          - file: Fundamentals/DeepLearning/deep_learning_outro
+
+  - caption: Signal Processing (Week 9)
+    chapters:
+      - file: Fundamentals/SignalProcessing/signal_processing_intro
+      - file: Fundamentals/SignalProcessing/signal_processing_part1_sampling_averaging
+      - file: Fundamentals/SignalProcessing/signal_processing_part2_dft
+      - file: Fundamentals/SignalProcessing/signal_processing_part3_STFT
+      - file: Fundamentals/SignalProcessing/signal_processing_part4_application
+      - file: Fundamentals/SignalProcessing/signal_processing_outro
+
+  - caption: Applications (Weeks 10-12)
+    chapters:
+      - file: Applications/MiniProjects
+
+  - caption: Extra Resources
+    chapters:
+      - file: ExtraResources/HandsOnDeepLearningWithPytorch
+      - file: ExtraResources/RecurrentNeuralNetwork
+      - file: ExtraResources/AttentionTransformer
+      - file: ExtraResources/GraphNeuralNetwork
+      - file: ExtraResources/ReinforcementLearning
+      - file: ExtraResources/Statistics
