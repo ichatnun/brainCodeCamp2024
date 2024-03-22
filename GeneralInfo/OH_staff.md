@@ -153,7 +153,7 @@
     </div>
     <div class="col">
         <div class="card staff-image-container">
-            <img src="" class="card-img-top" alt="">
+            <img src="https://github.com/ichatnun/brainCodeCamp2024/blob/main/assets/images/team_photos/jatupong-oboun.jpg?raw=true" class="card-img-top" alt="">
             <div class="card-body">
                 <h5 class="card-title m-0">จตุพงศ์ อบอุ่น (มาร์ค)</h5>
                 <p class="card-text">
@@ -165,7 +165,7 @@
     </div>
     <div class="col">
         <div class="card staff-image-container">
-            <img src="" class="card-img-top" alt="">
+            <img src="https://github.com/ichatnun/brainCodeCamp2024/blob/main/assets/images/team_photos/sirapakit-limtragooltongchai.png?raw=true" class="card-img-top" alt="">
             <div class="card-body">
                 <h5 class="card-title m-0">ศิรประกฤษฎิ์ ลิ้มตระกูลธงชัย (ปัง)</h5>
                 <p class="card-text">
