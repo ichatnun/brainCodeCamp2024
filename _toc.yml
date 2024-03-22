@@ -5,68 +5,11 @@ root: intro
 parts:
   - caption: General Information
     chapters:
-      - file: GeneralInfo/OH_schedule
+      - file: GeneralInfo/schedule
       - file: GeneralInfo/OH_staff
       # - file: GeneralInfo/OH_teams
       - file: GeneralInfo/datasets
       - file: GeneralInfo/graduation_requirements
-      # - file: GeneralInfo/projects
-  # - caption: Brain Building Blocks
-  #   chapters:
-  #     - file: Prereqs/BrainBuildingBlocks/Session1/S1_Intro
-  #       sections:
-  #         - file: Prereqs/BrainBuildingBlocks/Session1/S1L1_HelloBrain
-  #         - file: Prereqs/BrainBuildingBlocks/Session1/S1L2_EssentialNeuroanatomy
-  #         - file: Prereqs/BrainBuildingBlocks/Session1/S1L3_FunctionalAreaAndNetwork
-  #         - file: Prereqs/BrainBuildingBlocks/Session1/S1L4_LanguageOfTheBrain
-  #     - file: Prereqs/BrainBuildingBlocks/Session2/S2_Intro
-  #       sections:
-  #         - file: Prereqs/BrainBuildingBlocks/Session2/S2L1_IntroBrainScienceToolbox
-  #         - file: Prereqs/BrainBuildingBlocks/Session2/S2L2_EraOfLocalization
-  #         - file: Prereqs/BrainBuildingBlocks/Session2/S2L3_MeasuringImmeasurable
-  #         - file: Prereqs/BrainBuildingBlocks/Session2/S2L4_SneakPeekInsideTheBlackBox
-  #         - file: Prereqs/BrainBuildingBlocks/Session2/S2L5_JourneyIntoTheBrain
-  #     - file: Prereqs/BrainBuildingBlocks/Session3/S3_Intro
-  #       sections:
-  #         - file: Prereqs/BrainBuildingBlocks/Session3/S3L1_ConnectingBrainAndBehavior
-  #         - file: Prereqs/BrainBuildingBlocks/Session3/S3L2_SingleNeuronStudies
-  #         - file: Prereqs/BrainBuildingBlocks/Session3/S3L3_EEGStudies
-  #         - file: Prereqs/BrainBuildingBlocks/Session3/S3L4_fMRIStudies
-  #     - file: Prereqs/BrainBuildingBlocks/Session4/S4_Intro
-  #       sections:
-  #         - file: Prereqs/BrainBuildingBlocks/Session4/S4L1_SolveTheBrainSignal
-  #         - file: Prereqs/BrainBuildingBlocks/Session4/S4L2_NeuralFiring
-  #         - file: Prereqs/BrainBuildingBlocks/Session4/S4L3_EEGSignal
-  #         - file: Prereqs/BrainBuildingBlocks/Session4/S4L4_fMRISignal
-
-  #     - file: Prereqs/BrainBuildingBlocks/Session5/S5_Intro
-  #       sections:
-  #         - file: Prereqs/BrainBuildingBlocks/Session5/S5L1_TopographicOrganization
-  #         - file: Prereqs/BrainBuildingBlocks/Session5/S5L2_BiologicalNeuron
-  #         - file: Prereqs/BrainBuildingBlocks/Session5/S5L3_NeuralPopulationTuning
-  #         - file: Prereqs/BrainBuildingBlocks/Session5/S5L4_NeuralRepresentation
-  #         - file: Prereqs/BrainBuildingBlocks/Session5/S5L5_HowDoesBrainDecide
-  #     - file: Prereqs/BrainBuildingBlocks/Session6/S6_Intro
-  #       sections:
-  #         - file: Prereqs/BrainBuildingBlocks/Session6/S6L1_DataHandlingAndExploration
-  #         - file: Prereqs/BrainBuildingBlocks/Session6/S6L2_GoalsOfModeling
-  #         - file: Prereqs/BrainBuildingBlocks/Session6/S6L3_TypesOfModeling
-  #         - file: Prereqs/BrainBuildingBlocks/Session6/S6L4_ModelEvaluation
-  #     - file: Prereqs/BrainBuildingBlocks/Session7/S7_Intro
-  #       sections:
-  #         - file: Prereqs/BrainBuildingBlocks/Session7/S7L1_AIAndBI
-  #         - file: Prereqs/BrainBuildingBlocks/Session7/S7L2_AIAndBI2
-  #         - file: Prereqs/BrainBuildingBlocks/Session7/S7L3_SupervisedDeepLearning
-  #         - file: Prereqs/BrainBuildingBlocks/Session7/S7L4_ReinforcementLearning
-  #         - file: Prereqs/BrainBuildingBlocks/Session7/S7L5_UnsupervisedLearning
-  #         - file: Prereqs/BrainBuildingBlocks/Session7/S7L6_LanguageModels
-  #     - file: Prereqs/BrainBuildingBlocks/Session8/S8_Intro
-  #       sections:
-  #         - file: Prereqs/BrainBuildingBlocks/Session8/S8L1_DiagnosisAndMonitoring
-  #         - file: Prereqs/BrainBuildingBlocks/Session8/S8L4_ComputationalNeuropsychiatry
-  #     - file: Prereqs/BrainBuildingBlocks/Session9/S9_Intro
-  #       sections:
-  #         - file: Prereqs/BrainBuildingBlocks/Session9/S9L2_BrainComputerInterface
 
   - caption: Prerequisites
     chapters:
@@ -78,31 +21,71 @@ parts:
               - file: Prereqs/BrainBuildingBlocks/Session1/S1L2_EssentialNeuroanatomy
               - file: Prereqs/BrainBuildingBlocks/Session1/S1L3_FunctionalAreaAndNetwork
               - file: Prereqs/BrainBuildingBlocks/Session1/S1L4_LanguageOfTheBrain
+          - file: Prereqs/BrainBuildingBlocks/Session2/S2_Intro
+            sections:
+              - file: Prereqs/BrainBuildingBlocks/Session2/S2L1_IntroBrainScienceToolbox
+              - file: Prereqs/BrainBuildingBlocks/Session2/S2L2_EraOfLocalization
+              - file: Prereqs/BrainBuildingBlocks/Session2/S2L3_MeasuringImmeasurable
+              - file: Prereqs/BrainBuildingBlocks/Session2/S2L4_SneakPeekInsideTheBlackBox
+              - file: Prereqs/BrainBuildingBlocks/Session2/S2L5_JourneyIntoTheBrain
+          - file: Prereqs/BrainBuildingBlocks/Session3/S3_Intro
+            sections:
+              - file: Prereqs/BrainBuildingBlocks/Session3/S3L1_ConnectingBrainAndBehavior
+              - file: Prereqs/BrainBuildingBlocks/Session3/S3L2_SingleNeuronStudies
+              - file: Prereqs/BrainBuildingBlocks/Session3/S3L3_EEGStudies
+              - file: Prereqs/BrainBuildingBlocks/Session3/S3L4_fMRIStudies
+          - file: Prereqs/BrainBuildingBlocks/Session4/S4_Intro
+            sections:
+              - file: Prereqs/BrainBuildingBlocks/Session4/S4L1_SolveTheBrainSignal
+              - file: Prereqs/BrainBuildingBlocks/Session4/S4L2_NeuralFiring
+              - file: Prereqs/BrainBuildingBlocks/Session4/S4L3_EEGSignal
+              - file: Prereqs/BrainBuildingBlocks/Session4/S4L4_fMRISignal
 
-      - file: Prereqs/BBB2BCC/PrereqBCC
+          - file: Prereqs/BrainBuildingBlocks/Session5/S5_Intro
+            sections:
+              - file: Prereqs/BrainBuildingBlocks/Session5/S5L1_TopographicOrganization
+              - file: Prereqs/BrainBuildingBlocks/Session5/S5L2_BiologicalNeuron
+              - file: Prereqs/BrainBuildingBlocks/Session5/S5L3_NeuralPopulationTuning
+              - file: Prereqs/BrainBuildingBlocks/Session5/S5L4_NeuralRepresentation
+              - file: Prereqs/BrainBuildingBlocks/Session5/S5L5_HowDoesBrainDecide
+          - file: Prereqs/BrainBuildingBlocks/Session6/S6_Intro
+            sections:
+              - file: Prereqs/BrainBuildingBlocks/Session6/S6L1_DataHandlingAndExploration
+              - file: Prereqs/BrainBuildingBlocks/Session6/S6L2_GoalsOfModeling
+              - file: Prereqs/BrainBuildingBlocks/Session6/S6L3_TypesOfModeling
+              - file: Prereqs/BrainBuildingBlocks/Session6/S6L4_ModelEvaluation
+          - file: Prereqs/BrainBuildingBlocks/Session7/S7_Intro
+            sections:
+              - file: Prereqs/BrainBuildingBlocks/Session7/S7L1_AIAndBI
+              - file: Prereqs/BrainBuildingBlocks/Session7/S7L2_AIAndBI2
+              - file: Prereqs/BrainBuildingBlocks/Session7/S7L3_SupervisedDeepLearning
+              - file: Prereqs/BrainBuildingBlocks/Session7/S7L4_ReinforcementLearning
+              - file: Prereqs/BrainBuildingBlocks/Session7/S7L5_UnsupervisedLearning
+              - file: Prereqs/BrainBuildingBlocks/Session7/S7L6_LanguageModels
+          - file: Prereqs/BrainBuildingBlocks/Session8/S8_Intro
+            sections:
+              - file: Prereqs/BrainBuildingBlocks/Session8/S8L1_DiagnosisAndMonitoring
+              - file: Prereqs/BrainBuildingBlocks/Session8/S8L4_ComputationalNeuropsychiatry
+          - file: Prereqs/BrainBuildingBlocks/Session9/S9_Intro
+            sections:
+              - file: Prereqs/BrainBuildingBlocks/Session9/S9L2_BrainComputerInterface
+
+      - file: Prereqs/BBB2BCC/BBB2BCC
         sections:
           - file: Prereqs/BBB2BCC/DataVisualization
-          - file: Prereqs/BBB2BCC/DimensionalityReduction
-          - file: Prereqs/BBB2BCC/NeuroscienceData
+          # - file: Prereqs/BBB2BCC/DimensionalityReduction
+          # - file: Prereqs/BBB2BCC/NeuroscienceData
           - file: Prereqs/BBB2BCC/Modeling
 
-  - caption: Welcome to Brain Code Camp! (Week 1)
-    chapters:
-      - file: Fundamentals/WelcomeToBrainCodeCamp/Intro
+      - file: Prereqs/IntroToModeling/modeling_front
+        sections:
+          - file: Prereqs/IntroToModeling/modeling_intro
+          - file: Prereqs/IntroToModeling/modeling_part1_simple_linear_model
+          - file: Prereqs/IntroToModeling/modeling_part2_poly_overfit_regularization
+          - file: Prereqs/IntroToModeling/modeling_part3_data_splitting
+          - file: Prereqs/IntroToModeling/modeling_outro
 
-  - caption: Prerequisites & Project Idea Exploration (Week 2)
-    chapters:
-      - file: Fundamentals/PrereqAndProjectExploration/Intro
-
-  - caption: Intro to Modeling and Model Selection (Week 3)
-    chapters:
-      - file: Fundamentals/IntroToModeling/modeling_intro
-      - file: Fundamentals/IntroToModeling/modeling_part1_simple_linear_model
-      - file: Fundamentals/IntroToModeling/modeling_part2_poly_overfit_regularization
-      - file: Fundamentals/IntroToModeling/modeling_part3_data_splitting
-      - file: Fundamentals/IntroToModeling/modeling_outro
-
-  - caption: Dimensionality Reduction (Week 4)
+  - caption: Dimensionality Reduction (Week 1)
     chapters:
       - file: Fundamentals/DimensionalityReduction/dim_reduct_intro
       - file: Fundamentals/DimensionalityReduction/dim_reduct_part1_basics
@@ -111,46 +94,45 @@ parts:
       - file: Fundamentals/DimensionalityReduction/dim_reduct_part4_nonlinear_methods
       - file: Fundamentals/DimensionalityReduction/dim_reduct_outro
 
-  - caption: Machine Learning (Weeks 5-6)
+  - caption: Machine Learning (Weeks 2-3)
     chapters:
       - file: Fundamentals/MachineLearning/ml_part1_intro
-        title: ML Part 1 (Week 5)
+        title: ML Part 1 (Week 2)
         sections:
           - file: Fundamentals/MachineLearning/intro_to_machine_learning
           - file: Fundamentals/MachineLearning/logistic_regression
           - file: Fundamentals/MachineLearning/svm
       - file: Fundamentals/MachineLearning/ml_part2_intro
-        title: ML Part 2 (Week 6)
+        title: ML Part 2 (Week 3)
         sections:
           - file: Fundamentals/MachineLearning/decision_tree_random_forest
           - file: Fundamentals/MachineLearning/knn
           - file: Fundamentals/MachineLearning/ml_part2_outro
 
-  - caption: Deep Learning (Weeks 7-8)
+  - caption: Deep Learning (Week 4)
     chapters:
       - file: Fundamentals/DeepLearning/deep_learning_intro
-        title: DL Part 1 (Week 7)
         sections:
           - file: Fundamentals/DeepLearning/deep_learning_fundamentals
           - file: Fundamentals/DeepLearning/intro_pytorch
           - file: Fundamentals/DeepLearning/concentration_prediction_with_EEG
           - file: Fundamentals/DeepLearning/cnn_cdt_pytorch
-      - file: Fundamentals/DeepLearning/deep_learning_part2_intro
-        title: DL Part 2 (Week 8)
-        sections:
-          - file: Fundamentals/DeepLearning/object_detection_transformer
-          - file: Fundamentals/DeepLearning/breast_cancer_segmentation_transformers
-          - file: Fundamentals/DeepLearning/thai_food_classification_transformers
-          - file: Fundamentals/DeepLearning/deep_learning_outro
+      # - file: Fundamentals/DeepLearning/deep_learning_part2_intro
+      #   title: DL Part 2 (Week 8)
+      #   sections:
+      #     - file: Fundamentals/DeepLearning/object_detection_transformer
+      #     - file: Fundamentals/DeepLearning/breast_cancer_segmentation_transformers
+      #     - file: Fundamentals/DeepLearning/thai_food_classification_transformers
+      #     - file: Fundamentals/DeepLearning/deep_learning_outro
 
-  - caption: Signal Processing (Week 9)
-    chapters:
-      - file: Fundamentals/SignalProcessing/signal_processing_intro
-      - file: Fundamentals/SignalProcessing/signal_processing_part1_sampling_averaging
-      - file: Fundamentals/SignalProcessing/signal_processing_part2_dft
-      - file: Fundamentals/SignalProcessing/signal_processing_part3_STFT
-      - file: Fundamentals/SignalProcessing/signal_processing_part4_application
-      - file: Fundamentals/SignalProcessing/signal_processing_outro
+  # - caption: Signal Processing (Week 9)
+  #   chapters:
+  #     - file: Fundamentals/SignalProcessing/signal_processing_intro
+  #     - file: Fundamentals/SignalProcessing/signal_processing_part1_sampling_averaging
+  #     - file: Fundamentals/SignalProcessing/signal_processing_part2_dft
+  #     - file: Fundamentals/SignalProcessing/signal_processing_part3_STFT
+  #     - file: Fundamentals/SignalProcessing/signal_processing_part4_application
+  #     - file: Fundamentals/SignalProcessing/signal_processing_outro
 
   - caption: Applications (Weeks 10-12)
     chapters:
@@ -166,5 +148,7 @@ parts:
       - file: ExtraResources/Statistics
   - caption: Previous Offerings
     chapters:
-      - file: PreviousOfferings/BCC2023/graduates
-      - file: PreviousOfferings/BCC2023/projects
+      - file: PreviousOfferings/BCC2023/bcc2023
+        sections:
+          - file: PreviousOfferings/BCC2023/graduates
+          - file: PreviousOfferings/BCC2023/projects
