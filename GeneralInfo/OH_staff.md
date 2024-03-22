@@ -151,4 +151,28 @@
             </div>
         </div>
     </div>
+    <div class="col">
+        <div class="card staff-image-container">
+            <img src="" class="card-img-top" alt="">
+            <div class="card-body">
+                <h5 class="card-title m-0">จตุพงศ์ อบอุ่น (มาร์ค)</h5>
+                <p class="card-text">
+                    Jatupong Oboun<br/>
+                    B.Eng. Information Engineering
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card staff-image-container">
+            <img src="" class="card-img-top" alt="">
+            <div class="card-body">
+                <h5 class="card-title m-0">ศิรประกฤษฎิ์ ลิ้มตระกูลธงชัย (ปัง)</h5>
+                <p class="card-text">
+                    Sirapakit Limtragooltongchai (Pung)<br/>
+                    BCs. in Biomedical Engineer
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
