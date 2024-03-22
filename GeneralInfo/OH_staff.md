@@ -50,18 +50,6 @@
             </div>
         </div>
     </div>
-    <div class="col">
-        <div class="card staff-image-container">
-            <img src="https://github.com/ichatnun/brainCodeCamp/blob/main/assets/images/team_photos/thiparat_chotibut.jpeg?raw=true" class="card-img-top" alt="thiparat_chotibut">
-            <div class="card-body">
-                <h5 class="card-title m-0">ธิปรัชต์ โชติบุตร (ธิป)</h5>
-                <p class="card-text">
-                    Thiparat Chotibut<br/>
-                    Ph.D. in Theoretical Physics
-                </p>
-            </div>
-        </div>
-    </div>
 </div>
 
 ## Teaching Assistants
@@ -81,12 +69,12 @@
     </div>
     <div class="col">
         <div class="card staff-image-container">
-            <img src="https://github.com/ichatnun/brainCodeCamp/blob/main/assets/images/team_photos/maytus_piriyajitakonkij.jpeg?raw=true" class="card-img-top" alt="maytus_piriyajitakonkij">
+            <img src="https://github.com/ichatnun/brainCodeCamp/blob/main/assets/images/team_photos/setthanan_jarukasemkit.jpeg?raw=true" class="card-img-top" alt="setthanan_jarukasemkit">
             <div class="card-body">
-                <h5 class="card-title m-0">เมธัส พิริยจิตรกรกิจ (โม)</h5>
+                <h5 class="card-title m-0">เสฏฐนันท์ จารุเกษมกิจ (โจ)</h5>
                 <p class="card-text">
-                    Maytus Piriyajitakonkij<br/>
-                    Ph.D. (Student) in Computer Science
+                    Setthanan Jarukasemkit<br/>
+                    M.D. in Medicine
                 </p>
             </div>
         </div>
@@ -105,24 +93,12 @@
     </div>
     <div class="col">
         <div class="card staff-image-container">
-            <img src="https://github.com/ichatnun/brainCodeCamp/blob/main/assets/images/team_photos/kanokkorn_pimcharoen.jpeg?raw=true" class="card-img-top" alt="kanokkorn_pimcharoen">
+            <img src="https://github.com/ichatnun/brainCodeCamp/blob/main/assets/images/team_photos/maytus_piriyajitakonkij.jpeg?raw=true" class="card-img-top" alt="maytus_piriyajitakonkij">
             <div class="card-body">
-                <h5 class="card-title m-0">กนกกร พิมพ์เจริญ (กิฟท์)</h5>
+                <h5 class="card-title m-0">เมธัส พิริยจิตรกรกิจ (โม)</h5>
                 <p class="card-text">
-                    Kanokkorn Pimcharoen<br/>
-                    Ph.D. in Physics
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card staff-image-container">
-            <img src="https://github.com/ichatnun/brainCodeCamp/blob/main/assets/images/team_photos/chayanon_atthapak.jpeg?raw=true" class="card-img-top" alt="chayanon_atthapak">
-            <div class="card-body">
-                <h5 class="card-title m-0">ชญานนท์ อรรถปักษ์ (ออม)</h5>
-                <p class="card-text">
-                    Chayanon Atthapak<br/>
-                    MSc. in Physics
+                    Maytus Piriyajitakonkij<br/>
+                    Ph.D. (Student) in Computer Science
                 </p>
             </div>
         </div>
@@ -153,66 +129,6 @@
     </div>
     <div class="col">
         <div class="card staff-image-container">
-            <img src="https://github.com/ichatnun/brainCodeCamp/blob/main/assets/images/team_photos/setthanan_jarukasemkit.jpeg?raw=true" class="card-img-top" alt="setthanan_jarukasemkit">
-            <div class="card-body">
-                <h5 class="card-title m-0">เสฏฐนันท์ จารุเกษมกิจ (โจ)</h5>
-                <p class="card-text">
-                    Setthanan Jarukasemkit<br/>
-                    M.D. in Medicine
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card staff-image-container">
-            <img src="https://github.com/ichatnun/brainCodeCamp/blob/main/assets/images/team_photos/chattarin_poungtubtim.jpeg?raw=true" class="card-img-top" alt="chattarin_poungtubtim">
-            <div class="card-body">
-                <h5 class="card-title m-0">ฉัตริน พวงทับทิม (ปัน)</h5>
-                <p class="card-text">
-                    Chattarin  Poungtubtim <br/>
-                    M.D. (Student) in Medicine 
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card staff-image-container">
-            <img src="https://github.com/ichatnun/brainCodeCamp/blob/main/assets/images/team_photos/naphapa_panyanirun.jpeg?raw=true" class="card-img-top" alt="naphapa_panyanirun">
-            <div class="card-body">
-                <h5 class="card-title m-0">ณปภา ปัญญานิรันดร์ (ปริน)</h5>
-                <p class="card-text">
-                    Naphapa Panyanirun<br/>
-                    M.D. (Student) in Medicine
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card staff-image-container">
-            <img src="https://github.com/ichatnun/brainCodeCamp/blob/main/assets/images/team_photos/anantaporn_sena.jpeg?raw=true" class="card-img-top" alt="anantaporn_sena">
-            <div class="card-body">
-                <h5 class="card-title m-0">อนันตพร เสนา (แพรว)</h5>
-                <p class="card-text">
-                    Anantaporn Sena<br/>
-                    B.A. in Psychology
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card staff-image-container">
-            <img src="https://github.com/ichatnun/brainCodeCamp/blob/main/assets/images/team_photos/nattapat_yuvasuta.jpg?raw=true" class="card-img-top" alt="nattapat_yuvasuta">
-            <div class="card-body">
-                <h5 class="card-title m-0">ณัฐพัชร์ ยุวะสุต (ณัฐ)</h5>
-                <p class="card-text">
-                    Nattapat Yuvasuta<br/>
-                    B.A. in Computer Engineering
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card staff-image-container">
             <img src="https://github.com/ichatnun/brainCodeCamp/blob/main/assets/images/team_photos/panchalee_sookprao.jpg?raw=true" class="card-img-top" alt="panchalee_sookprao">
             <div class="card-body">
                 <h5 class="card-title m-0">ปัญญ์ชลี สุขพราว (ป๊อป)</h5>
@@ -225,35 +141,11 @@
     </div>
     <div class="col">
         <div class="card staff-image-container">
-            <img src="https://github.com/ichatnun/brainCodeCamp/blob/main/assets/images/team_photos/kanathip_jongmekwamsuk.png?raw=true" class="card-img-top" alt="kanathip_jongmekwamsuk">
-            <div class="card-body">
-                <h5 class="card-title m-0">คณาธิป จงมีความสุข (แทน)</h5>
-                <p class="card-text">
-                    Kanathip Jongmekwamsuk<br/>
-                    M.D. (Student) in Medicine
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card staff-image-container">
             <img src="https://github.com/ichatnun/brainCodeCamp/blob/main/assets/images/team_photos/prapasiri_sawetsuttipan.jpg?raw=true" class="card-img-top" alt="prapasiri_sawetsuttipan">
             <div class="card-body">
                 <h5 class="card-title m-0">ประภาสิริ เศวตสุทธิพันธ์ (โบนัส)</h5>
                 <p class="card-text">
                     Prapasiri Sawetsuttipan<br/>
-                    M.Eng. (Student) in Computer Engineering
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card staff-image-container">
-            <img src="https://github.com/ichatnun/brainCodeCamp/blob/main/assets/images/team_photos/tanagrit_phangwiwat.jpg?raw=true" class="card-img-top" alt="tanagrit_phangwiwat">
-            <div class="card-body">
-                <h5 class="card-title m-0">ธนกฤต  ผังวิวัฒน์ (พั้นช์)</h5>
-                <p class="card-text">
-                    Tanagrit Phangwiwat<br/>
                     M.Eng. (Student) in Computer Engineering
                 </p>
             </div>
