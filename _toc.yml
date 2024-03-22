@@ -84,11 +84,6 @@ parts:
           - file: Prereqs/BBB2BCC/NeuroscienceData
           - file: Prereqs/BBB2BCC/Modeling
 
-      - file: Fundamentals/Prereqs/Coding/PrereqCoding
-        sections:
-          - file: Fundamentals/Prereqs/Coding/00_basic_python
-          - file: Fundamentals/Prereqs/Coding/01_numpy
-
   - caption: Welcome to Brain Code Camp! (Week 1)
     chapters:
       - file: Fundamentals/WelcomeToBrainCodeCamp/Intro
