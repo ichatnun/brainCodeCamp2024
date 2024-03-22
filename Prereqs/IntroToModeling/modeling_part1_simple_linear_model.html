@@ -1,0 +1,1155 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Simple Linear Model &#8212; Brain Code Camp</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=97488244" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Prereqs/IntroToModeling/modeling_part1_simple_linear_model';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Polynomial Regression, Overfitting, and Regularization" href="modeling_part2_poly_overfit_regularization.html" />
+    <link rel="prev" title="Welcome to Intro to Modeling and Model Selection" href="modeling_intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/bcc-logo.png" class="logo__image only-light" alt="Brain Code Camp - Home"/>
+    <script>document.write(`<img src="../../_static/bcc-logo.png" class="logo__image only-dark" alt="Brain Code Camp - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    About Brain Code Camp
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/schedule.html">Schedule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/on-site-meetups.html">On-Site Meetups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/staff.html">Staff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/OH-teams.html">Office Hour Teams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/graduation_requirements.html">Graduation Requirements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisites</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../BrainBuildingBlocks/BBB.html">Brain Building Blocks</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../BrainBuildingBlocks/Session1/S1_Intro.html">Welcome to the Brain!</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session1/S1L1_HelloBrain.html">Hello, Brains!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session1/S1L2_EssentialNeuroanatomy.html">Essential Neuroanatomy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session1/S1L3_FunctionalAreaAndNetwork.html">Functional Area &amp; Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session1/S1L4_LanguageOfTheBrain.html">Language of the Brain</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../BrainBuildingBlocks/Session2/S2_Intro.html">Neuroscience Methods</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session2/S2L1_IntroBrainScienceToolbox.html">Introduction to Brain Science Toolbox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session2/S2L2_EraOfLocalization.html">The Era of Localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session2/S2L3_MeasuringImmeasurable.html">Measuring the Immeasurable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session2/S2L4_SneakPeekInsideTheBlackBox.html">Sneak Peek Inside the Blackbox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session2/S2L5_JourneyIntoTheBrain.html">Journey Into the Brain</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../BrainBuildingBlocks/Session3/S3_Intro.html">Brain &amp; Behaviors</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session3/S3L1_ConnectingBrainAndBehavior.html">Connecting Brain &amp; Behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session3/S3L2_SingleNeuronStudies.html">Single Neuron Studies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session3/S3L3_EEGStudies.html">EEG Studies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session3/S3L4_fMRIStudies.html">fMRI Studies</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../BrainBuildingBlocks/Session4/S4_Intro.html">Brain Signals</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session4/S4L1_SolveTheBrainSignal.html">Solve the Brain Signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session4/S4L2_NeuralFiring.html">Neural Firing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session4/S4L3_EEGSignal.html">EEG Signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session4/S4L4_fMRISignal.html">fMRI Signal</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../BrainBuildingBlocks/Session5/S5_Intro.html">Models of the Mind</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session5/S5L1_TopographicOrganization.html">Topographic Organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session5/S5L2_BiologicalNeuron.html">Biological Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session5/S5L3_NeuralPopulationTuning.html">Neural and Population Tuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session5/S5L4_NeuralRepresentation.html">Neural Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session5/S5L5_HowDoesBrainDecide.html">How Does The Brain Decide?</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../BrainBuildingBlocks/Session6/S6_Intro.html">Data Modeling</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session6/S6L1_DataHandlingAndExploration.html">Data Handling and Exploration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session6/S6L2_GoalsOfModeling.html">Goals of Modeling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session6/S6L3_TypesOfModeling.html">Types of Modeling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session6/S6L4_ModelEvaluation.html">Model Evaluation</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../BrainBuildingBlocks/Session7/S7_Intro.html">Neuro &amp; AI</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session7/S7L1_AIAndBI.html">Artificial Intelligence &amp; Biological Intelligence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session7/S7L2_AIAndBI2.html">Artificial Intelligence &amp; Biological Intelligence II</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session7/S7L3_SupervisedDeepLearning.html">Supervised Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session7/S7L4_ReinforcementLearning.html">Reinforcement Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session7/S7L5_UnsupervisedLearning.html">Unsupervised Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session7/S7L6_LanguageModels.html">Language Models</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../BrainBuildingBlocks/Session8/S8_Intro.html">Medical Applications</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session8/S8L1_DiagnosisAndMonitoring.html">Diagnosis and Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session8/S8L4_ComputationalNeuropsychiatry.html">Computational Neuropsychiatry</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../BrainBuildingBlocks/Session9/S9_Intro.html">Social Applications</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session9/S9L2_BrainComputerInterface.html">Brain Computer Interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../BBB2BCC/BBB2BCC.html">From BBB to BCC</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../BBB2BCC/DataVisualization.html">Data Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BBB2BCC/Modeling.html">Modeling</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="modeling_front.html">Intro to Modeling and Model Selection</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="modeling_intro.html">Welcome to Intro to Modeling and Model Selection</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Simple Linear Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modeling_part2_poly_overfit_regularization.html">Polynomial Regression, Overfitting, and Regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modeling_part3_data_splitting.html">Training, Validation and Test Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modeling_outro.html">Outro</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Dimensionality Reduction (Week 1)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DimensionalityReduction/dim_reduct_intro.html">Intro to Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DimensionalityReduction/dim_reduct_part1_basics.html">The Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DimensionalityReduction/dim_reduct_part2_pca.html">Principal Component Analysis (PCA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DimensionalityReduction/dim_reduct_part3_pca_CDT_images.html">Applying PCA to CDT Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DimensionalityReduction/dim_reduct_part4_nonlinear_methods.html">Nonlinear Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DimensionalityReduction/dim_reduct_outro.html">Outro</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning (Weeks 2-3)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Fundamentals/MachineLearning/ml_part1_intro.html">ML Part 1 (Week 2)</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Fundamentals/MachineLearning/intro_to_machine_learning.html">Introduction to Machine Learning</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../Fundamentals/MachineLearning/logistic_regression.html">Logistic Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Fundamentals/MachineLearning/svm.html">Support Vector Machine (SVM)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Fundamentals/MachineLearning/ml_part2_intro.html">ML Part 2 (Week 3)</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Fundamentals/MachineLearning/decision_tree_random_forest.html">Decision Tree and Random Forest</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../Fundamentals/MachineLearning/knn.html">k-Nearest Neighbors (k-NN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Fundamentals/MachineLearning/ml_part2_outro.html">Outro</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deep Learning (Week 4)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DeepLearning/deep_learning_intro.html">Intro to Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DeepLearning/deep_learning_fundamentals.html">Fundamentals of Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DeepLearning/intro_pytorch.html">Introduction to Pytorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DeepLearning/concentration_prediction_with_EEG.html">Concentration Prediction with EEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DeepLearning/cnn_cdt_pytorch.html">Classification with Convolutional Neural Network Using PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DeepLearning/deep_learning_outro.html">Outro</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments (Weeks 6-7)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/ModalityExploration/Assignments/EEG-assignment/eeg-assignment.html">EEG (modality 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/ModalityExploration/Assignments/fMRI-assignment/fmri-assignment.html">fMRI (modality 2)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications (Weeks 8-12)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Applications/MiniProjects.html">Applying What You Have Learned to Your Project</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Lectures</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_intro.html">Signal Processing</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part1_sampling_averaging.html">Sampling and Signal Averaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part2_dft.html">Discrete Fourier Transform (DFT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part3_STFT.html">Short Time Fourier Transform (STFT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part4_application.html">Audio Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_outro.html">Outro</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/RecurrentNeuralNetwork.html">Recurrent Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/AttentionTransformer.html">Attention Mechanisms and Transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/GraphNeuralNetwork.html">Graph Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/ReinforcementLearning.html">Reinforcement Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/Statistics.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DimensionalityReduction.html">Dimensionality Reduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/HandsOnDeepLearningWithPytorch.html">Hands-On Deep Learning with Pytorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DeepLearningApplications/object_detection_transformer.html">Object Detection with Transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DeepLearningApplications/breast_cancer_segmentation_transformers.html">Breast Cancer Segmentation Using Transformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DeepLearningApplications/thai_food_classification_transformers.html">Image Classification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Previous Offerings</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../PreviousOfferings/BCC2023/bcc2023.html">2023</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../PreviousOfferings/BCC2023/graduates.html">Graduates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreviousOfferings/BCC2023/projects.html">Projects</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ichatnun/brainCodeCamp/blob/main/Prereqs/IntroToModeling/modeling_part1_simple_linear_model.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Prereqs/IntroToModeling/modeling_part1_simple_linear_model.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Simple Linear Model</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-model">โมเดลเชิงเส้น (Linear Model)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">Multiple Linear Regression</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="simple-linear-model">
+<h1>Simple Linear Model<a class="headerlink" href="#simple-linear-model" title="Link to this heading">#</a></h1>
+<p>ถ้าลองนึกภาพตามง่ายๆในมุมมองของผู้สร้างโมเดล เราอาจจะสร้างโมเดลที่มีความซับซ้อนมากๆและทำนายชุดข้อมูลที่เรามีได้ดีมาก หรืออาจจะสร้างโมเดลที่ซับซ้อนน้อยลงมาหน่อยแต่ก็ยังทำนายชุดข้อมูลที่เรามีได้ดีรองลงมาก็ได้ ตัวเลือกในการสร้างโมเดลมีหลากหลายรูปแบบ แต่ว่าเราจะเลือกโมเดลที่เหมาะสมได้อย่างไร?</p>
+<p>ในบทเรียนนี้เราจะลองสร้างโมเดลทำนายชุดข้อมูลในรูปแบบต่าง ๆ และดูกันว่าโมเดลแบบใดจะเหมาะสมกับชุดข้อมูลตัวอย่างของเรา</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>  <span class="c1"># ใช้สำหรับการทำ interactive display</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># ตั้งค่า random seed เอาไว้ เพื่อให้การรันโค้ดนี้ได้ผลเหมือนเดิม</span>
+</pre></div>
+</div>
+</div>
+</div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/DXAAvRMtSNY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p><a class="reference external" href="https://github.com/ichatnun/brainCodeCamp2023_lectures/blob/main/IntroToModeling/modeling_part1a_linear1.pdf">Slides: Simple Linear Models 1</a></p>
+<section id="linear-model">
+<h2>โมเดลเชิงเส้น (Linear Model)<a class="headerlink" href="#linear-model" title="Link to this heading">#</a></h2>
+<p>กำหนดให้สมการความสัมพันธ์ระหว่าง <span class="math notranslate nohighlight">\(x\)</span> และ <span class="math notranslate nohighlight">\(y\)</span> ที่แท้จริง เป็นสมการเชิงเส้น</p>
+<div class="math notranslate nohighlight">
+\[y = w_0 + w_1x\]</div>
+<p>โดยที่ <span class="math notranslate nohighlight">\(w_0\)</span> คือค่าจุดตัดแกน <span class="math notranslate nohighlight">\(y\)</span> และ <span class="math notranslate nohighlight">\(w_1\)</span> คือค่าความชันของเส้นตรง</p>
+<p>ในการเก็บข้อมูลจริงมักมีสัญญาณรบกวน (noise) ที่มาจากหลายปัจจัย เช่น ความไม่เสถียรของเครื่องมือเก็บข้อมูล คลื่นไฟฟ้ากระแสสลับที่ใช้ในประเทศ ในกรณีที่เก็บข้อมูลผ่านอุปกรณ์อิเล็กทรอนิคส์ หรืออาจจะมี noise ที่เราไม่รู้ว่ามาจากกระบวนการไหนก็ตาม ปัจจัยเหล่านี้ส่งผลให้ข้อมูลที่เก็บมานั้นมีค่าที่แตกต่างไปจากความสัมพันธ์ที่แท้จริง ซึ่งสามารถเขียนอธิบายได้ด้วยสมการ</p>
+<div class="math notranslate nohighlight">
+\[y = w_0 + w_1x + noise\]</div>
+<p>แทน</p>
+<p><br><br>
+ในส่วนนี้เราจะลองทดลองเลียนแบบกระบวนการเก็บข้อมูลผ่านการเรียกใช้ <code class="docutils literal notranslate"><span class="pre">generate_sample_linear</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_sample_linear</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">w1</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">include_noise</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+    <span class="c1"># สร้างสมการเส้นตรงโดยที่จำลองการใส่สัญญาณรบกวนเข้าไป</span>
+    <span class="c1"># เลือก include_noise เป็น True เพื่อกำหนดให้มีค่า noise เพิ่มเข้าไปในสมการ</span>
+    <span class="k">if</span> <span class="n">include_noise</span><span class="p">:</span>
+      <span class="c1"># สร้าง Gaussian noise</span>
+      <span class="n">noise</span> <span class="o">=</span> <span class="mf">0.20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">noise</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">w0</span> <span class="o">+</span> <span class="p">(</span><span class="n">w1</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">noise</span>
+    <span class="k">return</span> <span class="n">y</span>
+
+<span class="c1"># ทดลองสร้างข้อมูลโดยการเรียกใช้ generate_sample_linear</span>
+<span class="n">num_samples</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">w0_true</span><span class="p">,</span> <span class="n">w1_true</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="c1"># กำหนดค่า w0 และ w1 ที่แท้จริง สำหรับสร้างข้อมูล</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span> <span class="c1"># สุ่มค่า x จากพิสัย -2.5 ถึง 2.5</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">generate_sample_linear</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w0_true</span><span class="p">,</span> <span class="n">w1_true</span><span class="p">,</span> <span class="n">include_noise</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># สร้างข้อมูลที่ไม่มีสัญญาณรบกวนมาเปรียบเทียบ ซึ่งเป็นข้อมูลที่เรามักไม่มีโอกาสเข้าถึงในชีวิตจริง (จะใช้ในภายหลัง)</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="n">generate_sample_linear</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w0_true</span><span class="p">,</span> <span class="n">w1_true</span><span class="p">,</span> <span class="n">include_noise</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># สร้างข้อมูลที่ไม่มีสัญญาณรบกวนมาแบบละเอียดสำหรับค่า x จำนวนมาก เพื่อใช้ในการวาดกราฟ (เส้นประสีดำ)</span>
+<span class="n">x_whole_line</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y_true_whole_line</span> <span class="o">=</span> <span class="n">generate_sample_linear</span><span class="p">(</span><span class="n">x_whole_line</span><span class="p">,</span> <span class="n">w0_true</span><span class="p">,</span> <span class="n">w1_true</span><span class="p">,</span> <span class="n">include_noise</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Plot ข้อมูล x, y ที่มีอยู่</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Observed&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_whole_line</span><span class="p">,</span> <span class="n">y_true_whole_line</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>กำหนดให้เรามีจำนวนจุดข้อมูลในรูปด้านบนทั้งหมด <span class="math notranslate nohighlight">\(n\)</span> จุด <span class="math notranslate nohighlight">\((x_1,y_1), (x_2,y_2), ..., (x_i,y_i),.., (x_n,y_n)\)</span> แสดงด้วยสีน้ำเงิน หากเราพิจารณาภาพความสัมพันธ์ระหว่าง <span class="math notranslate nohighlight">\(x\)</span> กับ <span class="math notranslate nohighlight">\(y\)</span> จากการรันโค้ดด้านบน จะพบว่ามีลักษณะคล้ายกับเส้นตรง</p>
+<p><strong>หมายเหตุ</strong> ถึงแม้ว่าในรูปด้านบน เราจะ plot เส้นประสีดำ ซึ่งแสดงความสัมพันธ์ระหว่าง <span class="math notranslate nohighlight">\(x\)</span> และ <span class="math notranslate nohighlight">\(y\)</span> ที่แท้จริง (ปราศจากสัญญาณรบกวน) ได้ แต่ในชีวิตจริง เรามักจะไม่มีโอกาสเข้าถึงข้อมูลตรงนี้ได้เลย</p>
+<p><br><br></p>
+<p>สมมติว่ามีคนเดินมาถามเราว่า ถ้า <span class="math notranslate nohighlight">\(x\)</span> มีค่าเป็น <span class="math notranslate nohighlight">\(0.8\)</span> แล้ว <span class="math notranslate nohighlight">\(y\)</span> ควรจะมีค่าเป็นเท่าไหร่ เราจะตอบเค้าว่าอย่างไรดี</p>
+<p>ในการให้คำตอบตรงนี้ เราสามารถทำได้หลายวิธีมาก ๆ เช่น</p>
+<ul class="simple">
+<li><p>ถ้าเกิดว่าเราไปไล่ดูจุดข้อมูลทั้ง <span class="math notranslate nohighlight">\(n\)</span> จุดในชุดข้อมูลของเรา พบว่ามีจุด <span class="math notranslate nohighlight">\((0.8, 2.6)\)</span> อยู่ เราก็อาจจะตอบได้ว่า <span class="math notranslate nohighlight">\(y\)</span> น่าจะมีค่าเป็น <span class="math notranslate nohighlight">\(2.6\)</span></p></li>
+<li><p>ถ้าเกิดว่าเราไปไล่ดูจุดข้อมูลทั้ง <span class="math notranslate nohighlight">\(n\)</span> จุดในชุดข้อมูลของเรา แต่ไม่พบจุดที่มีค่า <span class="math notranslate nohighlight">\(x\)</span> เป็น <span class="math notranslate nohighlight">\(0.8\)</span> เลย แต่ดันมีจุด <span class="math notranslate nohighlight">\((0.7, 2.4)\)</span> และ <span class="math notranslate nohighlight">\((0.9, 2.8)\)</span> เราก็อาจจะตอบว่าค่า <span class="math notranslate nohighlight">\(y\)</span> ที่สอดคล้องกับค่า <span class="math notranslate nohighlight">\(x=0.8\)</span> ซึ่งเป็นจุดกึ่งกลางระหว่าง <span class="math notranslate nohighlight">\(x=0.7\)</span> และ <span class="math notranslate nohighlight">\(x=0.9\)</span> น่าจะมีค่า <span class="math notranslate nohighlight">\(y\)</span> เป็นจุดตรงกลางระหว่าง <span class="math notranslate nohighlight">\(2.4\)</span> และ <span class="math notranslate nohighlight">\(2.8\)</span> หรือว่ามีค่าเท่ากับ <span class="math notranslate nohighlight">\(\frac{2.4+2.8}{2}=2.6\)</span> นั่นเอง</p></li>
+</ul>
+<p>หากสังเกตตัวอย่างด้านบนทั้ง 2 ตัวอย่าง เราจะเห็นว่าทุกครั้งที่เราจะตอบค่า <span class="math notranslate nohighlight">\(y\)</span> เราจะต้องไปไล่ดูจุดข้อมูลในชุดข้อมูลของเรา สมมติว่า <span class="math notranslate nohighlight">\(n=1,000,000\)</span> ล่ะ เราจะทำอย่างไรกันดี เราพอจะมีวิธีอะไรบางอย่างที่ช่วยให้เราสามารถตอบค่า <span class="math notranslate nohighlight">\(y\)</span> ที่เหมาะสมจากค่า <span class="math notranslate nohighlight">\(x\)</span> ใด ๆ ก็ตามได้อย่างรวดเร็วหรือไม่</p>
+<hr class="docutils" />
+<p>เนื่องจากข้อมูลใน plot ด้านบน ดูมีลักษณะเป็นเส้นตรง เรามาทดลองใช้โมเดลที่เป็นสมการเชิงเส้น <span class="math notranslate nohighlight">\(\hat{y}=\hat{w_0} + \hat{w_1} x\)</span> กันดีกว่า ซึ่งสมการนี้มี</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\hat{w_0}\)</span> เป็นค่าจุดตัดแกน <span class="math notranslate nohighlight">\(y\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{w_1}\)</span> เป็นค่าความชันของเส้นตรง</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{y}\)</span> เป็นค่า <span class="math notranslate nohighlight">\(y\)</span> ที่ทำนายมาจากสมการเส้นตรงของเรา สำหรับค่า <span class="math notranslate nohighlight">\(x\)</span> ใด ๆ</p></li>
+</ul>
+<p>ถ้าเกิดว่าเราสามารถหาค่า <span class="math notranslate nohighlight">\(\hat{w_0}\)</span> และ <span class="math notranslate nohighlight">\(\hat{w_1}\)</span> ที่เหมาะสมออกมาได้ (ซึ่งเราก็หวังว่ามันจะเป็นค่าเดียวกับ <span class="math notranslate nohighlight">\(w_0\)</span> และ <span class="math notranslate nohighlight">\(w_1\)</span> ของความสัมพันธ์จริง) เราจะสามารถทำนายค่า <span class="math notranslate nohighlight">\(y\)</span> เป็น <span class="math notranslate nohighlight">\(\hat{w_0} + \hat{w_1} x\)</span> จากค่า <span class="math notranslate nohighlight">\(x\)</span> ใด ๆ ได้ทันที โดยที่ไม่ต้องไปนั่งไล่ดูจุดข้อมูลทั้ง <span class="math notranslate nohighlight">\(n\)</span> จุดในชุดข้อมูลเลย</p>
+<p><strong>หมายเหตุ</strong> ในบทเรียนนี้เราใส่สัญลักษณ์ hat เข้าไปบนตัวแปร (เช่น <span class="math notranslate nohighlight">\(\hat{w_0}\)</span> และ <span class="math notranslate nohighlight">\(\hat{w_1}\)</span>) เพื่อทำให้เห็นชัดว่าเรากำลังพูดถึงตัวแปรที่เราประมาณค่าออกมา ไม่ได้กำลังพูดถึงค่าจริงของตัวแปรเหล่านั้น (เช่น <span class="math notranslate nohighlight">\(w_0\)</span> และ <span class="math notranslate nohighlight">\(w_1\)</span>)</p>
+<p><br><br></p>
+<p>ใน code ด้านล่าง เรามาลองปรับค่า <span class="math notranslate nohighlight">\(\hat{w_0}\)</span> และ <span class="math notranslate nohighlight">\(\hat{w_1}\)</span> กัน เพื่อหาดูว่าค่าที่เหมาะสมมีค่าเป็นเท่าไหร่</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ใส่แถบสำหรับปรับค่า w1_hat และ w2_hat รวมถึงช่องสำหรับให้เลือกว่าจะโขว์เส้นความสัมพันธ์ระหว่าง x และ y ที่แท้จริงหรือไม่</span>
+<span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">w0_hat</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">min</span><span class="o">=-</span><span class="mi">4</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
+                  <span class="n">w1_hat</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">min</span><span class="o">=-</span><span class="mi">4</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
+                  <span class="n">show_true_line</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Checkbox</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Show true data&#39;</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">plot_linear_results</span><span class="p">(</span><span class="n">w0_hat</span><span class="p">,</span> <span class="n">w1_hat</span><span class="p">,</span> <span class="n">show_true_line</span><span class="p">):</span>
+
+    <span class="c1"># คำนวณค่า y จากค่า w0_hat และ w1_hat ที่เราเดามา โดยจะคำนวณมาเฉพาะอันที่มีค่า x ตรงกับที่มีในชุดข้อมูล</span>
+    <span class="n">y_predicted_partial</span> <span class="o">=</span> <span class="n">w0_hat</span> <span class="o">+</span> <span class="n">w1_hat</span> <span class="o">*</span> <span class="n">x</span>
+
+    <span class="c1"># คำนวณค่า y จากค่า w0_hat และ w1_hat ที่เราเดามา สำหรับค่า x จำนวนมาก</span>
+    <span class="n">y_predicted</span> <span class="o">=</span> <span class="n">w0_hat</span> <span class="o">+</span> <span class="n">w1_hat</span> <span class="o">*</span> <span class="n">x_whole_line</span>
+
+    <span class="c1"># สร้าง figure</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+    <span class="c1"># Plot ข้อมูล x, y ที่มีอยู่ด้วยสีน้ำเงิน</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Observed&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Plot ข้อมูลค่า y ที่เราทำนายมาที่ตำแหน่งค่า x ต่าง ๆ กัน ด้วยสีแดง</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_whole_line</span><span class="p">,</span> <span class="n">y_predicted</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predicted&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Plot ข้อมูลที่ไม่มี noise ด้วยสีดำ ซึ่งในความเป็นจริง เรามักไม่มีโอกาสเข้าถึงข้อมูลตรงนี้</span>
+    <span class="k">if</span> <span class="n">show_true_line</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_whole_line</span><span class="p">,</span> <span class="n">y_true_whole_line</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True&#39;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>จะเห็นได้ว่าเราสามารถลองปรับค่าความชันและจุดตัดแกน <span class="math notranslate nohighlight">\(y\)</span> ของเส้นตรงไปเรื่อย ๆ จนมีความสอดคล้องกับชุดข้อมูลที่เราเก็บมา (สีน้ำเงิน)</p>
+<p>หากเรากำหนดให้ค่า <span class="math notranslate nohighlight">\(\hat{w_0}=1\)</span> และ <span class="math notranslate nohighlight">\(\hat{w_1}=2\)</span> จะพบว่าเส้นตรงสีแดงมีความสอดคล้องกับจุดสีน้ำเงินค่อนข้างดี โดยเส้นตรงนั้นมีสมการคือ <span class="math notranslate nohighlight">\(y = 2x + 1\)</span> ซึ่งเป็นเส้นตรงที่มีความชันเป็น <span class="math notranslate nohighlight">\(2\)</span> และมีจุดตัดแกน <span class="math notranslate nohighlight">\(y\)</span> คือ <span class="math notranslate nohighlight">\((0,1)\)</span></p>
+<p>อีกวิธีหนึ่งที่อาจจะช่วยให้เราเลือกค่า <span class="math notranslate nohighlight">\(\hat{w_0}\)</span> และ <span class="math notranslate nohighlight">\(\hat{w_0}\)</span> ด้วยตาได้ง่ายขึ้น คือการ plot โชว์ความแตกต่างระหว่างจุดที่ observed มา (สีน้ำเงิน) และสิ่งที่โมเดลทำนายออกมา (สีแดง) ดังตัวอย่างโค้ดด้านล่าง โดยเราจะพยายามเลือกเอาค่า <span class="math notranslate nohighlight">\(\hat{w_0}\)</span> และ <span class="math notranslate nohighlight">\(\hat{w_0}\)</span> ที่ทำให้เส้นสีส้ม ๆ ในรูปมีขนาดรวมกันสั้นที่สุด</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># เหมือน cell ก่อนหน้า แต่เพิ่มช่องสำหรับเลือกว่าจะโชว์ error หรือไม่</span>
+<span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">w0_hat</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">min</span><span class="o">=-</span><span class="mi">4</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
+                  <span class="n">w1_hat</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">min</span><span class="o">=-</span><span class="mi">4</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
+                  <span class="n">show_true_line</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Checkbox</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Show true data&#39;</span><span class="p">),</span>
+                  <span class="n">show_error</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Checkbox</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Show error&#39;</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">plot_linear_results</span><span class="p">(</span><span class="n">w0_hat</span><span class="p">,</span> <span class="n">w1_hat</span><span class="p">,</span> <span class="n">show_true_line</span><span class="p">,</span> <span class="n">show_error</span><span class="p">):</span>
+
+    <span class="c1"># คำนวณค่า y จากค่า w0_hat และ w1_hat ที่เราเดามา สำหรับค่า x จำนวนมาก</span>
+    <span class="n">y_predicted</span> <span class="o">=</span> <span class="n">w0_hat</span> <span class="o">+</span> <span class="n">w1_hat</span> <span class="o">*</span> <span class="n">x_whole_line</span>
+
+    <span class="c1"># สร้าง figure</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+    <span class="c1"># Plot ข้อมูล x, y ที่มีอยู่ด้วยสีน้ำเงิน</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Observed&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Plot ข้อมูลค่า y ที่เราทำนายมาที่ตำแหน่งค่า x ต่าง ๆ กัน ด้วยสีแดง</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_whole_line</span><span class="p">,</span> <span class="n">y_predicted</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predicted&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Plot ข้อมูลที่ไม่มี noise ด้วยสีดำ ซึ่งในความเป็นจริง เรามักไม่มีโอกาสเข้าถึงข้อมูลตรงนี้</span>
+    <span class="k">if</span> <span class="n">show_true_line</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_whole_line</span><span class="p">,</span> <span class="n">y_true_whole_line</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Plot ความแตกต่างระหว่างค่า y ที่ observed มา และค่า y ที่ทำนายมาด้วยสีส้ม</span>
+    <span class="k">if</span> <span class="n">show_error</span><span class="p">:</span>
+
+        <span class="c1"># คำนวณค่า y จากค่า w0_hat และ w1_hat ที่เราเดามา โดยจะคำนวณมาเฉพาะอันที่มีค่า x ตรงกับที่มีในชุดข้อมูล</span>
+        <span class="n">y_predicted_partial</span> <span class="o">=</span> <span class="n">w0_hat</span> <span class="o">+</span> <span class="n">w1_hat</span> <span class="o">*</span> <span class="n">x</span>
+
+        <span class="n">ymin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_predicted_partial</span><span class="p">)</span>
+        <span class="n">ymax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_predicted_partial</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;errors&#39;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZWoUn5OH5no" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p><a class="reference external" href="https://github.com/ichatnun/brainCodeCamp2023_lectures/blob/main/IntroToModeling/modeling_part1b_linear2.pdf">Slides: Simple Linear Models 2</a></p>
+<p>ที่ผ่านมาเราเลือกค่า <span class="math notranslate nohighlight">\(\hat{w_0}\)</span> และ <span class="math notranslate nohighlight">\(\hat{w_1}\)</span> โดยการดูด้วยตาว่าเส้นตรงสีแดงที่เกิดขึ้นมานั้น ดูสอดคล้องกับจุดข้อมูลสีน้ำเงินมากน้อยแค่ไหน ซึ่งนับว่าเป็นจากวัดความเหมือนหรือความแตกต่างเชิงคุณภาพ (qualitative)</p>
+<p>ในลำดับถัดไป เราจะมาลองดูวิธีการวัดความเหมือนหรือความแตกต่างเชิงปริมาณกันบ้าง (quantitative)</p>
+<p>เรามาลองใช้ฟังก์ชัน <span class="math notranslate nohighlight">\(L(y_{i},\hat{y_i})\)</span> สำหรับวัดความต่างระหว่าง <span class="math notranslate nohighlight">\(y_{i}\)</span> และ <span class="math notranslate nohighlight">\(\hat{y_i}\)</span> ออกมาเป็นตัวเลข 1 ตัว โดยการนำเอาค่าทั้งสองมาลบกันแล้วยกกำลังสอง</p>
+<div class="math notranslate nohighlight">
+\[L(y_{i},\hat{y_i}) = (y_{i} - \hat{y_i})^2\]</div>
+<ul class="simple">
+<li><p>ถ้าหากเราพยายามนำเอาสมการนี้ไปตีความทางเรขาคณิต เราจะเห็นว่าค่า <span class="math notranslate nohighlight">\(y_{i} - \hat{y_i}\)</span> แสดงถึง”ความยาว”ของเส้นสีส้มแต่ละเส้นในโค้ดของ cell ก่อนหน้า (อาจะมีค่าเป็นลบหรือบวกก็ได้) ซึ่งแปลว่าค่า <span class="math notranslate nohighlight">\(L(y_{i},\hat{y_i})\)</span> นี้ ก็คือค่าความยาวของเส้นสีส้มยกกำลังสองนั่นเอง</p></li>
+<li><p>ถ้า <span class="math notranslate nohighlight">\(L(y_{i},\hat{y_i})\)</span> มีค่าน้อย แสดงว่า <span class="math notranslate nohighlight">\(y_{i}\)</span> กับ <span class="math notranslate nohighlight">\(\hat{y_i}\)</span> มีความแตกต่างกันน้อย (เส้นสีส้มจะสั้น)</p></li>
+<li><p>ถ้า <span class="math notranslate nohighlight">\(L(y_{i},\hat{y_i})\)</span> มีค่ามาก แสดงว่า <span class="math notranslate nohighlight">\(y_{i}\)</span> และ <span class="math notranslate nohighlight">\(\hat{y_i}\)</span> มีความแตกต่างกันมาก (เส้นสีส้มจะยาว)</p></li>
+</ul>
+<p>ชุดข้อมูลของเรามีทั้งหมด <span class="math notranslate nohighlight">\(n\)</span> จุด ซึ่งหากเราต้องการวัดความแตกต่างในระดับชุดข้อมูล เราก็สามารถเอาค่า <span class="math notranslate nohighlight">\(L(y_{i},\hat{y_i})\)</span> จากแต่ละจุดข้อมูลมาเฉลี่ยกันได้ เกิดเป็นสมการ</p>
+<div class="math notranslate nohighlight">
+\[L(Y,\hat{Y}) =\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}-\hat{y_i}\right)^{2}\]</div>
+<p>ที่มีชื่อเรียกอีกว่า mean squared error (MSE) โดยในที่นี้เราใช้สัญลักษณ์</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Y\)</span> เพื่ออ้างอิงถึง <span class="math notranslate nohighlight">\(y_1, y_2, ..., y_i, ..., y_n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{Y}\)</span> เพื่ออ้างอิงถึง <span class="math notranslate nohighlight">\(\hat{y_1}, \hat{y_2}, ..., \hat{y_i}, ..., \hat{y_n}\)</span></p></li>
+</ul>
+<p>หากเราย้อนกลับไปที่ตัวอย่างด้านบนที่เราพยายามปรับค่า <span class="math notranslate nohighlight">\(\hat{w_0} และ \hat{w_1}\)</span> (จุดตัดแกน <span class="math notranslate nohighlight">\(y\)</span> และค่าความชัน ตามลำดับ) แทนที่เราจะวัดผลด้วยตา เราสามารถลองใช้ <span class="math notranslate nohighlight">\(L\)</span> สำหรับช่วยในการวัดผล โดยสุดท้ายแล้ว เราจะเลือกค่า <span class="math notranslate nohighlight">\(\hat{w_0} และ \hat{w_1}\)</span> ที่ทำให้ <span class="math notranslate nohighlight">\(L\)</span> มีค่าน้อยที่สุด</p>
+<p>อย่างไรก็ตาม การทดลองสุ่มค่าไปเรื่อย ๆ ในลักษณะนี้ เป็นวิธีการที่ใช้เวลานานมาก และไม่ค่อยมีประสิทธิภาพ</p>
+<p><br><br></p>
+<p>หากเรามองออกว่าโจทย์ที่เราพยายามแก้อยู่ เป็นโจทย์การหาค่าต่ำสุดของฟังก์ชัน <span class="math notranslate nohighlight">\(L\)</span> ซึ่งสามารถเขียนในทางคณิตศาสตร์ได้ว่า</p>
+<div class="math notranslate nohighlight">
+\[
+\min_{\hat{w_{0}},\hat{w_{1}}}L(Y,\hat{Y})
+=\min_{\hat{w_{0}},\hat{w_{1}}}\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}-\hat{y_i}\right)^{2}
+= \min_{\hat{w_{0}},\hat{w_{1}}}\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}-(\hat{w_{0}}+\hat{w_{1}}x_{i})\right)^{2}
+\]</div>
+<p>เราก็สามารถเอาเครื่องมือทางคณิตศาสตร์ (เช่น calculus, สถิติ และ linear algebra) มาแก้โจทย์ข้อนี้ได้ ซึ่งคำตอบที่ <span class="math notranslate nohighlight">\(\hat{w_{0}}\)</span> และ <span class="math notranslate nohighlight">\(\hat{w_{1}}\)</span> ที่ได้รับจากการแก้โจทย์ข้อนี้ ก็คือคำตอบที่ทำให้เส้นตรงของเรามีความแตกต่างจากข้อมูลที่เราเก็บมาน้อยที่สุดภายใต้มาตรวัดประเภทนี้ หรือพูดอีกอย่างว่ามีความเหมือนที่สุดนั่นเอง</p>
+<p><strong>หมายเหตุ</strong> เนื่องจาก <span class="math notranslate nohighlight">\(L\)</span> ในที่นี้แสดงถึงความแตกต่าง ซึ่งเราต้องการหาคำตอบที่ทำให้มันมีค่าน้อย (ความสูญเสียน้อย) เรามักจะเรียก <span class="math notranslate nohighlight">\(L\)</span> ในบริบทนี้ว่า loss function</p>
+<hr class="docutils" />
+<p>เนื่องจากมีผู้เรียนจำนวนหนึ่งยังไม่มีโอกาสได้เรียนเนื้อหาทางคณิตศาสตร์ที่จำเป็นต่อการแก้โจทย์ข้อนี้ (เช่น การใช้ calculus และ linear algebra) เราจะแก้โจทย์ข้อนี้ผ่านการเรียกใช้ <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> จากไลบรารี่ <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> เลย</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_linear</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+
+<span class="c1"># ให้โมเดลหาค่า w_0 and w_1 จากข้อมูล (x,y) ทั้งหมดที่มี</span>
+<span class="n">model_linear</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">w0_hat</span> <span class="o">=</span> <span class="n">model_linear</span><span class="o">.</span><span class="n">intercept_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">w1_hat</span> <span class="o">=</span> <span class="n">model_linear</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;True slope </span><span class="si">{</span><span class="n">w1_true</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimated slope </span><span class="si">{</span><span class="n">w1_hat</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;True intercept </span><span class="si">{</span><span class="n">w0_true</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimated intercept </span><span class="si">{</span><span class="n">w0_hat</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>จะเห็นว่าความชันและจุดตัดแกน <span class="math notranslate nohighlight">\(y\)</span> ที่ประมาณจากโมเดล linear regression มีค่าใกล้กับค่าที่เรากำหนดมาตอนสร้างชุดข้อมูล</p>
+<p>หลังจากที่เรา fit โมเดลแล้ว (โมเดลได้ทำการประมาณค่า <span class="math notranslate nohighlight">\(\hat{w_0}\)</span> และ <span class="math notranslate nohighlight">\(\hat{w_1}\)</span> เรียบร้อยแล้ว) เราสามารถทำนายค่า <span class="math notranslate nohighlight">\(y\)</span> จาก <span class="math notranslate nohighlight">\(x\)</span> ใดๆ ได้จากสมการ <span class="math notranslate nohighlight">\( \hat{y} = \hat{w_0} + \hat{w_1}x\)</span> ได้โดยตรง หรือผ่านการเรียกใช้ฟังก์ชัน <code class="docutils literal notranslate"><span class="pre">predict</span></code> ได้เช่นกัน</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ใช้โมเดลทำนายค่า y จากค่า x วิธีที่ 1</span>
+<span class="n">y_hat</span> <span class="o">=</span> <span class="n">w0_hat</span> <span class="o">+</span> <span class="n">w1_hat</span><span class="o">*</span><span class="n">x</span>
+
+<span class="c1"># ใช้โมเดลทำนายค่า y จากค่า x วิธีที่ 2</span>
+<span class="c1"># y_hat = model_linear.predict(x)</span>
+
+<span class="c1"># วัด mean squared error จากการทำนาย</span>
+<span class="k">def</span> <span class="nf">mse</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">y_hat</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">y_hat</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">mse_val</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">)</span>
+<span class="n">mse_val_noisy</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># แสดงผลการทำนาย</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Observed&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predicted&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_whole_line</span><span class="p">,</span> <span class="n">y_true_whole_line</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The error as measured by MSE = </span><span class="si">{</span><span class="n">mse_val</span><span class="si">:</span><span class="s2">0.4f</span><span class="si">}</span><span class="s2"> (red) and </span><span class="si">{</span><span class="n">mse_val_noisy</span><span class="si">:</span><span class="s2">0.4f</span><span class="si">}</span><span class="s2"> (blue) with respect to the black dash line&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>จากการสังเกตด้วยตา จะเห็นว่าค่า <span class="math notranslate nohighlight">\(y\)</span> ที่โมเดลได้ทำนายออกมา (จุดสีแดง) มีความสอดคล้องกับความสัมพันธ์ระหว่าง <span class="math notranslate nohighlight">\(x\)</span> และ <span class="math notranslate nohighlight">\(y\)</span> ที่แท้จริง (เส้นประสีดำ) มากกว่าข้อมูลที่เราเก็บมาเสียอีก (จุดสีน้ำเงิน)</p>
+<p>นอกจากนั้น เราก็ได้ใช้ loss function ตัวเดิม</p>
+<div class="math notranslate nohighlight">
+\[MSE(Y,\hat{Y}) = L(Y,\hat{Y}) =\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}-\hat{y_i}\right)^{2}\]</div>
+<p>มาเป็นมาตรวัดความเหมือน/ความคล้ายระหว่างชุดข้อมูลเชิงปริมาณ และพบว่า MSE ระหว่างค่า <span class="math notranslate nohighlight">\(y\)</span> ของจุดสีแดงกับค่า <span class="math notranslate nohighlight">\(y\)</span> ที่มาจากความสัมพันธ์ที่แท้จริง (สีดำ) มีค่าต่ำกว่า MSE ระหว่างค่า <span class="math notranslate nohighlight">\(y\)</span> ที่เราเก็บมาซึ่งมีสัญญาณรบกวน​ (สีน้ำเงิน) กับ ค่า <span class="math notranslate nohighlight">\(y\)</span> ที่มาจากความสัมพันธ์ที่แท้จริง (สีดำ)</p>
+<p>จะเห็นได้ว่าการเปรียบเทียบทั้งแบบเชิงคุณภาพและเชิงปริมาณมีความสอดคล้องกันในระดับหนึ่ง</p>
+<p><br><br>
+MSE เป็นแค่หนึ่งในวิธีสำหรับวัดผล (evaluation metric) เท่านั้น ยังมีอีกหลายวิธีที่ใช้วัดผลออกมาเป็นตัวเลข เช่น mean absolution error (MAE), root mean squared error (RMSE), correlation coeficient, หรือแม้กระทั่งความเป็นไปได้(likelihood) ของแบบจำลองเทียบกับชุดข้อมูลที่เก็บรวบรวมได้<br><br> แต่ละวิธีในการวัดผลต่างมีสมมติฐานของข้อมูลที่แตกต่างกันจึงเหมาะสมกับข้อมูลที่ต่างกัน การเลือกใช้ evaluation metric ที่เหมาะสมจะส่งผลให้แบบจำลองที่เราสร้างขึ้นสามารถอธิบายข้อมูลได้ดีมากขึ้น <br><br>
+อย่างไรก็ตามวิธีการวัดผลข้างต้นนั้นหมาะสำหรับการสร้างแบบจำลองประเภท regression ส่วนปัญหาอื่นๆ เช่น classification ก็จำเป็นต้องมีการวัดความสามารถของแบบจำลองที่แตกต่างออกไป เช่น ความแม่นยำ (accuracy), F-score ฯลฯ<br></p>
+<p>ใน module นี้ เราจะใช้ MSE เป็น evaluation metric ไปก่อน แต่ใน module ถัด ๆ ไป หรือการทำงานจริง เราจะได้เห็น evaluation metric ที่หลากหลายมากยิ่งขึ้น</p>
+<hr class="docutils" />
+<p>เราลองกลับมาดูตัวอย่างที่คล้าย ๆ กับตัวอย่างที่พูดไว้ในช่วง Introduction ของ module นี้ ที่เราให้แมวดูภาพที่มีลักษณะต่าง ๆ กัน ในขณะที่เราใช้ electrode บันทึกการส่งสัญญาณของ neuron ใน visual cortex ของแมวตัวนั้น</p>
+<p>หากเราลองเปลี่ยนแปลง contrast ของภาพที่ให้แมวดู (โดยใช้ orientation ที่ neuron ตัวนั้น sensitive ที่สุดเท่านั้น ไม่มีการเปลี่ยน orientation เลย) แล้วเก็บค่า average firing rate เอาไว้ เราสามารถลองศึกษาดูว่าการเปลี่ยน contrast ของภาพมันมีผลอย่างไรต่อ average firing rate ของ neuron ตัวนั้น</p>
+<p>สมมติว่าเราลองเอาข้อมูลมา plot ดู แล้วพบข้อมูลที่หน้าตาเหมือน code ใน cell ถัดไป</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ทดลองสร้างข้อมูลโดยการเรียกใช้ generate_sample_linear</span>
+<span class="n">num_samples</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">w0_true</span><span class="p">,</span> <span class="n">w1_true</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="c1"># กำหนดค่า w0 และ w1 ที่แท้จริง สำหรับสร้างข้อมูล</span>
+<span class="n">x_example</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="n">y_example</span> <span class="o">=</span> <span class="n">generate_sample_linear</span><span class="p">(</span><span class="n">x_example</span><span class="p">,</span> <span class="n">w0_true</span><span class="p">,</span> <span class="n">w1_true</span><span class="p">,</span> <span class="n">include_noise</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Plot ข้อมูล x, y ที่มีอยู่</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_example</span><span class="p">,</span> <span class="n">y_example</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;contrast [a.u.]&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;average firing rate [a.u]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>จากการดูหน้าตาของกราฟนี้ เราพบว่ามีลักษณะเป็นคล้ายเส้นตรง (อย่างน้อยก็ในช่วงค่า <span class="math notranslate nohighlight">\(x\)</span> ระหว่าง <span class="math notranslate nohighlight">\(3\)</span> กับ <span class="math notranslate nohighlight">\(6\)</span>)</p>
+<p>ถ้าเราต้องการทำนายค่า average firing rate ของ neuron ตัวนี้จากค่า contrast ค่าใดค่าหนึ่งในช่วง <span class="math notranslate nohighlight">\(x\)</span> ระหว่าง <span class="math notranslate nohighlight">\(3\)</span> กับ <span class="math notranslate nohighlight">\(6\)</span> วิธีหนึ่งที่เราได้เรียนจากเนื้อหาในบทเรียนนี้ก็คือการประมาณค่าความสัมพันธ์ระหว่าง average firing rate ของ neuron (แกน <span class="math notranslate nohighlight">\(y\)</span>) กับค่า contrast (แกน <span class="math notranslate nohighlight">\(x\)</span>) ด้วยสมการเส้นตรง</p>
+<div class="math notranslate nohighlight">
+\[ \hat{y} = \hat{w_0} + \hat{w_1} x\]</div>
+<p>โดยสามารถหาค่า <span class="math notranslate nohighlight">\(\hat{w_0}\)</span> และ <span class="math notranslate nohighlight">\(\hat{w_1}\)</span> การเรียกใช้ <code class="docutils literal notranslate"><span class="pre">sklearn.linear_model.LinearRegression</span></code> ได้อย่างง่ายดาย</p>
+<p><strong>ข้อควรระวัง</strong></p>
+<p>ข้อมูลแสดงความสัมพันธ์ที่แท้จริงระหว่าง average firing rate กับ contrast มีความซับซ้อนกว่าตัวอย่างที่เราสร้างไว้ตรงนี้มาก เช่น หากเราดูค่า contrast ที่นอกเหนือจากช่วง <span class="math notranslate nohighlight">\(3 - 6\)</span> เราอาจพบว่า</p>
+<ul class="simple">
+<li><p>ความสัมพันธ์เริ่มมีความโค้งงอ ไม่เป็นเส้นตรงอีกต่อไป</p></li>
+<li><p>เมื่อมีค่า contrast สูงถึงระดับหนึ่ง ค่า average firing rate ก็ไม่เพิ่มขึ้นแล้ว</p></li>
+</ul>
+<p>ถ้าเราต้องการใช้โมเดลตัวเดียว เพื่ออธิบายความสัมพันธ์ทั้งหมดได้ เรามีความจำเป็นต้องพัฒนาโมเดลที่มีความซับซ้อนมากยิ่งขึ้น</p>
+<p>หรืออีกวิธีหนึ่งก็คือการแบ่งแกน <span class="math notranslate nohighlight">\(x\)</span> ออกเป็นช่วงต่าง ๆ แล้วเราใช้สมการต่างชนิดกัน อธิบายความสัมพันธ์ในแต่ละช่วง</p>
+</section>
+<section id="multiple-linear-regression">
+<h2>Multiple Linear Regression<a class="headerlink" href="#multiple-linear-regression" title="Link to this heading">#</a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kWwz-K2sr7k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p><a class="reference external" href="https://github.com/ichatnun/brainCodeCamp2023_lectures/blob/main/IntroToModeling/modeling_part1c_linear3_multivariate1.pdf">Slides: Simple Linear Models 3</a></p>
+<p>ทีนี้เรามาลองดูการทดลองที่เปลี่ยนไปเล็กน้อย</p>
+<p>สมมติเราให้น้องแมวดูภาพที่มีการเปลี่ยนแปลง contrast แต่ไม่เปลี่ยน orientation เหมือนในตัวอย่างที่แล้ว <strong>พร้อมกันกับ</strong> การให้ฟังเสียงที่เรากำหนดความดังได้</p>
+<p>แล้วเราไปวัด ค่า average firing rate จาก neuron ประเภท multi-sensory neuron ในขณะที่เราเปลี่ยน contrast ของภาพ และ ความดังของเสียง ไปเรื่อย ๆ เราสามารถเอาข้อมูลนี้มาศึกษาดูว่าการเปลี่ยน contrast และความดัง มีผลต่อ average firing rate ของ neuron ตัวนั้นอย่างไร</p>
+<p>สมมติว่าเราลองเอาข้อมูล (contrast, loudness, average firing rate) มา plot ดู แล้วพบข้อมูลที่หน้าตาเหมือน code ใน cell ถัดไป</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_sample_multi_linear</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">w0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">w1</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">w2</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">include_noise</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+    <span class="c1"># สร้างสมการเส้นตรงโดยที่จำลองการใส่สัญญาณรบกวนเข้าไป</span>
+    <span class="c1"># เลือก include_noise เป็น True เพื่อกำหนดให้มีค่า noise เพิ่มเข้าไปในสมการ</span>
+    <span class="k">if</span> <span class="n">include_noise</span><span class="p">:</span>
+      <span class="c1"># สร้าง Gaussian noise</span>
+      <span class="n">noise</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="o">*</span><span class="n">x1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">noise</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="n">w0</span> <span class="o">+</span> <span class="p">(</span><span class="n">w1</span> <span class="o">*</span> <span class="n">x1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">w2</span><span class="o">*</span> <span class="n">x2</span><span class="p">)</span> <span class="o">+</span> <span class="n">noise</span>
+
+    <span class="k">return</span> <span class="n">y</span>
+
+
+<span class="c1"># ทดลองสร้างข้อมูลโดยการเรียกใช้ generate_sample_multi_linear</span>
+<span class="n">num_samples</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">w0_true</span><span class="p">,</span> <span class="n">w1_true</span><span class="p">,</span> <span class="n">w2_true</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y_multi</span> <span class="o">=</span> <span class="n">generate_sample_multi_linear</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">w0_true</span><span class="p">,</span> <span class="n">w1_true</span><span class="p">,</span> <span class="n">w2_true</span><span class="p">)</span>
+
+<span class="c1"># แสดงผลภาพ</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y_multi</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;contrast [a.u.]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;loudness [a.u.]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;average firing rate [a.u.]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">elev</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">azim</span><span class="o">=-</span><span class="mi">70</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>หากเราสังเกตรูปด้านบน เราจะเห็นว่าข้อมูลมีลักษณะเป็นเหมือนแผ่นกระดาษสี่เหลี่ยมผืนผ้า</p>
+<p>ในทางคณิตศาสตร์เราสามารถเขียนสมการของแผ่นกระดาษสี่เหลี่ยมผืนผ้าได้</p>
+<div class="math notranslate nohighlight">
+\[ y = w_0 + w_1 x_1 + w_2 x_2 \]</div>
+<p>โดยที่ <span class="math notranslate nohighlight">\(w_0\)</span>, <span class="math notranslate nohighlight">\(w_1\)</span> และ <span class="math notranslate nohighlight">\(w_2\)</span> เป็นตัวแปรที่เราปรับค่าได้ ซึ่งการปรับค่าตัวแปรเหล่านี้ จะส่งผลให้แผ่นกระดาษนี้ (เราเรียกมันว่า <strong>plane</strong>) มันหมุนไปมา หรือเลื่อนขึ้นลงได้</p>
+<p><br><br>
+เราสามารถลองใช้สมการนี้ มาเปรียบเทียบกับข้อมูลของเราดู โดยการลองปรับค่า <span class="math notranslate nohighlight">\(w_0\)</span>, <span class="math notranslate nohighlight">\(w_1\)</span> และ <span class="math notranslate nohighlight">\(w_2\)</span> ไปเรื่อย ๆ ตาม code ใน cell ถัดมา</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ใส่แถบสำหรับปรับค่า w1_hat และ w2_hat รวมถึงช่องสำหรับให้เลือกว่าจะโขว์เส้นความสัมพันธ์ระหว่าง x และ y ที่แท้จริงหรือไม่</span>
+<span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">w0_hat</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
+                  <span class="n">w1_hat</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">min</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
+                  <span class="n">w2_hat</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">min</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">plot_plane_results</span><span class="p">(</span><span class="n">w0_hat</span><span class="p">,</span> <span class="n">w1_hat</span><span class="p">,</span> <span class="n">w2_hat</span><span class="p">):</span>
+
+    <span class="c1"># สร้างข้อมูลที่ไม่มีสัญญาณรบกวนมาแบบละเอียดสำหรับค่า x1 และ x2 จำนวนมาก เพื่อใช้ในการวาด plane</span>
+    <span class="n">num_sample_per_axis</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">X1_whole_plane</span><span class="p">,</span> <span class="n">X2_whole_plane</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_sample_per_axis</span><span class="p">),</span>
+                                                 <span class="mi">3</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_sample_per_axis</span><span class="p">))</span>
+
+    <span class="n">x1_whole_plane</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">X1_whole_plane</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">x2_whole_plane</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">X2_whole_plane</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="c1"># คำนวณค่า y จากค่า w0_hat และ w1_hat ที่เราเดามา สำหรับค่า x จำนวนมาก</span>
+    <span class="n">y_predicted_whole_plane</span> <span class="o">=</span> <span class="n">w0_hat</span> <span class="o">+</span> <span class="n">w1_hat</span> <span class="o">*</span> <span class="n">x1_whole_plane</span> <span class="o">+</span> <span class="n">w2_hat</span> <span class="o">*</span> <span class="n">x2_whole_plane</span>
+
+    <span class="c1"># Plot รูปออกมา</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x1_whole_plane</span><span class="p">,</span> <span class="n">x2_whole_plane</span><span class="p">,</span> <span class="n">y_predicted_whole_plane</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predicted&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.03</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y_multi</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;contrast [a.u.]&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;loudness [a.u.]&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;average firing rate [a.u.]&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">elev</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">azim</span><span class="o">=-</span><span class="mi">70</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>การลองปรับค่า <span class="math notranslate nohighlight">\(w_0\)</span>, <span class="math notranslate nohighlight">\(w_1\)</span> และ <span class="math notranslate nohighlight">\(w_2\)</span> ไปเรื่อย ๆ เราน่าจะพอเห็นภาพแล้วว่าตัวแปรแต่ละตัวส่งผลอย่างไรต่อ plane ของเรา เช่น การปรับ <span class="math notranslate nohighlight">\(w_0\)</span> เพียงอย่างเดียวจะยก plane ขึ้นหรือลงโดยไม่เปลี่ยนความชันของ plane เลย</p>
+<p>อย่างที่เราได้เคยคุยกันแล้วว่าการลองปรับค่าตัวแปรไปเรื่อย ๆ จนกว่าจะเจอค่าที่อธิบายจุดข้อมูลสีน้ำเงินได้ดีที่สุด เป็นอะไรที่ค่อนข้างใช้เวลานาน เรามาลองใช้เทคนิคที่เราเรียนรู้มาในช่วงแรกของบทเรียนนี้กันดีกว่า</p>
+<p><br><br>
+เราจะใช้ mean squared error (MSE) เป็นมาตรวัดเหมือนเดิม แล้วก็หาค่า <span class="math notranslate nohighlight">\(w_0\)</span>, <span class="math notranslate nohighlight">\(w_1\)</span> และ <span class="math notranslate nohighlight">\(w_2\)</span> ที่ทำให้มีค่า MSE น้อยที่สุด</p>
+<div class="math notranslate nohighlight">
+\[ MSE(Y, \hat{Y})
+= L(Y,\hat{Y})
+=\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}-\hat{y_i}\right)^{2}
+=\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}-(\hat{w_0} + \hat{w_1} x_{i1} + \hat{w_2} x_{i2})\right)^{2}  \]</div>
+<p>เราจะเห็นว่าสมการแทบจะมีหน้าตาเหมือนเดิมเลย ยกเว้นแค่เราเปลี่ยนจาก <span class="math notranslate nohighlight">\(\hat{y} = \hat{w_0} + \hat{w_1} x_1\)</span> ไปเป็น <span class="math notranslate nohighlight">\(\hat{y} = \hat{w_0} + \hat{w_1} x_{i1} + \hat{w_2} x_{i2}\)</span></p>
+<p>โดยที่</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_{i1}\)</span> แสดงถึงค่า feature ที่ 1 ของจุดข้อมูลที่ <span class="math notranslate nohighlight">\(i\)</span> (ค่า contrast ของจุดที่ <span class="math notranslate nohighlight">\(i\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_{i2}\)</span> แสดงถึงค่า feature ที่ 2 ของจุดข้อมูลที่ <span class="math notranslate nohighlight">\(i\)</span> (ค่า loudness ของจุดที่ <span class="math notranslate nohighlight">\(i\)</span>)</p></li>
+</ul>
+<p><br><br>
+การหาค่า <span class="math notranslate nohighlight">\(w_0\)</span>, <span class="math notranslate nohighlight">\(w_1\)</span> และ <span class="math notranslate nohighlight">\(w_2\)</span> ที่ทำให้มีค่า MSE น้อยที่สุด สามารถเขียนเป็นสมการทางคณิตศาสตร์ได้เป็น</p>
+<div class="math notranslate nohighlight">
+\[
+\min_{\hat{w_{0}},\hat{w_{1}},\hat{w_2}}L(Y,\hat{Y})
+=\min_{\hat{w_{0}},\hat{w_{1}},\hat{w_2}}\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}-\hat{y_i}\right)^{2}
+= \min_{\hat{w_{0}},\hat{w_{1}},\hat{w_2}}\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}-(\hat{w_0} + \hat{w_1} x_{i1} + \hat{w_2} x_{i2})\right)^{2}
+\]</div>
+<p>ซึ่งเราสามารถแก้สมการนี้ผ่านการเรียกใช้ <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> จากไลบรารี่ <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> เลย ได้เช่นกัน แต่ต้องลองอ่าน documentation ดูว่าเราจะต้องจัดเรียง dimension ของข้อมูลของเราอย่างไร เพื่อให้เรียกใช้ <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> ได้อย่างถูกต้อง</p>
+<p><strong>ความท้าทาย</strong> สำหรับคนที่มีโอกาสได้ศึกษา linear algebra มาแล้ว อยากให้ลองเขียนสมการนี้ให้อยู่ในรูป vector และ matrix ดู รวมถึงลองแก้สมการดูด้วยเทคนิคที่ผู้เรียนถนัด เช่น การคำนวณ gradient แล้วจับมาเท่ากับศูนย์ (สามารถมองได้ว่า คล้าย ๆ กับการคำนวน derivative แล้วจับมาเท่ากับ <span class="math notranslate nohighlight">\(0\)</span> ที่เราเคยเรียนกันมาใน calculus ม. ปลาย)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># จัดเรียงข้อมูลให้อยู่ในรูปแบบที่เหมาะสม</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># ให้โมเดลหาค่า w_0, w_1 และ w_2 จากข้อมูลทั้งหมดที่มี</span>
+<span class="n">model_multi_linear</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">model_multi_linear</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_multi</span><span class="p">)</span>
+<span class="n">w0_hat</span> <span class="o">=</span> <span class="n">model_multi_linear</span><span class="o">.</span><span class="n">intercept_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">w1_hat</span> <span class="o">=</span> <span class="n">model_multi_linear</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">w2_hat</span> <span class="o">=</span> <span class="n">model_multi_linear</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;True w0 </span><span class="si">{</span><span class="n">w0_true</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimated w0 </span><span class="si">{</span><span class="n">w0_hat</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;True w1 </span><span class="si">{</span><span class="n">w1_true</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimated w1 </span><span class="si">{</span><span class="n">w1_hat</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;True w2 </span><span class="si">{</span><span class="n">w2_true</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimated w2 </span><span class="si">{</span><span class="n">w2_hat</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>จะเห็นว่าค่า <span class="math notranslate nohighlight">\(w_0\)</span>, <span class="math notranslate nohighlight">\(w_1\)</span> และ <span class="math notranslate nohighlight">\(w_2\)</span> ที่ประมาณจากโมเดล linear regression มีค่าใกล้กับค่าที่เรากำหนดมาตอนสร้างชุดข้อมูล</p>
+<p>หลังจากที่เรา fit โมเดลแล้ว (โมเดลได้ทำการประมาณค่า <span class="math notranslate nohighlight">\(w_0\)</span>, <span class="math notranslate nohighlight">\(w_1\)</span> และ <span class="math notranslate nohighlight">\(w_2\)</span> เรียบร้อยแล้ว) เราสามารถทำนายค่า <span class="math notranslate nohighlight">\(y\)</span> จาก <span class="math notranslate nohighlight">\(x_1\)</span> และ <span class="math notranslate nohighlight">\(x_2\)</span> ใดๆ ได้จากสมการ <span class="math notranslate nohighlight">\( \hat{y} = \hat{w_0} + \hat{w_1} x_1 + \hat{w_2} x_2\)</span> ได้โดยตรง หรือผ่านการเรียกใช้ฟังก์ชัน <code class="docutils literal notranslate"><span class="pre">predict</span></code> ได้เช่นกัน</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># สร้างข้อมูลที่ไม่มีสัญญาณรบกวนมาแบบละเอียดสำหรับค่า x1 และ x2 จำนวนมาก เพื่อใช้ในการวาด plane</span>
+<span class="n">num_sample_per_axis</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">X1_whole_plane</span><span class="p">,</span> <span class="n">X2_whole_plane</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_sample_per_axis</span><span class="p">),</span>
+                                              <span class="mi">3</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_sample_per_axis</span><span class="p">))</span>
+<span class="n">x1_whole_plane</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">X1_whole_plane</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">x2_whole_plane</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">X2_whole_plane</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># ปรับให้อยู่ในรูปแบบที่เหมาะสมกับ LinearRegression</span>
+<span class="n">X_whole_plane</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">x1_whole_plane</span><span class="p">,</span> <span class="n">x2_whole_plane</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># ทำนายค่า y ออกมา</span>
+<span class="n">y_predicted_whole_plane</span> <span class="o">=</span> <span class="n">model_multi_linear</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_whole_plane</span><span class="p">)</span>
+
+<span class="c1"># Plot รูปออกมา</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x1_whole_plane</span><span class="p">,</span> <span class="n">x2_whole_plane</span><span class="p">,</span> <span class="n">y_predicted_whole_plane</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predicted&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.03</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y_multi</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;contrast [a.u.]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;loudness [a.u.]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;average firing rate [a.u.]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">elev</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">azim</span><span class="o">=-</span><span class="mi">70</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>จะเห็นได้ว่าเรา plane ที่เราหามาจากการแก้โจทย์ สามารถอธิบายข้อมูลที่เรามีอยู่ได้ดีพอสมควร</p>
+<hr class="docutils" />
+<p>การเปลี่ยนจาก</p>
+<div class="math notranslate nohighlight">
+\[y=w_0 + w_1 x_1\]</div>
+<p>ไปเป็น</p>
+<div class="math notranslate nohighlight">
+\[y=w_0 + w_1 x_1 + w_2 x_2\]</div>
+<p>ส่งผลให้เรา</p>
+<ul class="simple">
+<li><p>เปลี่ยนจากเส้นตรงใน 2 มิติ ไปเป็น plane ใน 3 มิติ</p></li>
+<li><p>เปลี่ยนจากการใช้แค่ค่า <span class="math notranslate nohighlight">\(x_1\)</span> ในการทำนายค่า <span class="math notranslate nohighlight">\(y\)</span> ไปเป็นการมีโอกาสใช้ทั้ง <span class="math notranslate nohighlight">\(x_1\)</span> และ <span class="math notranslate nohighlight">\(x_2\)</span> ในการทำนายค่า <span class="math notranslate nohighlight">\(y\)</span></p></li>
+</ul>
+<p><strong>ข้อสังเกต</strong> สมการ <span class="math notranslate nohighlight">\(y=w_0 + w_1 x_1\)</span> เป็นกรณีพิเศษ (special case) ของสมการ <span class="math notranslate nohighlight">\(y=w_0 + w_1 x_1 + w_2 x_2\)</span> ที่กำหนดให้ <span class="math notranslate nohighlight">\(w_2=0\)</span></p>
+<p><br><br>
+เราสามารถเพิ่มจำนวนตัวแปรเข้าไปอีกจนเกิดเป็นสมการ</p>
+<div class="math notranslate nohighlight">
+\[ y=w_0 + w_1 x_1 + w_2 x_2 + ... + w_p x_p \]</div>
+<p>ที่มีตัวแปรทั้งหมด
+<span class="math notranslate nohighlight">\(p+1\)</span>
+ตัว ซึ่งประกอบด้วย <span class="math notranslate nohighlight">\(w_0, w_1, ..., w_p\)</span></p>
+<p>ซึ่งสมการนี้จะถือเป็นสมการเชิงเส้นเหมือนเดิม แต่เราจะอยู่ในมิติที่สูงขึ้นเรื่อย ๆ เช่น</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p=1\)</span>: <span class="math notranslate nohighlight">\( y=w_0 + w_1 x_1\)</span> เป็นเส้นตรง</p></li>
+<li><p><span class="math notranslate nohighlight">\(p=2\)</span>: <span class="math notranslate nohighlight">\( y=w_0 + w_1 x_1 + w_2 x_2\)</span> เป็นแผ่นกระดาษสี่เหลี่ยม (plane)</p></li>
+<li><p><span class="math notranslate nohighlight">\(p&gt;2\)</span>: <span class="math notranslate nohighlight">\( y=w_0 + w_1 x_1 + ... + w_p x_p\)</span> เป็นแผ่นกระดาษใน <span class="math notranslate nohighlight">\(p+1\)</span> มิติ หรือมีชื่อเรียกทางเทคนิคว่า hyperplane</p></li>
+</ul>
+<p>ไม่ว่าเราจะใช้ <span class="math notranslate nohighlight">\(p\)</span> มีค่าเป็นเท่าไหร่ก็ตาม เราก็ยังสามารถหาค่า <span class="math notranslate nohighlight">\(w_0, w_1, ..., w_p\)</span> ได้โดยการเรียกใช้ <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> จากไลบรารี่ <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> ได้เหมือนเดิม!</p>
+<p><strong>หมายเหตุ</strong> ในกรณีที่เราทำงานกับสมการเชิงเส้น (linear) ที่มีจำนวนมิติสูง เรามักจะใช้ linear algebra มาใช้ในการเขียนสมการออกมาให้อยู่ในรูปแบบที่กระชับในรูปของ vector และ matrix และสามารถแก้สามารถที่มีได้โดยใช้เทคนิคทาง optmization ดังแสดงเอาไว้ใน video ที่เป็น optional สำหรับผู้ที่สนใจด้านล่าง</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/BcGL0yM2cpc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p><a class="reference external" href="https://github.com/ichatnun/brainCodeCamp2023_lectures/blob/main/IntroToModeling/modeling_part1d_linear4_multivariate2.pdf">Slides: Simple Linear Models 4</a></p>
+<p><strong>ผู้จัดเตรียม code ใน tutorial</strong>: ดร. อิทธิ ฉัตรนันทเวช</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Prereqs/IntroToModeling"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="modeling_intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to Intro to Modeling and Model Selection</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="modeling_part2_poly_overfit_regularization.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Polynomial Regression, Overfitting, and Regularization</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-model">โมเดลเชิงเส้น (Linear Model)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">Multiple Linear Regression</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Brain Code Camp Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

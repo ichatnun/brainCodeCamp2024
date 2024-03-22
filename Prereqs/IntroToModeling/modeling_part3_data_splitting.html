@@ -1,0 +1,920 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Training, Validation and Test Data &#8212; Brain Code Camp</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=97488244" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Prereqs/IntroToModeling/modeling_part3_data_splitting';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Outro" href="modeling_outro.html" />
+    <link rel="prev" title="Polynomial Regression, Overfitting, and Regularization" href="modeling_part2_poly_overfit_regularization.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/bcc-logo.png" class="logo__image only-light" alt="Brain Code Camp - Home"/>
+    <script>document.write(`<img src="../../_static/bcc-logo.png" class="logo__image only-dark" alt="Brain Code Camp - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    About Brain Code Camp
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/schedule.html">Schedule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/on-site-meetups.html">On-Site Meetups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/staff.html">Staff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/OH-teams.html">Office Hour Teams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/graduation_requirements.html">Graduation Requirements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisites</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../BrainBuildingBlocks/BBB.html">Brain Building Blocks</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../BrainBuildingBlocks/Session1/S1_Intro.html">Welcome to the Brain!</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session1/S1L1_HelloBrain.html">Hello, Brains!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session1/S1L2_EssentialNeuroanatomy.html">Essential Neuroanatomy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session1/S1L3_FunctionalAreaAndNetwork.html">Functional Area &amp; Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session1/S1L4_LanguageOfTheBrain.html">Language of the Brain</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../BrainBuildingBlocks/Session2/S2_Intro.html">Neuroscience Methods</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session2/S2L1_IntroBrainScienceToolbox.html">Introduction to Brain Science Toolbox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session2/S2L2_EraOfLocalization.html">The Era of Localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session2/S2L3_MeasuringImmeasurable.html">Measuring the Immeasurable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session2/S2L4_SneakPeekInsideTheBlackBox.html">Sneak Peek Inside the Blackbox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session2/S2L5_JourneyIntoTheBrain.html">Journey Into the Brain</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../BrainBuildingBlocks/Session3/S3_Intro.html">Brain &amp; Behaviors</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session3/S3L1_ConnectingBrainAndBehavior.html">Connecting Brain &amp; Behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session3/S3L2_SingleNeuronStudies.html">Single Neuron Studies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session3/S3L3_EEGStudies.html">EEG Studies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session3/S3L4_fMRIStudies.html">fMRI Studies</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../BrainBuildingBlocks/Session4/S4_Intro.html">Brain Signals</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session4/S4L1_SolveTheBrainSignal.html">Solve the Brain Signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session4/S4L2_NeuralFiring.html">Neural Firing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session4/S4L3_EEGSignal.html">EEG Signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session4/S4L4_fMRISignal.html">fMRI Signal</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../BrainBuildingBlocks/Session5/S5_Intro.html">Models of the Mind</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session5/S5L1_TopographicOrganization.html">Topographic Organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session5/S5L2_BiologicalNeuron.html">Biological Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session5/S5L3_NeuralPopulationTuning.html">Neural and Population Tuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session5/S5L4_NeuralRepresentation.html">Neural Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session5/S5L5_HowDoesBrainDecide.html">How Does The Brain Decide?</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../BrainBuildingBlocks/Session6/S6_Intro.html">Data Modeling</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session6/S6L1_DataHandlingAndExploration.html">Data Handling and Exploration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session6/S6L2_GoalsOfModeling.html">Goals of Modeling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session6/S6L3_TypesOfModeling.html">Types of Modeling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session6/S6L4_ModelEvaluation.html">Model Evaluation</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../BrainBuildingBlocks/Session7/S7_Intro.html">Neuro &amp; AI</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session7/S7L1_AIAndBI.html">Artificial Intelligence &amp; Biological Intelligence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session7/S7L2_AIAndBI2.html">Artificial Intelligence &amp; Biological Intelligence II</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session7/S7L3_SupervisedDeepLearning.html">Supervised Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session7/S7L4_ReinforcementLearning.html">Reinforcement Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session7/S7L5_UnsupervisedLearning.html">Unsupervised Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session7/S7L6_LanguageModels.html">Language Models</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../BrainBuildingBlocks/Session8/S8_Intro.html">Medical Applications</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session8/S8L1_DiagnosisAndMonitoring.html">Diagnosis and Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session8/S8L4_ComputationalNeuropsychiatry.html">Computational Neuropsychiatry</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../BrainBuildingBlocks/Session9/S9_Intro.html">Social Applications</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../BrainBuildingBlocks/Session9/S9L2_BrainComputerInterface.html">Brain Computer Interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../BBB2BCC/BBB2BCC.html">From BBB to BCC</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../BBB2BCC/DataVisualization.html">Data Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BBB2BCC/Modeling.html">Modeling</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="modeling_front.html">Intro to Modeling and Model Selection</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="modeling_intro.html">Welcome to Intro to Modeling and Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modeling_part1_simple_linear_model.html">Simple Linear Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modeling_part2_poly_overfit_regularization.html">Polynomial Regression, Overfitting, and Regularization</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Training, Validation and Test Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modeling_outro.html">Outro</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Dimensionality Reduction (Week 1)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DimensionalityReduction/dim_reduct_intro.html">Intro to Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DimensionalityReduction/dim_reduct_part1_basics.html">The Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DimensionalityReduction/dim_reduct_part2_pca.html">Principal Component Analysis (PCA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DimensionalityReduction/dim_reduct_part3_pca_CDT_images.html">Applying PCA to CDT Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DimensionalityReduction/dim_reduct_part4_nonlinear_methods.html">Nonlinear Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DimensionalityReduction/dim_reduct_outro.html">Outro</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning (Weeks 2-3)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Fundamentals/MachineLearning/ml_part1_intro.html">ML Part 1 (Week 2)</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Fundamentals/MachineLearning/intro_to_machine_learning.html">Introduction to Machine Learning</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../Fundamentals/MachineLearning/logistic_regression.html">Logistic Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Fundamentals/MachineLearning/svm.html">Support Vector Machine (SVM)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Fundamentals/MachineLearning/ml_part2_intro.html">ML Part 2 (Week 3)</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Fundamentals/MachineLearning/decision_tree_random_forest.html">Decision Tree and Random Forest</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../Fundamentals/MachineLearning/knn.html">k-Nearest Neighbors (k-NN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Fundamentals/MachineLearning/ml_part2_outro.html">Outro</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deep Learning (Week 4)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DeepLearning/deep_learning_intro.html">Intro to Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DeepLearning/deep_learning_fundamentals.html">Fundamentals of Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DeepLearning/intro_pytorch.html">Introduction to Pytorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DeepLearning/concentration_prediction_with_EEG.html">Concentration Prediction with EEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DeepLearning/cnn_cdt_pytorch.html">Classification with Convolutional Neural Network Using PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/DeepLearning/deep_learning_outro.html">Outro</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments (Weeks 6-7)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/ModalityExploration/Assignments/EEG-assignment/eeg-assignment.html">EEG (modality 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Fundamentals/ModalityExploration/Assignments/fMRI-assignment/fmri-assignment.html">fMRI (modality 2)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications (Weeks 8-12)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Applications/MiniProjects.html">Applying What You Have Learned to Your Project</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Lectures</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_intro.html">Signal Processing</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part1_sampling_averaging.html">Sampling and Signal Averaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part2_dft.html">Discrete Fourier Transform (DFT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part3_STFT.html">Short Time Fourier Transform (STFT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part4_application.html">Audio Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_outro.html">Outro</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/RecurrentNeuralNetwork.html">Recurrent Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/AttentionTransformer.html">Attention Mechanisms and Transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/GraphNeuralNetwork.html">Graph Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/ReinforcementLearning.html">Reinforcement Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/Statistics.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DimensionalityReduction.html">Dimensionality Reduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/HandsOnDeepLearningWithPytorch.html">Hands-On Deep Learning with Pytorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DeepLearningApplications/object_detection_transformer.html">Object Detection with Transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DeepLearningApplications/breast_cancer_segmentation_transformers.html">Breast Cancer Segmentation Using Transformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DeepLearningApplications/thai_food_classification_transformers.html">Image Classification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Previous Offerings</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../PreviousOfferings/BCC2023/bcc2023.html">2023</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../PreviousOfferings/BCC2023/graduates.html">Graduates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreviousOfferings/BCC2023/projects.html">Projects</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ichatnun/brainCodeCamp/blob/main/Prereqs/IntroToModeling/modeling_part3_data_splitting.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Prereqs/IntroToModeling/modeling_part3_data_splitting.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Training, Validation and Test Data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="training-validation-and-test-data">
+<h1>Training, Validation and Test Data<a class="headerlink" href="#training-validation-and-test-data" title="Link to this heading">#</a></h1>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/x1Fn8Gk2mgg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p><a class="reference external" href="https://github.com/ichatnun/brainCodeCamp2023_lectures/blob/main/IntroToModeling/modeling_part3_train_val_test.pdf">Slides: Training, Validation, and Test Data</a></p>
+<br>
+<p>ใน part ก่อนหน้า เราได้เห็นตัวอย่างการใช้ polynomial regression มา fit กับข้อมูลที่มีความสัมพันธ์แบบไม่เป็นเชิงเส้น (nonlinear)</p>
+<ul class="simple">
+<li><p>ถ้าหากเลือก order ของ polynomial ได้อย่างเหมาะสมก็จะช่วยให้ได้โมเดลที่มีความแม่นยำที่สูง</p></li>
+<li><p>ถ้าหากเลือก order ที่ต่ำเกินไป จะเกิดปัญหา underfitting</p></li>
+<li><p>ถ้าหากเลือก order ที่สูงเกินไป ก็จะเกิดปัญหา overfitting</p></li>
+</ul>
+<p>นอกจากนี้ เรายังได้ทดลองใช้เทคนิค regularization มาบรรเทาปัญหา overfitting และได้เห็นถึงความสำคัญในการเลือกค่า <span class="math notranslate nohighlight">\(λ\)</span> ที่เหมาะสม</p>
+<p>ใน part นี้ เราจะมาลองเรียนรู้วิธีการเลือก order ของ polynomial โดยการใช้การแบ่งข้อมูลของเราออกเป็น 3 ส่วน ประกอบด้วย</p>
+<ol class="arabic simple">
+<li><p>Training data - ข้อมูลสำหรับ fit เพื่อหาค่าตัวแปรของโมเดล เช่น <span class="math notranslate nohighlight">\(\mathbf{\hat{w}}\)</span> ใน linear regression และ polynomial regression</p></li>
+<li><p>Validation data - ข้อมูลสำหรับเลือก hyper-parameter เช่น order ของ polynomial</p></li>
+<li><p>Test data - ข้อมูลสำหรับใช้ทดสอบวัดความแม่นยำของโมเดลเท่านั้น กล่าวคือ ข้อมูลชุดนี้จะไม่ถูกนำไป fit เพื่อหาค่าของตัวแปรใดๆ ในโมเดล (เหมือน training data) และข้อมูลนี้ก็ไม่ถูกใช้สำหรับเลือก order ของ polynomial (เหมือน validation data) อีกด้วย</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span> <span class="c1"># ตั้งค่า random seed เอาไว้ เพื่อให้การรันโค้ดนี้ได้ผลเหมือนเดิม</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>ฟังก์ชันจาก part ก่อนหน้า</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ฟังก์ชันสำหรับวัด mean squared error ระหว่างค่าที่ทำนายได้ (y_hat) และค่าผลเฉลย y</span>
+<span class="k">def</span> <span class="nf">mse</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">y_hat</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">y_hat</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># ฟังก์ชันสำหรับ fit โมเดล polynomial ที่มี order ที่กำหนด และ ทำนายผลของโมเดลหลังจากถูกสอนด้วย training data แล้ว</span>
+<span class="k">def</span> <span class="nf">fit_and_predict_polynomial</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="c1"># ค่า x ที่ใช้เป็น input ของโมเดล (จาก training data)</span>
+                               <span class="n">y_train</span><span class="p">,</span> <span class="c1"># ค่า y ที่ใช้เป็นเฉลยให้โมเดล (จาก training data)</span>
+                               <span class="n">poly_order</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="c1"># ค่า order ของ polynomial ที่เราใช้</span>
+                               <span class="n">x_test_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># Python dictionary ที่ใช้เก็บชุดข้อมูลที่เราอยากจะนำมาทดสอบ โดยสามารถเลือกชุดข้อมูลผ่าน key ของ dictionary นี้</span>
+                               <span class="n">y_test_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span> <span class="c1"># Python dictionary ที่ใช้เก็บชุดข้อมูลที่ค่า y ที่เป็นเฉลยของข้อมูลที่นำมาทดสอบ โดยสามารถเลือกชุดข้อมูลผ่าน key ของ dictionary นี้</span>
+
+    <span class="c1"># สร้างตัวแปรประเภท Python dictionary สำหรับเก็บค่า output ของฟังก์ชันนี้</span>
+    <span class="n">mse_dict</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># ค่า mse</span>
+    <span class="n">out_x</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># ค่า x ที่ใช้เป็น input ของโมเดล</span>
+    <span class="n">out_y_hat</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># ค่า y ที่โมเดลตอบมา</span>
+    <span class="n">out_y</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># ค่า y ที่เป็นเฉลย</span>
+
+    <span class="c1"># สร้างโมเดลสำหรับแปลงจาก x เป็น z</span>
+    <span class="n">extract_poly_feat</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="n">poly_order</span><span class="p">,</span> <span class="n">include_bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># แปลงจากค่า x ให้กลายเป็น z</span>
+    <span class="n">z_train</span> <span class="o">=</span> <span class="n">extract_poly_feat</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+
+    <span class="c1"># สร้างโมเดล y = w_0 + w_1*z + w_2 * z^2 + ...</span>
+    <span class="n">model_poly</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+
+    <span class="c1"># สอนโมเดลจาก training data ที่ input ถูก transfrom จาก x มาเป็น z แล้ว</span>
+    <span class="n">model_poly</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">z_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+    <span class="c1"># ทดสอบโมเดลบน training data</span>
+    <span class="n">y_hat_train</span> <span class="o">=</span> <span class="n">model_poly</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">z_train</span><span class="p">)</span>
+
+    <span class="c1"># ถ้าเกิดว่า user ไม่ได้ให้ test data มา จะใช้ training data เป็น test data</span>
+    <span class="k">if</span> <span class="n">x_test_dict</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">x_test_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">y_test_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># เพิ่ม training data เข้าไปใน test_dict เพื่อที่จะใช้เป็นหนึ่งในข้อมูลสำหรับที่จะให้โมเดลลองทำนาย</span>
+    <span class="n">x_test_dict</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_train</span>
+    <span class="n">y_test_dict</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_train</span>
+
+    <span class="c1"># ทดสอบโมเดลบนข้อมูลแต่ละชุดข้อมูล (แต่ละชุดข้อมูลถูกเลือกจาก key ของ dictionary)</span>
+    <span class="k">for</span> <span class="n">curr_mode</span> <span class="ow">in</span> <span class="n">x_test_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+
+        <span class="c1"># แปลงค่า x ให้เป็น z เหมือนขั้นตอนด้านบนที่เรา fit โมเดล</span>
+        <span class="n">z_test</span> <span class="o">=</span> <span class="n">extract_poly_feat</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_test_dict</span><span class="p">[</span><span class="n">curr_mode</span><span class="p">])</span>
+
+        <span class="c1"># ทำนายค่า y โดยใช้โมเดล</span>
+        <span class="n">y_hat_test</span> <span class="o">=</span> <span class="n">model_poly</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">z_test</span><span class="p">)</span>
+
+        <span class="c1"># คำนวณค่า mse บน test data</span>
+        <span class="n">mse_dict</span><span class="p">[</span><span class="n">curr_mode</span><span class="p">]</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">y_test_dict</span><span class="p">[</span><span class="n">curr_mode</span><span class="p">],</span> <span class="n">y_hat_test</span><span class="p">)</span>
+
+        <span class="c1"># เตรียมข้อมูลเป็น output ของฟังก์ชันนี้ เผื่อเรียกใช้ภายหลัง เช่น การนำเอาข้อมูลไป plot</span>
+        <span class="n">out_x</span><span class="p">[</span><span class="n">curr_mode</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_test_dict</span><span class="p">[</span><span class="n">curr_mode</span><span class="p">]</span> <span class="c1"># เก็บค่า x ที่นำมาทดสอบ</span>
+        <span class="n">out_y_hat</span><span class="p">[</span><span class="n">curr_mode</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_hat_test</span> <span class="c1"># เก็บค่า y ที่โมเดลทำนายออกมา</span>
+        <span class="n">out_y</span><span class="p">[</span><span class="n">curr_mode</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_test_dict</span><span class="p">[</span><span class="n">curr_mode</span><span class="p">]</span> <span class="c1"># เก็บค่า y ที่เป็นผลเฉลย</span>
+
+    <span class="k">return</span> <span class="n">out_x</span><span class="p">,</span> <span class="n">out_y_hat</span><span class="p">,</span> <span class="n">out_y</span><span class="p">,</span> <span class="n">mse_dict</span><span class="p">,</span> <span class="n">model_poly</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>กำหนดให้ข้อมูลที่เราเก็บมานั้นเป็นข้อมูลที่มาจากสมการ <span class="math notranslate nohighlight">\(y=sin((x+π/2))^2\)</span> โดยที่ <span class="math notranslate nohighlight">\(0&lt;x&lt; \frac{π}{2}\)</span></p>
+<p>ถ้าหากว่าเราต้องการประมาณค่าฟังก์ชันนี้ด้วย โมเดลที่เราใช้ใน part ที่แล้ว</p>
+<div class="math notranslate nohighlight">
+\[y = \hat{w_0} + \hat{w_1} x+ \hat{w_2} x^2+ ...+ \hat{w_p} x^p\]</div>
+<p>เราจะมีวิธีการเลือก order <span class="math notranslate nohighlight">\(p\)</span> ของโมเดลนี้อย่างไร</p>
+<hr class="docutils" />
+<p>สมมติว่าเรามีโอกาสเก็บข้อมูลมาใช้สำหรับ fit โมเดลเพียงแค่ <span class="math notranslate nohighlight">\(50\)</span> จุด เราสามารถทดลองใช้ขั้นตอนเหล่านี้ในการเลือก order <span class="math notranslate nohighlight">\(p\)</span> ของโมเดล</p>
+<ol class="arabic simple">
+<li><p>อาจจะสุ่ม <span class="math notranslate nohighlight">\( 30\% \)</span> ของข้อมูลที่เก็บมา (<span class="math notranslate nohighlight">\(30\%\)</span> ของ <span class="math notranslate nohighlight">\(50\)</span> จุด) มาใช้เป็น validation data <span class="math notranslate nohighlight">\(x_{val}\)</span> และ ใช้ที่เหลือ (<span class="math notranslate nohighlight">\(70\%\)</span> ของ <span class="math notranslate nohighlight">\(50\)</span> จุด) มาใช้เป็น training data <span class="math notranslate nohighlight">\((x_{train}, y_{train})\)</span></p></li>
+<li><p>ทดลองสร้าง polynomial ที่มีค่า order <span class="math notranslate nohighlight">\(p\)</span> สักค่าหนึ่งมา และใช้ <span class="math notranslate nohighlight">\(x_{train}\)</span> ในการ fit โมเดล หรือ การหาค่า <span class="math notranslate nohighlight">\(\hat{W}\)</span> นั่นเอง</p></li>
+<li><p>หลังจากที่ fit โมเดลเรียบร้อยแล้ว เราจะนำเอาโมเดลมาทำนายค่า <span class="math notranslate nohighlight">\(y\)</span> สำหรับทุก ๆ ค่า <span class="math notranslate nohighlight">\(x\)</span> ใน <span class="math notranslate nohighlight">\(x_{val}\)</span> โดยเราจะเรียกค่าที่โมเดลทำนายออกมาว่า <span class="math notranslate nohighlight">\(\hat{y}_{val}\)</span></p></li>
+<li><p>ใช้ evaluation metric เช่น <span class="math notranslate nohighlight">\(MSE(y_{val}, \hat{y}_{val})\)</span> มาคำนวณดูความสามารถของโมเดลในการทำนายค่า</p></li>
+<li><p>ทำซ้ำขั้นตอนที่ 2, 3 และ 4 แต่ใช้ค่า order <span class="math notranslate nohighlight">\(p\)</span> ที่เปลี่ยนไปเรื่อยๆ</p></li>
+<li><p>ใช้ <span class="math notranslate nohighlight">\(p\)</span> ที่ทำให้โมเดลมีความสามารถในการทำนายค่าบน validation data <span class="math notranslate nohighlight">\((x_{val}, y_{val})\)</span> มากที่สุด เป็นค่า <span class="math notranslate nohighlight">\(p\)</span> ที่จะใช้งานจริง</p></li>
+<li><p>นำเอาโมเดล polynomial ที่ใช้ค่า order <span class="math notranslate nohighlight">\(p\)</span> จากขั้นตอนที่ 6 มาทดสอบกับ test data</p></li>
+</ol>
+<hr class="docutils" />
+<p>เรามาลองดูข้อมูลชุดนี้กัน</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num_points</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># จำนวนจุดที่มีทั้งหมด</span>
+<span class="n">num_point_observed</span> <span class="o">=</span> <span class="mi">50</span> <span class="c1"># จำนวนจุดที่เราเก็บมาใช้สอนโมเดล (fit โมเดล)</span>
+<span class="n">mode2color_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;train&#39;</span><span class="p">:</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">:</span><span class="s1">&#39;g&#39;</span><span class="p">}</span> <span class="c1"># กำหนดสีสำหรับแต่ละ mode เช่น สีน้ำเงินสำหรับ training data สีเขียวสำหรับ test data</span>
+
+<span class="c1"># สร้างข้อมูลที่ไม่มีสัญญาณรบกวนมาแบบละเอียด เพื่อใช้ในการวาดกราฟ (เส้นประสีดำ)</span>
+<span class="n">x_whole_line</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">num_points</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">y_true_whole_line</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="n">x_whole_line</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># เติมสัญญาณรบกวนเข้าไปในค่า y เพื่อจำลองสถานการณ์ที่มีสัญญาณรบกวนเวลาเก็บข้อมูล</span>
+<span class="n">y_noisy</span> <span class="o">=</span> <span class="n">y_true_whole_line</span> <span class="o">+</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="o">*</span><span class="n">x_whole_line</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># สมมติเราเก็บข้อมูลมาแค่ num_point_observed จุด และเราจะใช้ 30% ของจุดที่เก็บมาเป็น validation data</span>
+<span class="n">fraction_val</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">num_val</span> <span class="o">=</span>  <span class="nb">int</span><span class="p">(</span><span class="n">num_point_observed</span><span class="o">*</span><span class="n">fraction_val</span><span class="p">)</span>
+<span class="n">num_train</span> <span class="o">=</span> <span class="n">num_point_observed</span> <span class="o">-</span> <span class="n">num_val</span>
+
+<span class="c1">## สร้าง training data และ validation data จากข้อมูลที่หยิบมาแบบแรนดอม</span>
+<span class="n">shuffle_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_points</span><span class="p">))</span>
+<span class="n">x_whole_line_shuffle</span> <span class="o">=</span> <span class="n">x_whole_line</span><span class="p">[</span><span class="n">shuffle_indices</span><span class="p">]</span>
+<span class="n">y_noisy_shuffle</span> <span class="o">=</span> <span class="n">y_noisy</span><span class="p">[</span><span class="n">shuffle_indices</span><span class="p">]</span>
+
+<span class="c1"># Training data</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">x_whole_line_shuffle</span><span class="p">[:</span><span class="n">num_train</span><span class="p">]</span>
+<span class="n">y_train_noisy</span> <span class="o">=</span> <span class="n">y_noisy_shuffle</span><span class="p">[:</span><span class="n">num_train</span><span class="p">]</span>
+
+<span class="c1"># Validation data</span>
+<span class="n">x_val</span> <span class="o">=</span> <span class="n">x_whole_line_shuffle</span><span class="p">[</span><span class="n">num_train</span><span class="p">:</span><span class="n">num_train</span><span class="o">+</span><span class="n">num_val</span><span class="p">]</span>
+<span class="n">y_val_noisy</span> <span class="o">=</span> <span class="n">y_noisy_shuffle</span><span class="p">[</span><span class="n">num_train</span><span class="p">:</span><span class="n">num_train</span><span class="o">+</span><span class="n">num_val</span><span class="p">]</span>
+
+<span class="c1"># Test data (จุดที่เราไม่ได้เก็บมา ซึ่งมีจำนวนจุด = num_points - num_points_observed)</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">x_whole_line_shuffle</span><span class="p">[</span><span class="n">num_train</span><span class="o">+</span><span class="n">num_val</span><span class="p">:]</span>
+<span class="n">y_test_noisy</span> <span class="o">=</span> <span class="n">y_noisy_shuffle</span><span class="p">[</span><span class="n">num_train</span><span class="o">+</span><span class="n">num_val</span><span class="p">:]</span>
+
+<span class="c1"># Plot ข้อมูล x, y ที่มีอยู่</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train_noisy</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">mode2color_dict</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Training&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_val</span><span class="p">,</span> <span class="n">y_val_noisy</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">mode2color_dict</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Validation&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test_noisy</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">mode2color_dict</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_whole_line</span><span class="p">,</span> <span class="n">y_true_whole_line</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True&#39;</span> <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1b63ba474baa5b9c65a7677beb659d8a50a855b3eda102b3cc14f3f254fc5c7f.png" src="../../_images/1b63ba474baa5b9c65a7677beb659d8a50a855b3eda102b3cc14f3f254fc5c7f.png" />
+</div>
+</div>
+<p>ลองทำตามขั้นตอน 7 ขั้นตอนที่เพิ่งได้อธิบายไป เพื่อเลือก polynomial order ที่เหมาะสม</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># สร้าง x_test_dict และ y_test_dict มาเก็บข้อมูลที่เราอยากจะให้โมเดลลองทำนายดู</span>
+<span class="n">x_test_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;val&#39;</span><span class="p">:</span> <span class="n">x_val</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="n">x_test</span><span class="p">,</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span> <span class="n">x_whole_line</span><span class="p">}</span>
+<span class="n">y_test_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;val&#39;</span><span class="p">:</span> <span class="n">y_val_noisy</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="n">y_test_noisy</span><span class="p">,</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span> <span class="n">y_true_whole_line</span><span class="p">}</span>
+
+<span class="c1"># ลองทดสอบเปลี่ยนค่า polynomial order</span>
+<span class="n">poly_order_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+
+<span class="c1"># สร้างตัวแปรประเภท dictionary สำหรับเก็บค่า mse ของแต่ละชุดข้อมูล (เช่น train, val และ test)</span>
+<span class="n">mse_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">fig_row</span><span class="p">,</span> <span class="n">fig_col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+<span class="c1"># ใช้ for-loop สำหรับทดลองนำเอา polymonial ที่มีค่า order ต่างๆ มา fit กับข้อมูล</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">curr_poly_order</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">poly_order_list</span><span class="p">):</span>
+
+    <span class="c1"># fit โมเดล และให้โมเดลทำนายค่า y ออกมา</span>
+    <span class="n">curr_outputs</span> <span class="o">=</span> <span class="n">fit_and_predict_polynomial</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span>
+                                              <span class="n">y_train_noisy</span><span class="p">,</span>
+                                              <span class="n">poly_order</span> <span class="o">=</span> <span class="n">poly_order_list</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span>
+                                              <span class="n">x_test_dict</span> <span class="o">=</span> <span class="n">x_test_dict</span><span class="p">,</span>
+                                              <span class="n">y_test_dict</span> <span class="o">=</span> <span class="n">y_test_dict</span><span class="p">)</span>
+
+    <span class="n">out_x</span> <span class="o">=</span> <span class="n">curr_outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># ค่า x ที่ถูกใช้ทดสอบโมเดล</span>
+    <span class="n">out_y_hat</span> <span class="o">=</span> <span class="n">curr_outputs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># ค่า y ที่โมเดลทำนายออกมา</span>
+    <span class="n">out_y</span> <span class="o">=</span> <span class="n">curr_outputs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="c1"># ค่า y ที่เป็นผลเฉลย</span>
+
+    <span class="c1"># เก็บค่า mse ของแต่ละชุดข้อมูลที่นำมาทดสอบที่มีค่า order ของ polynomial ที่แตกต่างกัน</span>
+    <span class="k">for</span> <span class="n">curr_mode</span> <span class="ow">in</span> <span class="n">out_x</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">mse_dict</span><span class="p">[</span><span class="n">curr_mode</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">curr_outputs</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="n">curr_mode</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mse_dict</span><span class="p">[</span><span class="n">curr_mode</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">curr_outputs</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="n">curr_mode</span><span class="p">])</span>
+
+    <span class="c1"># แสดงผล</span>
+    <span class="k">if</span> <span class="n">idx</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">idx</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">fig_col</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">fig_row</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">curr_mode</span> <span class="ow">in</span> <span class="n">out_x</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">curr_mode</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span>
+            <span class="c1"># Plot สิ่งที่โมเดลทำนายมาทุกจุด</span>
+            <span class="n">ax</span><span class="p">[</span><span class="n">fig_row</span><span class="p">,</span> <span class="n">fig_col</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">out_x</span><span class="p">[</span><span class="n">curr_mode</span><span class="p">],</span> <span class="n">out_y_hat</span><span class="p">[</span><span class="n">curr_mode</span><span class="p">],</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;prediction&#39;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Plot ข้อมูล &quot;ผลเฉลย&quot; (ในที่นี้เราใช้ข้อมูลที่มีสัญญาณรบกวนเป็นผลเฉลยสำหรับสอน/วัดผลโมเดล เนื่องจากในสถานการณ์จริง บ่อยครั้ง เราไม่สามารถเข้าถึงข้อมูลที่ไม่มีสัญญาณรบกวนได้)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="n">fig_row</span><span class="p">,</span> <span class="n">fig_col</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">out_x</span><span class="p">[</span><span class="n">curr_mode</span><span class="p">],</span> <span class="n">out_y</span><span class="p">[</span><span class="n">curr_mode</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">mode2color_dict</span><span class="p">[</span><span class="n">curr_mode</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">curr_mode</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+    <span class="c1"># Plot ข้อมูลที่ไม่มี noise สำหรับเป็น reference ไว้ดู</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">fig_row</span><span class="p">,</span> <span class="n">fig_col</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_whole_line</span><span class="p">,</span> <span class="n">y_true_whole_line</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">fig_row</span><span class="p">,</span> <span class="n">fig_col</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">fig_row</span><span class="p">,</span> <span class="n">fig_col</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Order = </span><span class="si">{</span><span class="n">curr_poly_order</span><span class="si">}</span><span class="s2">, MSE(train,val,test) = (</span><span class="si">{</span><span class="n">mse_dict</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">mse_dict</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">mse_dict</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">fig_row</span><span class="p">,</span> <span class="n">fig_col</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.25</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">fig_row</span><span class="p">,</span> <span class="n">fig_col</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="n">fig_col</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="c1"># แสดงผล mse ที่มีค่า order ของ polynomial แตกต่างกัน</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">curr_mode</span> <span class="ow">in</span> <span class="n">mse_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">curr_mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">,</span><span class="s1">&#39;test&#39;</span><span class="p">]:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">poly_order_list</span><span class="p">,</span> <span class="n">mse_dict</span><span class="p">[</span><span class="n">curr_mode</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">curr_mode</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Polynomial order&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;MSE&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.01</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/fd8d868760d9953cecdc46453be126dce219f2a91cb732c3c50f29a435eeb701.png" src="../../_images/fd8d868760d9953cecdc46453be126dce219f2a91cb732c3c50f29a435eeb701.png" />
+<img alt="../../_images/4253ef7b2dbc8a00ac1e0253d9481fccbc8c6dfc56ae2dfdd81a1d0fcf4e2c3f.png" src="../../_images/4253ef7b2dbc8a00ac1e0253d9481fccbc8c6dfc56ae2dfdd81a1d0fcf4e2c3f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The lowest training MSE was achieved with the polynomial of order </span><span class="si">{</span><span class="n">poly_order_list</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">mse_dict</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">])]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The lowest validation MSE was achieved with the polynomial of order </span><span class="si">{</span><span class="n">poly_order_list</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">mse_dict</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">])]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The lowest test MSE was achieved with the polynomial of order </span><span class="si">{</span><span class="n">poly_order_list</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">mse_dict</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">])]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The lowest training MSE was achieved with the polynomial of order 15
+The lowest validation MSE was achieved with the polynomial of order 4
+The lowest test MSE was achieved with the polynomial of order 4
+</pre></div>
+</div>
+</div>
+</div>
+<p>จากตัวอย่างด้านบน เราสังเกตเห็นว่า</p>
+<ul class="simple">
+<li><p>order <span class="math notranslate nohighlight">\(p\)</span> ที่ให้ค่า MSE บน validation data ต่ำที่สุด ให้ค่าทำนายบน test data  ที่ใกล้เคียงกับค่าที่ถูกต้องมากกว่าค่า <span class="math notranslate nohighlight">\(p\)</span> อื่นๆ ที่เราลองทดสอบทั้งหมด</p></li>
+<li><p>order <span class="math notranslate nohighlight">\(p\)</span> ที่ต่ำกว่าค่าที่เราเลือกมาก ๆ จะมีปัญหา underfitting อย่างชัดเจน</p></li>
+<li><p>order <span class="math notranslate nohighlight">\(p\)</span> ที่สูงกว่าค่าที่เราเลือกมาก ๆ จะมีปัญหา overfitting อย่างชัดเจน</p></li>
+</ul>
+<hr class="docutils" />
+<p>นอกจากการแบ่งข้อมูลเป็นส่วน ๆ โดยการเขียนโค้ดเอง เราสามารถแบ่งข้อมูลผ่านการเรียกใช้ <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> ของ <code class="docutils literal notranslate"><span class="pre">sklearn.model_selection</span></code> ได้เช่นกัน ซึ่งสัดส่วนของการแบ่งข้อมูลออกเป็นแต่ละประเภท (training, validation หรือ test) ไม่มีกฎที่ตายตัว ขึ้นอยู่กับสถานการณ์</p>
+<p>นอกจากการแบ่งแบบสุ่มที่เราได้ลองใช้ในตัวอย่างด้านบนแล้ว ยังมีอีกหลายวิธี โดยหนึ่งในวิธีที่ได้รับความนิยมมาก คือ การทำ k-fold cross-validation ซึ่งมีขั้นตอนโดยสังเขปดังนี้</p>
+<ol class="arabic simple">
+<li><p>แบ่งชุดข้อมูลออกเป็น k ส่วน (เรียกว่า fold)</p></li>
+<li><p>นำเอา 1 fold มาเป็นตัวสำหรับทดสอบโมเดล และนำเอา fold ที่เหลือ (ซึ่งมีทั้งหมด k-1 folds) มาใช้ fit โมเดล และเก็บค่า evaluation metric ไว้</p></li>
+<li><p>ทำขั้นตอนที่ 2 ซ้ำ แต่จะเลือก fold ใหม่มาใช้สำหรับทดสอบโมเดล (และจะใช้อีก k-1 folds ที่เหลือสำหรับสอนโมเดล)</p></li>
+</ol>
+<p>ด้วยวิธีนี้ เราจะทำขั้นตอนที่ 2 ทั้งหมด k รอบ (ทุก fold ถูกนำเอามาใช้เป็น fold สำหรับทดสอบ 1 ครั้ง) และเราสามารถนำเอาค่า evaluation metric จากทุก fold มารวมกันเป็นตัวเลขหนึ่งตัว ซึ่งสามารถนำเอาไปใช้ในการเลือก hyperparameter เช่น order ของ polynomial ได้เช่นกัน</p>
+<p>ถ้าหากเราเลือก k ที่มีค่าเท่ากับจำนวนจุดข้อมูลที่เรามี เราจะเรียกว่าเราใช้ Leave One Out Cross Validation (LOOCV)</p>
+<p>เราสามารถใช้เทคนิค cross validation ผ่านการเรียกใช้ <code class="docutils literal notranslate"><span class="pre">sklearn.model_selection.cross_val_score</span></code> ได้อย่างง่ายดาย</p>
+<p>นอกจาก cross validation แล้ว ยังมีเทคนิคอีกหลายแบบที่ถูกใช้งานอย่างแพร่หลาย เช่น bootstrapping</p>
+<p><strong>ผู้จัดเตรียม code ใน tutorial</strong>: ดร. อิทธิ ฉัตรนันทเวช</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Prereqs/IntroToModeling"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="modeling_part2_poly_overfit_regularization.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Polynomial Regression, Overfitting, and Regularization</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="modeling_outro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Outro</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Brain Code Camp Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

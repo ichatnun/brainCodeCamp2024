@@ -1,0 +1,1408 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Logistic Regression &#8212; Brain Code Camp</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=97488244" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Fundamentals/MachineLearning/logistic_regression';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Support Vector Machine (SVM)" href="svm.html" />
+    <link rel="prev" title="Introduction to Machine Learning" href="intro_to_machine_learning.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/bcc-logo.png" class="logo__image only-light" alt="Brain Code Camp - Home"/>
+    <script>document.write(`<img src="../../_static/bcc-logo.png" class="logo__image only-dark" alt="Brain Code Camp - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    About Brain Code Camp
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/schedule.html">Schedule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/on-site-meetups.html">On-Site Meetups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/staff.html">Staff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/OH-teams.html">Office Hour Teams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/graduation_requirements.html">Graduation Requirements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisites</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/BBB.html">Brain Building Blocks</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session1/S1_Intro.html">Welcome to the Brain!</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session1/S1L1_HelloBrain.html">Hello, Brains!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session1/S1L2_EssentialNeuroanatomy.html">Essential Neuroanatomy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session1/S1L3_FunctionalAreaAndNetwork.html">Functional Area &amp; Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session1/S1L4_LanguageOfTheBrain.html">Language of the Brain</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session2/S2_Intro.html">Neuroscience Methods</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session2/S2L1_IntroBrainScienceToolbox.html">Introduction to Brain Science Toolbox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session2/S2L2_EraOfLocalization.html">The Era of Localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session2/S2L3_MeasuringImmeasurable.html">Measuring the Immeasurable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session2/S2L4_SneakPeekInsideTheBlackBox.html">Sneak Peek Inside the Blackbox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session2/S2L5_JourneyIntoTheBrain.html">Journey Into the Brain</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session3/S3_Intro.html">Brain &amp; Behaviors</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session3/S3L1_ConnectingBrainAndBehavior.html">Connecting Brain &amp; Behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session3/S3L2_SingleNeuronStudies.html">Single Neuron Studies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session3/S3L3_EEGStudies.html">EEG Studies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session3/S3L4_fMRIStudies.html">fMRI Studies</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session4/S4_Intro.html">Brain Signals</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session4/S4L1_SolveTheBrainSignal.html">Solve the Brain Signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session4/S4L2_NeuralFiring.html">Neural Firing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session4/S4L3_EEGSignal.html">EEG Signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session4/S4L4_fMRISignal.html">fMRI Signal</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session5/S5_Intro.html">Models of the Mind</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session5/S5L1_TopographicOrganization.html">Topographic Organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session5/S5L2_BiologicalNeuron.html">Biological Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session5/S5L3_NeuralPopulationTuning.html">Neural and Population Tuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session5/S5L4_NeuralRepresentation.html">Neural Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session5/S5L5_HowDoesBrainDecide.html">How Does The Brain Decide?</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session6/S6_Intro.html">Data Modeling</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session6/S6L1_DataHandlingAndExploration.html">Data Handling and Exploration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session6/S6L2_GoalsOfModeling.html">Goals of Modeling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session6/S6L3_TypesOfModeling.html">Types of Modeling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session6/S6L4_ModelEvaluation.html">Model Evaluation</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7_Intro.html">Neuro &amp; AI</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7L1_AIAndBI.html">Artificial Intelligence &amp; Biological Intelligence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7L2_AIAndBI2.html">Artificial Intelligence &amp; Biological Intelligence II</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7L3_SupervisedDeepLearning.html">Supervised Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7L4_ReinforcementLearning.html">Reinforcement Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7L5_UnsupervisedLearning.html">Unsupervised Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7L6_LanguageModels.html">Language Models</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session8/S8_Intro.html">Medical Applications</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session8/S8L1_DiagnosisAndMonitoring.html">Diagnosis and Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session8/S8L4_ComputationalNeuropsychiatry.html">Computational Neuropsychiatry</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session9/S9_Intro.html">Social Applications</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session9/S9L2_BrainComputerInterface.html">Brain Computer Interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Prereqs/BBB2BCC/BBB2BCC.html">From BBB to BCC</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/BBB2BCC/DataVisualization.html">Data Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/BBB2BCC/Modeling.html">Modeling</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Prereqs/IntroToModeling/modeling_front.html">Intro to Modeling and Model Selection</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/IntroToModeling/modeling_intro.html">Welcome to Intro to Modeling and Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/IntroToModeling/modeling_part1_simple_linear_model.html">Simple Linear Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/IntroToModeling/modeling_part2_poly_overfit_regularization.html">Polynomial Regression, Overfitting, and Regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/IntroToModeling/modeling_part3_data_splitting.html">Training, Validation and Test Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/IntroToModeling/modeling_outro.html">Outro</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Dimensionality Reduction (Week 1)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../DimensionalityReduction/dim_reduct_intro.html">Intro to Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DimensionalityReduction/dim_reduct_part1_basics.html">The Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DimensionalityReduction/dim_reduct_part2_pca.html">Principal Component Analysis (PCA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DimensionalityReduction/dim_reduct_part3_pca_CDT_images.html">Applying PCA to CDT Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DimensionalityReduction/dim_reduct_part4_nonlinear_methods.html">Nonlinear Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DimensionalityReduction/dim_reduct_outro.html">Outro</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning (Weeks 2-3)</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="ml_part1_intro.html">ML Part 1 (Week 2)</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro_to_machine_learning.html">Introduction to Machine Learning</a></li>
+
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Logistic Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="svm.html">Support Vector Machine (SVM)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ml_part2_intro.html">ML Part 2 (Week 3)</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="decision_tree_random_forest.html">Decision Tree and Random Forest</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="knn.html">k-Nearest Neighbors (k-NN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ml_part2_outro.html">Outro</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deep Learning (Week 4)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../DeepLearning/deep_learning_intro.html">Intro to Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DeepLearning/deep_learning_fundamentals.html">Fundamentals of Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DeepLearning/intro_pytorch.html">Introduction to Pytorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DeepLearning/concentration_prediction_with_EEG.html">Concentration Prediction with EEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DeepLearning/cnn_cdt_pytorch.html">Classification with Convolutional Neural Network Using PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DeepLearning/deep_learning_outro.html">Outro</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments (Weeks 6-7)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ModalityExploration/Assignments/EEG-assignment/eeg-assignment.html">EEG (modality 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ModalityExploration/Assignments/fMRI-assignment/fmri-assignment.html">fMRI (modality 2)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications (Weeks 8-12)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Applications/MiniProjects.html">Applying What You Have Learned to Your Project</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Lectures</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_intro.html">Signal Processing</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part1_sampling_averaging.html">Sampling and Signal Averaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part2_dft.html">Discrete Fourier Transform (DFT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part3_STFT.html">Short Time Fourier Transform (STFT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part4_application.html">Audio Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_outro.html">Outro</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/RecurrentNeuralNetwork.html">Recurrent Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/AttentionTransformer.html">Attention Mechanisms and Transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/GraphNeuralNetwork.html">Graph Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/ReinforcementLearning.html">Reinforcement Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/Statistics.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DimensionalityReduction.html">Dimensionality Reduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/HandsOnDeepLearningWithPytorch.html">Hands-On Deep Learning with Pytorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DeepLearningApplications/object_detection_transformer.html">Object Detection with Transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DeepLearningApplications/breast_cancer_segmentation_transformers.html">Breast Cancer Segmentation Using Transformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DeepLearningApplications/thai_food_classification_transformers.html">Image Classification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Previous Offerings</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../PreviousOfferings/BCC2023/bcc2023.html">2023</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../PreviousOfferings/BCC2023/graduates.html">Graduates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreviousOfferings/BCC2023/projects.html">Projects</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ichatnun/brainCodeCamp/blob/main/Fundamentals/MachineLearning/logistic_regression.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Fundamentals/MachineLearning/logistic_regression.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Logistic Regression</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-simulated-dataset">Generate Simulated Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-boundary">Decision Boundary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression-solver">Logistic Regression เมื่อใช้ <code class="docutils literal notranslate"><span class="pre">solver</span></code> ชนิดต่างๆ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">Regularization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression-pipeline">Logistic Regression Pipeline</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-3-class-dataset">Generate 3-class Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-data-test-data">แบ่งข้อมูลเป็น training data และ test data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardize">ทำการ standardize ข้อมูลทั้งหมด</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#base-model-default-hyperparameter">เทรนโมเดล ด้วย base model (default hyperparameter)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-tuning-gridsearchcv-train">ปรับแต่งโมเดล (Hyperparameter Tuning) ด้วย GridSearchCV และ train โมเดล</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Decision Boundary</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="logistic-regression">
+<h1>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Link to this heading">#</a></h1>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1eazvcI2_kE?si=qdwzBmy8eoEjab2J" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p><a class="reference external" href="https://github.com/ichatnun/brainCodeCamp2023_lectures/blob/main/MachineLearning/machine_learning_logistic_regression.pdf">Slides: Logistic Regression</a></p>
+<br>
+<p>ก่อนหน้านี้  เราได้เรียนรู้ Simple Linear Model ในสัปดาห์ที่ 3 ทำให้เราสามารถพัฒนาโมเดลเชิงเส้น (linear model) เพื่อทำนายค่า <span class="math notranslate nohighlight">\(y\)</span> โดยเรียนรู้จากชุดข้อมูลที่มีโดยไม่จำกัดค่าที่เป็นไปได้ของค่า <span class="math notranslate nohighlight">\(y\)</span> ในกรณีที่ชุดข้อมูลประกอบด้วย 1 feature คือ <span class="math notranslate nohighlight">\(x\)</span> เราสามารถเขียนสมการของความสัมพันธ์เชิงเส้นได้เป็น</p>
+<div class="math notranslate nohighlight">
+\[y = w_0 + w_1x\]</div>
+<p>โดยที่ <span class="math notranslate nohighlight">\(w_0\)</span> และ <span class="math notranslate nohighlight">\(w_1\)</span> คือ พารามิเตอร์ของโมเดลเชิงเส้น</p>
+<p>อย่างไรก็ดี มีโจทย์อีกประเภทหนึ่ง คือ classification problem หรือ ปัญหาการจำแนกหมวดหมู่ ซึ่ง <span class="math notranslate nohighlight">\(y\)</span> เป็น label ของหมวดหมู่ (class) โดยมักแทนด้วยตัวเลข (เช่น จำนวนเต็ม) เพื่อให้สามารถทำงานกับระบบคำนวณของคอมพิวเตอร์ได้</p>
+<p>ในกรณีที่ชุดข้อมูลประกอบด้วย 2 classes หรือ binary classification เรามักกำหนดให้ค่า <span class="math notranslate nohighlight">\(y\)</span> มีค่าเป็น 0 หรือ 1 แทน label ของแต่ละ class เช่น
+การใช้เลข 0 แทน class แรก และตัวเลข 1 แทน class ที่สอง</p>
+<p>การนำเอา linear model ตามสมการด้านบนมาใช้ทำนายค่า <span class="math notranslate nohighlight">\(y\)</span> ในโจทย์ประเภทนี้จะไม่เหมาะนัก เนื่องจาก linear model นั้นให้ค่า <span class="math notranslate nohighlight">\(y\)</span> ได้ตั้งแต่ <span class="math notranslate nohighlight">\(-∞\)</span> ไปจนถึง <span class="math notranslate nohighlight">\(+∞\)</span> ในขณะที่เราต้องการค่า <span class="math notranslate nohighlight">\(y\)</span> ที่เป็น 0 หรือ 1 เท่านั้น</p>
+<p>วิธีหนึ่งที่เราสามารถใช้ในการแก้ปัญหาตรงนี้ก็คือการนำเอาฟังก์ชันทางคณิตศาสตร์มาใช้แปลงค่า <span class="math notranslate nohighlight">\(y\)</span> ที่เราได้รับมาจากสมการ <span class="math notranslate nohighlight">\(y = w_0 + w_1x\)</span> ให้มีค่าอยู่ระหว่าง 0 กับ 1 ได้ หนึ่งในฟังก์ชันที่มีคุณสมบัติดังกล่าว คือ logistic function หรือ sigmoid function ซึ่งมีสมการทางคณิตศาสตร์ ดังนี้</p>
+<div class="math notranslate nohighlight">
+\[
+g(x) = \frac{1}{1 + e^{-x}}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">colors</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.inspection</span> <span class="kn">import</span> <span class="n">DecisionBoundaryDisplay</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedKFold</span><span class="p">,</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">ConfusionMatrixDisplay</span>
+
+<span class="c1"># ตั้งค่า random seed สำหรับการทำซ้ำ (reproducibility)</span>
+<span class="n">RANDOM_SEED</span> <span class="o">=</span> <span class="mi">2566</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+
+<span class="c1"># คำนวณค่า sigmoid function ด้วยช่วงค่า x ที่กำหนด</span>
+<span class="n">x</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="n">sigmoid_function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># plot sigmoid function</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sig</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$g(x)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Logistic Function or Sigmoid Function&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4c86387ed4fcaf4d4bbb0206a75c661077b8feb240b7c15d519d45787fb530ca.png" src="../../_images/4c86387ed4fcaf4d4bbb0206a75c661077b8feb240b7c15d519d45787fb530ca.png" />
+</div>
+</div>
+<p>จะเห็นได้ว่า logistic function มีค่าในช่วง 0 ถึง 1 เสมอ ดังนั้นสิ่งที่เราทำได้ก็คือเปลี่ยนจากการให้ตัวโมเดล output ค่า <span class="math notranslate nohighlight">\(w_0 + w_1x\)</span> ซึ่งมีค่าจาก <span class="math notranslate nohighlight">\(-∞\)</span> ไปจนถึง <span class="math notranslate nohighlight">\(+∞\)</span> ไปเป็นการ output ค่า <span class="math notranslate nohighlight">\(g(w_0 + w_1x)\)</span> ซึ่งมีค่ามากกว่าหรือเท่ากับ 0 แต่น้อยกว่าหรือเท่ากับ 1 แทน</p>
+<p>หากเรากำหนดให้ ค่า <span class="math notranslate nohighlight">\(y=0\)</span> แทน class 0 และ ค่า <span class="math notranslate nohighlight">\(y=1\)</span> แทน class 1 เราอาจจะตีความ output ใหม่ของโมเดล <span class="math notranslate nohighlight">\(g(w_0 + w_1x)\)</span> เป็นค่าความน่าจะเป็นที่จุดข้อมูล <span class="math notranslate nohighlight">\(x\)</span> ของเราเป็น class 1 โดยสามารถเขียนเป็นสมการทางคณิตศาสตร์ได้เป็น</p>
+<div class="math notranslate nohighlight">
+\[
+P(\text{class 1}| x) = y = g(w_0 + w_1x) = \frac{1}{1 + e^{-(w_0+w_1x)}}
+\]</div>
+<p>อ้างอิงจากสมการนี้ จะพบว่าโมเดลจะ output ค่า <span class="math notranslate nohighlight">\(y\)</span> ออกมา ซึ่งค่า <span class="math notranslate nohighlight">\(y\)</span> นี้จะแสดงถึงความน่าจะเป็นที่จุดข้อมูลที่ใส่เข้ามาในโมเดลจะเป็น class 1 เราสามารถกำหนดเงื่อนไขของการตัดสินใจว่าจุดข้อมูลที่เรานำมาทดสอบเป็น class ใด โดยการใช้เทียบดูว่า ค่า <span class="math notranslate nohighlight">\(y\)</span> ซึ่งเป็น output ของโมเดล มีค่าน้อยกว่า 0.5 หรือไม่</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y ≥ 0.5 →\)</span> จุดข้อมูลดังกล่าวเป็น class 1</p></li>
+<li><p><span class="math notranslate nohighlight">\(y &lt; 0.5 →\)</span> จุดข้อมูลดังกล่าวเป็น class 2</p></li>
+</ul>
+<p>ในที่นี้บริเวณที่เกิดค่าความน่าจะเป็นที่ 0.5 จะเป็นบริเวณที่เกิด decision boundary ขึ้น</p>
+<p>โมเดล logistic จะเรียนรู้จากชุดข้อมูล โดยปรับค่าพารามิเตอร์ของโมเดล <span class="math notranslate nohighlight">\(w_0\)</span> และ <span class="math notranslate nohighlight">\(w_1\)</span> เพื่อให้ค่า <span class="math notranslate nohighlight">\(y\)</span> ที่ทำนายออกมามีความคลาดเคลื่อนจากค่า <span class="math notranslate nohighlight">\(y\)</span> ที่เป็นผลเฉลยของชุดข้อมูลน้อยที่สุด</p>
+<p><br><br></p>
+<hr class="docutils" />
+<p><strong>Optional: ข้อมูลทางเทคนิคเพิ่มเติมสำหรับผู้ที่สนใจ</strong></p>
+<br>
+<p><strong>ข้อแรก</strong></p>
+<p>หากเราโยกย้ายพจน์ต่าง ๆ ในสมการ</p>
+<div class="math notranslate nohighlight">
+\[ P(\text{class 1}| x) = \frac{1}{1 + e^{-(w_0+w_1x)}} \]</div>
+<p>เราสามารถแสดงได้ว่า</p>
+<div class="math notranslate nohighlight">
+\[
+log\left(\frac{P(\text{class 1}| x)}{1-P(\text{class 1}| x)}\right) = w_0+w_1x
+\]</div>
+<p>พจน์ด้านซ้ายมือมีชื่อเรียกว่า <strong>log-odds</strong> ซึ่งเป็นค่า log ของ <em>ความน่าจะเป็นที่เป็น class 1</em> หารด้วย <em>ความน่าจะเป็นที่ไม่เป็น class 1</em></p>
+<p>เราจะเห็นได้ว่า logistic regression สร้างแบบจำลองโดยการกำหนดให้ log-odds เป็นฟังก์ชัน linear</p>
+<p>เรามาลองดูคุณสมบัติของ log-odds กันนิดนึงดีกว่า</p>
+<ul class="simple">
+<li><p>ถ้า <span class="math notranslate nohighlight">\(P(\text{class 1}| x) → 0\)</span> (ความน่าจะเป็นที่เป็น class 1 มีค่าเข้าใกล้ 0) จะพบว่าค่า
+<span class="math notranslate nohighlight">\(
+log\left(\frac{P(\text{class 1}| x)}{1-P(\text{class 1}| x)}\right) → -∞
+\)</span></p></li>
+<li><p>ถ้า <span class="math notranslate nohighlight">\(P(\text{class 1}| x) → 1\)</span> (ความน่าจะเป็นที่เป็น class 1 มีค่าเข้าใกล้ 1) จะพบว่าค่า
+<span class="math notranslate nohighlight">\(
+log\left(\frac{P(\text{class 1}| x)}{1-P(\text{class 1}| x)}\right) → +∞
+\)</span></p></li>
+</ul>
+<p>จะเห็นได้ว่าค่า log-odds นั้นมีค่าที่เป็นไปได้ระหว่าง -∞ ถึง +∞  ซึ่งจะไม่ขัดแย้งกับค่าที่เป็นไปได้ของสมการ <span class="math notranslate nohighlight">\(w_0+w_1x\)</span> ที่เราใช้สำหรับโมเดลตัว log-odds เลย</p>
+<p>จากข้อสังเกตนี้ เราเห็นได้ว่าจริง ๆ แล้ว logistic regression นั้น มีความเกี่ยวข้องกับ linear regression ค่อนข้างมาก ซึ่งเราสามารถมองได้ว่า logistic regression ก็คล้าย ๆ กับการนำเอา linear regression มาใช้งาน แต่เราตีความ output ที่ออกมาว่าเป็น log-odds</p>
+<br>
+<p><strong>ข้อที่สอง</strong></p>
+<p>ในการตัดสินใจว่าจุดข้อมูล <span class="math notranslate nohighlight">\(x\)</span> มีเป็น class 1 เราใช้เงื่อนไข</p>
+<div class="math notranslate nohighlight">
+\[ y = \frac{1}{1 + e^{-(w_0+w_1x)}} ≥ 0.5 \]</div>
+<p>เรามาลองโยกย้ายสมการกันดู</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\frac{1}{1 + e^{-(w_0+w_1x)}} &amp;≥ \frac{1}{2} \\ \\
+2 &amp;≥ 1 + e^{-(w_0+w_1x)} \\ \\
+1 &amp;≥ e^{-(w_0+w_1x)} \\ \\
+ln(1) &amp;≥ ln(e^{-(w_0+w_1x)}) \\ \\
+0 &amp;≥ -(w_0+w_1x) \\ \\
+w_0+w_1x &amp;≥ 0\\
+\end{align}
+\end{split}\]</div>
+<p>ซึ่งแปลว่า</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y ≥ 0.5 ⟷ w_0+w_1x ≥ 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(y ≤ 0.5 ⟷ w_0+w_1x ≤ 0\)</span></p></li>
+</ul>
+<p>ดังนั้นเราจะได้เงื่อนไขในการแบ่งคลาสในอีกรูปแบบหนึ่ง ก็คือ</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_0+w_1x ≥ 0 →\)</span> จุดข้อมูลดังกล่าวเป็น class 1</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_0+w_1x ≤ 0 →\)</span> จุดข้อมูลดังกล่าวเป็น class 2</p></li>
+</ul>
+<p>ซึ่งเป็นอสมการแบบ linear</p>
+<p>เราจะได้เห็นจากหลาย ๆ ตัวอย่างใน tutorial นี้ว่า decision boundary ก็มีลักษณะเป็นเส้นตรงจริง ๆ</p>
+<hr class="docutils" />
+<p><br><br>
+ใน tutorial นี้เราจะเรียนรู้การทำงานของ logistic regression ผ่านการเรียกใช้ <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code> จากไลบรารี่ <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> ที่จะแสดงต่อไป.</p>
+<section id="generate-simulated-dataset">
+<h2>Generate Simulated Dataset<a class="headerlink" href="#generate-simulated-dataset" title="Link to this heading">#</a></h2>
+<p>เพื่อเปรียบเทียบการทำงานของ Linear regression และ Logistic regression เราจะลองสร้างชุดข้อมูลที่ประกอบไปด้วย จำนวน 100 จุด <span class="math notranslate nohighlight">\((x_1,y_1), (x_2,y_2), ..., (x_i,y_i),.., (x_{100},y_{100})\)</span></p>
+<p>โดย <span class="math notranslate nohighlight">\(y\)</span> มีค่า 0 หรือ 1 (2-class dataset for binary classification) และแต่ละคลาสมีจำนวนข้อมูลเท่ากันที่จำนวน 50 จุด</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_multi_class_dataset</span><span class="p">(</span><span class="n">n_classes</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">mean_class</span><span class="p">,</span> <span class="n">std_class</span><span class="p">,</span><span class="n">n_samples</span><span class="p">):</span>
+    <span class="c1"># สร้างชุดข้อมูลแบบ multi-class</span>
+    <span class="c1"># ตั้งค่า random seed เพื่อให้สามารถสร้างชุดข้อมูลเดิมทุกครั้ง เพื่อใช้สำหรับการสอน</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">RANDOM_SEED</span><span class="p">)</span>
+
+    <span class="c1">#  สร้างข้อมูล x สำหรับแต่ละคลาส</span>
+    <span class="n">x_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">):</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean_class</span><span class="p">[</span><span class="n">label</span><span class="p">],</span> <span class="n">std_class</span><span class="p">[</span><span class="n">label</span><span class="p">],</span> <span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">))</span>
+        <span class="n">x_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
+
+    <span class="c1"># สร้างข้อมูล y หรือ labels สำหรับแต่ละคลาส</span>
+    <span class="n">y_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">y_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_samples</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">):</span>
+        <span class="n">y_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_samples</span><span class="p">))</span>
+
+    <span class="c1"># รวมข้อมูล x และ y จากทุกคลาส</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">x_data</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span><span class="n">y_data</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+<span class="c1"># ทดลองสร้างข้อมูลโดยการเรียกใช้ generate_multi_class_dataset</span>
+<span class="c1"># กำหนด จำนวนคลาส</span>
+<span class="n">n_classes</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># กำหนด จำนวน features</span>
+<span class="n">n_features</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># กำหนดค่า Mean และ standard deviation สำหรับแต่ละคลาส</span>
+<span class="n">mean_class</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">std_class</span>  <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]</span>
+
+<span class="c1"># กำหนดจำนวนข้อมูล สำหรับแต่ละคลาส (รวม 100 จุด)</span>
+<span class="n">n_samples</span> <span class="o">=</span>  <span class="mi">50</span>
+
+<span class="c1"># ทำการสร้างชุดข้อมูล</span>
+<span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">generate_multi_class_dataset</span><span class="p">(</span><span class="n">n_classes</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">mean_class</span><span class="p">,</span> <span class="n">std_class</span><span class="p">,</span><span class="n">n_samples</span><span class="p">)</span>
+
+<span class="c1"># Plot ข้อมูล x, y ที่มีสร้างขึ้น</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x or Feature&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Simulated Data for Binary Classification&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/baab6a862905eab3b0bbd426940c51ac9be891346f6f08571ed7a49d5b97831b.png" src="../../_images/baab6a862905eab3b0bbd426940c51ac9be891346f6f08571ed7a49d5b97831b.png" />
+</div>
+</div>
+<p>เราจะลอง fit ข้อมูลชุดนี้ ด้วย <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html">Linear regression</a> และ <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">Logistic Regression</a> จากไลบรารี่ <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># สร้าง Linear Model</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+
+<span class="c1"># สอนโมเดลจากข้อมูล x, y ที่มี แล้วทำนายค่า $y$</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">y_linear</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Linear model: R2 = </span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)))</span>
+<span class="n">sorted_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+<span class="n">y_linear_func</span> <span class="o">=</span> <span class="n">sorted_x</span><span class="o">*</span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">clf</span><span class="o">.</span><span class="n">intercept_</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Linear regression: y(x) = x*</span><span class="si">{:.2f}</span><span class="s1"> + </span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">clf</span><span class="o">.</span><span class="n">intercept_</span><span class="p">))</span>
+
+<span class="c1"># สร้าง Logistic Model</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+
+<span class="c1"># สอนโมเดลจากข้อมูล x, y ที่มี แล้วทำนายค่า $y$</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">y_logit</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Logistic model: accuracy = </span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)))</span>
+<span class="n">y_logit_func</span> <span class="o">=</span> <span class="n">sigmoid_function</span><span class="p">(</span><span class="n">sorted_x</span><span class="o">*</span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">clf</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Logistic regression: probability function P(x) = g(x*</span><span class="si">{:.2f}</span><span class="s1"> + </span><span class="si">{:.2f}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">clf</span><span class="o">.</span><span class="n">intercept_</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+<span class="c1"># Plot ข้อมูล x, y ที่มีอยู่</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True labels&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_linear</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="n">facecolors</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predicted labels&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">ravel</span><span class="p">()),</span> <span class="n">y_linear_func</span><span class="p">,</span> <span class="s1">&#39;b--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Fitted function&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x or Feature 1&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Linear Regression&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True labels&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_logit</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">facecolors</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predicted labels&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">ravel</span><span class="p">()),</span> <span class="n">y_logit_func</span><span class="p">,</span> <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Fitted function&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x or Feature 1&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Logistic Regression&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linear model: R2 = 0.71
+Linear regression: y(x) = x*0.18 + 0.54
+Logistic model: accuracy = 0.95
+Logistic regression: probability function P(x) = g(x*2.31 + 1.08)
+</pre></div>
+</div>
+<img alt="../../_images/96d2df32edb06d26dd2aebb7a6dc25b108c6f027fc8b89abb4dc9fdec9abe771.png" src="../../_images/96d2df32edb06d26dd2aebb7a6dc25b108c6f027fc8b89abb4dc9fdec9abe771.png" />
+</div>
+</div>
+<p>จะเห็นได้ว่า ค่า <span class="math notranslate nohighlight">\(y\)</span> ที่ทำนายจาก linear regression มีความคลาดเคลื่อนสูงมาก โดย linear regression ได้ตอบค่าที่น้อยกว่า 0 และค่าที่มากกว่า 1 ด้วยซ้ำ</p>
+<p>ในขณะที่ logistic regression สามารถเรียนรู้และทำนายข้อมูลในลักษณะนี้ได้ดีกว่า linear regression โดยตัวโมเดลทำนายคลาดเคลื่อนในช่วงค่าที่ปรากฏข้อมูลจากทั้งสองคลาส (บริเวณค่า <span class="math notranslate nohighlight">\(x\)</span> ระหว่าง -1 ถึง 0 มีการซ้อนทับกันระหว่าง 2 classes)</p>
+<p>ด้วยความคลุมเครือในบริเวณนั้น การมีตัวแปร <span class="math notranslate nohighlight">\(x\)</span> เพียงตัวเดียวจึงไม่เพียงพอในการจำแนกข้อมูลช่วงดังกล่าว</p>
+<p><strong>Quiz:</strong> Determine decision boundary, given <span class="math notranslate nohighlight">\(P(x) = g(x*2.13 + 1.08)\)</span></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/cjHGDU03_5E?si=EZEjyu94vH6Jd-47" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p><a class="reference external" href="https://github.com/ichatnun/brainCodeCamp2023_lectures/blob/main/MachineLearning/machine_learning_logistic_regression.pdf">Slides: Logistic Regression</a></p>
+<br>
+<p>ต่อไป เราจะลองสร้างชุดข้อมูลที่ feature space มีมิติสูงขึ้น โดยเป็นชุดข้อมูลที่ประกอบด้วย 2 features เพื่อจำแนก 2 classes โดยในแต่ละคลาสมีจำนวนข้อมูลเท่ากันที่ 100 จุด</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ทดลองสร้างข้อมูลโดยการเรียกใช้ generate_multi_class_dataset</span>
+<span class="c1"># กำหนด จำนวนคลาส</span>
+<span class="n">n_classes</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># กำหนด จำนวน features</span>
+<span class="n">n_features</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># กำหนดช่วงค่า Mean และ standard deviation (SD) สำหรับแต่ละคลาส</span>
+<span class="c1"># เนื่องจากเรากำหนดจำนวน features เป็น 2 จึงสามารถกำหนด Mean และ SD ด้วย array ของ 2 ค่า</span>
+<span class="n">mean_class</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
+<span class="n">std_class</span>  <span class="o">=</span> <span class="p">[[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">1.5</span><span class="p">]]</span>
+
+<span class="c1"># กำหนดจำนวนข้อมูล สำหรับแต่ละคลาส</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># ทำการสร้างชุดข้อมูล</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">generate_multi_class_dataset</span><span class="p">(</span><span class="n">n_classes</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">mean_class</span><span class="p">,</span> <span class="n">std_class</span><span class="p">,</span><span class="n">n_samples</span><span class="p">)</span>
+
+<span class="c1"># Plot ข้อมูล x, y ที่มีอยู่</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">y</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">y</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Class 0&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">y</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">y</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Class 1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Feature 1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Feature 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Simulated Data for Binary Classification&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0f0c3b7646e9df5ce1322fb400d68ed9841efb8a0f01037d5bc6a8b92cf0b896.png" src="../../_images/0f0c3b7646e9df5ce1322fb400d68ed9841efb8a0f01037d5bc6a8b92cf0b896.png" />
+</div>
+</div>
+</section>
+<section id="decision-boundary">
+<h2>Decision Boundary<a class="headerlink" href="#decision-boundary" title="Link to this heading">#</a></h2>
+<p>เราสามารถ visualize ลักษณะของ decision boundary (เขตแดนแบ่งแยกคลาส) โดยใช้ <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.inspection.DecisionBoundaryDisplay.html">DecisionBoundaryDisplay</a> จากไลบรารี่ <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># สร้างโมเดล</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+
+<span class="c1"># สอนโมเดลจากข้อมูล x, y ที่สร้างขึ้นก่อนหน้านี้</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># สร้าง cmap สำหรับแสดงผลตามสีแต่ละ class</span>
+<span class="n">cmap_2classes</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">ListedColormap</span><span class="p">([</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">])</span>
+
+<span class="c1"># plot the decision boundary</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">DecisionBoundaryDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span>
+                                       <span class="n">x</span><span class="p">,</span>
+                                       <span class="n">response_method</span><span class="o">=</span><span class="s2">&quot;predict&quot;</span><span class="p">,</span>
+                                       <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_2classes</span><span class="p">,</span>
+                                       <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                                       <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+                                       <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Feature 1&#39;</span><span class="p">,</span>
+                                       <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Feature 2&#39;</span>
+                                       <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_2classes</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Logistic Regression: Decision boundary&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9162268704f07210f180680491d0165c4eed462037e5777880247ada9e841afb.png" src="../../_images/9162268704f07210f180680491d0165c4eed462037e5777880247ada9e841afb.png" />
+</div>
+</div>
+<p>สังเกตได้ว่า decision boundary ของโมเดล logistic มีลักษณะเป็นเส้นตรง จำแนกกลุ่มข้อมูลต่างคลาสออกจากกัน</p>
+</section>
+<section id="logistic-regression-solver">
+<h2>Logistic Regression เมื่อใช้ <code class="docutils literal notranslate"><span class="pre">solver</span></code> ชนิดต่างๆ<a class="headerlink" href="#logistic-regression-solver" title="Link to this heading">#</a></h2>
+<p>เราสามารถ optimize โมเดล logistic โดยการหาค่าโมเดลพารามิเตอร์ <span class="math notranslate nohighlight">\(w\)</span> ที่เหมาะสมด้วย iterative solver ที่ประมาณค่าคำตอบจากการปรับค่าและคำนวณซ้ำๆ เพื่อให้ได้คำตอบที่เข้าใกล้คำตอบที่ถูกต้องมากที่สุด อาทิเช่น</p>
+<p><strong>Newton-CG Solver</strong>:</p>
+<ul class="simple">
+<li><p>ใช้วิธี Newton-Conjugate Gradient</p></li>
+<li><p>เหมาะสำหรับข้อมูลขนาดใหญ่ แต่จะใช้ computational time มากตามจำนวน features</p></li>
+<li><p>สามารถใช้ร่วมกับ L2 regularization</p></li>
+</ul>
+<p><strong>lbfgs Solver (Limited-memory Broyden-Fletcher-Goldfarb-Shanno)</strong>:</p>
+<ul class="simple">
+<li><p>ใช้ L-BFGS algorithm ในการค้นหาค่าพารามิเตอร์ที่เหมาะสม</p></li>
+<li><p>เหมาะสำหรับข้อมูลขนาดเล็กถึงกลาง</p></li>
+<li><p>เป็น default solver ของ <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> ในการทำ logistic regression</p></li>
+<li><p>สามารถใช้ร่วมกับ L2 regularization</p></li>
+</ul>
+<p><strong>liblinear Solver</strong>:</p>
+<ul class="simple">
+<li><p>วิธีการนี้ใช้เทคนิคจากไลบรารี LIBLINEAR</p></li>
+<li><p>เหมาะสำหรับข้อมูลขนาดเล็ก</p></li>
+<li><p>สามารถใช้ร่วมกับ L1 และ L2 regularization</p></li>
+</ul>
+<p>เราสามารถเลือกใช้ iterative solver ที่เหมาะสมโดยยังมี hyperparameters อีก 2 ตัวที่กำหนดการหยุดทำงานของ iterative solvers เหล่านี้ ได้แก่</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tol</span></code> คือ ค่า tolerance เป็นการกำหนดระดับความแม่นยำ (precision) ของ คำตอบจาก iterative solver โดยเมื่อค่าคำตอบที่ได้จาก solver มีการเปลี่ยนแปลงน้อยกว่าค่า tolerance ที่กำหนด จะถือว่าได้ค่าตอบที่มีความถูกต้องในระดับความแม่นยำที่ต้องการ และหยุดการคำนวณ</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_iter</span></code> กำหนดจำนวนครั้งมากที่สุดที่ให้ solver คำนวณหาค่าคำตอบ ก่อนยุติการคำนวณ</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># สร้างชุดโมเดล</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">(</span><span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s1">&#39;newton-cg&#39;</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">),</span>
+          <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">),</span>
+          <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s1">&#39;liblinear&#39;</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">),</span>
+          <span class="p">)</span>
+<span class="c1"># สอนโมเดลจากข้อมูล x, y ที่สร้างขึ้นก่อนหน้านี้</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">clf</span> <span class="ow">in</span> <span class="n">models</span><span class="p">)</span>
+
+<span class="c1"># ตั้งชื่อ plot ที่สอดคล้องกับชุดข้อมูล</span>
+<span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Logistic Regression </span><span class="se">\n</span><span class="s1">with $newton-cg$ solver&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;Logistic Regression </span><span class="se">\n</span><span class="s1">with $lbfgs$ solver&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;Logistic Regression </span><span class="se">\n</span><span class="s1">with $liblinear$ solver&#39;</span><span class="p">,</span>
+          <span class="p">]</span>
+
+<span class="c1"># plot the decision boundaries</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">clf</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">titles</span><span class="p">,</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()):</span>
+    <span class="n">disp</span> <span class="o">=</span> <span class="n">DecisionBoundaryDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span>
+                                                  <span class="n">x</span><span class="p">,</span>
+                                                  <span class="n">response_method</span><span class="o">=</span><span class="s2">&quot;predict&quot;</span><span class="p">,</span>
+                                                  <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_2classes</span><span class="p">,</span>
+                                                  <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                                                  <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+                                                  <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Feature 1&#39;</span><span class="p">,</span>
+                                                  <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Feature 2&#39;</span><span class="p">,</span>
+                                                  <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_2classes</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(())</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(())</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e5b8d330a243b809dfe4938ee56795f1f21d3f83581f463efc3414f627f2b36d.png" src="../../_images/e5b8d330a243b809dfe4938ee56795f1f21d3f83581f463efc3414f627f2b36d.png" />
+</div>
+</div>
+<p>จะเห็นได้ว่า solvers ต่างๆ สามารถค้นหาค่าพารามิเตอร์ <span class="math notranslate nohighlight">\(w\)</span> ที่เหมาะสม โดยมี decision boundary ที่ใกล้เคียงกัน ทั้งนี้ decision boundary ของโมเดล logistic จะประกอบขึ้นจากเส้นตรง</p>
+</section>
+<section id="regularization">
+<h2>Regularization<a class="headerlink" href="#regularization" title="Link to this heading">#</a></h2>
+<p>หากพบปัญหา overfitting หรือการเรียนรู้ข้อมูลฝึกสอนมากเกินไปจนโมเดลจดจำคำตอบ เราสามารถใช้ regularization ร่วมกับ logistic regression</p>
+<p>ในไลบรารี่ <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> เราสามารถปรับค่า regularization strength <span class="math notranslate nohighlight">\(\lambda\)</span> ได้โดยผ่านทางไฮเปอร์พารามิเตอร์ <code class="docutils literal notranslate"><span class="pre">C</span></code> โดย ค่า <code class="docutils literal notranslate"><span class="pre">C</span></code> มีค่าเท่ากับ <span class="math notranslate nohighlight">\(1/\lambda\)</span> (Inverse of Regularization Strength)</p>
+</section>
+<section id="logistic-regression-pipeline">
+<h2>Logistic Regression Pipeline<a class="headerlink" href="#logistic-regression-pipeline" title="Link to this heading">#</a></h2>
+<p>ต่อไปเราจะลองพัฒนาโมเดล logistic อย่างครบกระบวนการ ด้วยชุดข้อมูลที่จะสร้างขึ้น</p>
+<section id="generate-3-class-dataset">
+<h3>Generate 3-class Dataset<a class="headerlink" href="#generate-3-class-dataset" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># สร้างข้อมูลโดยการเรียกใช้ generate_multi_class_dataset</span>
+<span class="c1"># กำหนด จำนวนคลาส</span>
+<span class="n">n_classes</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># กำหนด จำนวน features</span>
+<span class="n">n_features</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># กำหนดช่วงค่า Mean และ standard deviation สำหรับแต่ละคลาส</span>
+<span class="n">mean_class</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">std_class</span>  <span class="o">=</span> <span class="p">[[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.75</span><span class="p">,</span><span class="mf">0.75</span><span class="p">],[</span><span class="mf">0.75</span><span class="p">,</span><span class="mf">0.5</span><span class="p">]]</span>
+
+<span class="c1"># กำหนดจำนวนข้อมูล สำหรับแต่ละคลาส</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># ทำการสร้างชุดข้อมูล</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">generate_multi_class_dataset</span><span class="p">(</span><span class="n">n_classes</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">mean_class</span><span class="p">,</span> <span class="n">std_class</span><span class="p">,</span><span class="n">n_samples</span><span class="p">)</span>
+
+<span class="c1"># Plot ข้อมูล x, y ที่สร้างขึ้น</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">color_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">]</span>
+<span class="n">cmap_3classes</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">ListedColormap</span><span class="p">(</span><span class="n">color_list</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">y</span><span class="o">==</span><span class="n">label</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">y</span><span class="o">==</span><span class="n">label</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">color_list</span><span class="p">[</span><span class="n">label</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Class &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">label</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Feature 1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Feature 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Simulated 3-class dataset&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e7345b66ea39804f77f48905e83077cebb11bcb453b4ba6c36fb31163006e5cf.png" src="../../_images/e7345b66ea39804f77f48905e83077cebb11bcb453b4ba6c36fb31163006e5cf.png" />
+</div>
+</div>
+<p>ข้อมูลที่สร้างขึ้นมีประกอบด้วย 2 features และ 3 classes (class: 0, 1, 2) โดยข้อมูลในแต่ละคลาสมีจำนวนเท่ากันที่ 200 จุด   เราจะพัฒนาโมเดล logistic เพื่อจำแนกข้อมูลแต่ละคลาสออกจากกัน</p>
+<p>เมื่อสังเกตการกระจายตัวของข้อมูล พบว่า class 0 มีการกระจายข้อมูลแบ่งแยกออกมาอย่างเห็นได้ชัด ในขณะที่ class 1 และ class 2 จะกระจายตัวอยู่ร่วมกัน</p>
+</section>
+<section id="training-data-test-data">
+<h3>แบ่งข้อมูลเป็น training data และ test data<a class="headerlink" href="#training-data-test-data" title="Link to this heading">#</a></h3>
+<p>โดยใช้ <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">train_test_split</a> จากไลบรารี่ <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code></p>
+<p>ในตัวอย่างนี้เราจะใช้ default value ซึ่งจะ shuffle ข้อมูลก่อนแบ่งข้อมูล และ ไม่ stratify (ไม่กำกับสัดส่วนของคลาสใน training data และ test data)</p>
+<p>อย่างไรก็ดี ในกรณีที่ข้อมูลประกอบด้วยคลาสต่างๆ ที่มีสัดส่วนต่างกันอย่างมาก (imbalanced dataset) การทำ stratify มีความจำเป็นอย่างมากเพื่อคงสัดส่วนของแต่ละคลาส ใน training data และ test data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># สร้าง training data และ test data โดยแบ่งจากชุดข้อมูล x,y</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                                                    <span class="n">stratify</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">RANDOM_SEED</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Train set: จำนวนข้อมูล แบ่งกลุ่มตาม class label&#39;</span><span class="p">)</span>
+<span class="n">unique</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">((</span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test set: จำนวนข้อมูล แบ่งกลุ่มตาม class label&#39;</span><span class="p">)</span>
+<span class="n">unique</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">((</span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train set: จำนวนข้อมูล แบ่งกลุ่มตาม class label
+[[ 0. 82.]
+ [ 1. 79.]
+ [ 2. 79.]]
+Test set: จำนวนข้อมูล แบ่งกลุ่มตาม class label
+[[ 0. 18.]
+ [ 1. 21.]
+ [ 2. 21.]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="standardize">
+<h3>ทำการ standardize ข้อมูลทั้งหมด<a class="headerlink" href="#standardize" title="Link to this heading">#</a></h3>
+<p>ใช้ mean และ standard deviation (SD) จาก training data ในการ standardize test set เพื่อป้องกัน information leak</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># สร้าง standardized scaler จาก features ใน training data</span>
+<span class="n">x_scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+
+<span class="c1"># scale ค่า features ใน training data และ test data</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">x_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+<span class="n">x_test</span>  <span class="o">=</span> <span class="n">x_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="base-model-default-hyperparameter">
+<h3>เทรนโมเดล ด้วย base model (default hyperparameter)<a class="headerlink" href="#base-model-default-hyperparameter" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># สร้างโมเดล</span>
+<span class="n">base_clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+
+<span class="c1"># สอนโมเดลด้วย training data</span>
+<span class="n">base_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># ให้โมเดลทำนาย training data</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">base_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+
+<span class="c1"># แสดงผล classification ของโมเดลจาก training data</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training Set: Classification report&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+
+<span class="c1"># คำนวนและแสดงผล confusion matrix ของ training data</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">display</span> <span class="o">=</span> <span class="n">ConfusionMatrixDisplay</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="o">=</span><span class="n">cm</span><span class="p">)</span>
+<span class="n">display</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;[Training Data] </span><span class="se">\n</span><span class="s1">Confusion Matrix: base model&#39;</span><span class="p">)</span>
+
+<span class="c1"># ให้โมเดลทำนาย test data</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">base_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+
+<span class="c1"># แสดงผล classification ของโมเดล</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Test Set: Classification report&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+
+<span class="c1"># คำนวนและแสดงผล confusion matrix ของ test set</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">display</span> <span class="o">=</span> <span class="n">ConfusionMatrixDisplay</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="o">=</span><span class="n">cm</span><span class="p">)</span>
+<span class="n">display</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;[Test Data] </span><span class="se">\n</span><span class="s1">Confusion Matrix: base model&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Set: Classification report
+              precision    recall  f1-score   support
+
+         0.0       1.00      1.00      1.00        82
+         1.0       0.91      0.89      0.90        79
+         2.0       0.89      0.91      0.90        79
+
+    accuracy                           0.93       240
+   macro avg       0.93      0.93      0.93       240
+weighted avg       0.93      0.93      0.93       240
+
+
+Test Set: Classification report
+              precision    recall  f1-score   support
+
+         0.0       1.00      1.00      1.00        18
+         1.0       0.93      0.67      0.78        21
+         2.0       0.74      0.95      0.83        21
+
+    accuracy                           0.87        60
+   macro avg       0.89      0.87      0.87        60
+weighted avg       0.89      0.87      0.86        60
+</pre></div>
+</div>
+<img alt="../../_images/18e906d345169157898f13a518dc1ab3b22d9c1ad362412e3347564aabde915d.png" src="../../_images/18e906d345169157898f13a518dc1ab3b22d9c1ad362412e3347564aabde915d.png" />
+</div>
+</div>
+</section>
+<section id="hyperparameter-tuning-gridsearchcv-train">
+<h3>ปรับแต่งโมเดล (Hyperparameter Tuning) ด้วย <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV">GridSearchCV</a> และ train โมเดล<a class="headerlink" href="#hyperparameter-tuning-gridsearchcv-train" title="Link to this heading">#</a></h3>
+<p>โดยเราจะปรับแต่งโมเดล โดย tune 2 hyperparameters ที่สำคัญของ logistic regression ได้แก่</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">solver</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C</span></code></p></li>
+</ol>
+<p>ในไลบรารี่ <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> ยังมีวิธีการอื่นๆ ในการปรับแต่งโมเดล เช่น</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score">CrossValScore</a></p></li>
+<li><p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html">RandomizedSearchCV</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># กำหนดช่วงค่า hyperparameters ในรูปแบบ dictionary</span>
+<span class="n">clf_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;solver&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;newton-cg&#39;</span><span class="p">,</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span><span class="s1">&#39;liblinear&#39;</span><span class="p">],</span>
+              <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
+              <span class="s1">&#39;penalty&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;l2&#39;</span><span class="p">]</span>
+              <span class="p">}</span>
+
+<span class="c1"># แบ่งข้อมูล training data ด้วย 5-fold cross-validation เพื่อ tune hyperparameter</span>
+<span class="n">cv_splitter</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">RANDOM_SEED</span><span class="p">)</span>
+
+<span class="c1"># ใช้ GridSearchCV เพื่อสอนโมเดลจากชุดค่า hyperparameters จาก clf_params</span>
+<span class="c1"># และคำนวณค่า accuracy ของแต่ละโมเดล เพื่อเลือกชุด hyperparameters ที่ดีที่สุด</span>
+<span class="c1"># โดยใช้เทคนิค cross-validation ในการแบ่งกลุ่ม validation data จาก training data</span>
+<span class="n">tuned_clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">base_clf</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">clf_params</span><span class="p">,</span>
+                             <span class="n">scoring</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">],</span> <span class="n">refit</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv_splitter</span><span class="p">)</span>
+
+<span class="c1"># fit โมเดลด้วย training data และ ให้โมเดลทำนายค่า y จาก training data</span>
+<span class="n">tuned_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">tuned_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+
+<span class="c1"># แสดงผล hyperparameters ที่ดีที่สุด และ cross-validation score</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best hyperparameters: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tuned_clf</span><span class="o">.</span><span class="n">best_params_</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best cross-validation score: </span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tuned_clf</span><span class="o">.</span><span class="n">best_score_</span><span class="p">))</span>
+
+<span class="c1"># แสดงผล classification ของโมเดลจาก training data</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training Set: Classification report&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+
+<span class="c1"># คำนวนและแสดงผล confusion matrix ของโมเดลจาก training data</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">display</span> <span class="o">=</span> <span class="n">ConfusionMatrixDisplay</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="o">=</span><span class="n">cm</span><span class="p">)</span>
+<span class="n">display</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;[Training Data] </span><span class="se">\n</span><span class="s1">Confusion Matrix: tuned model&#39;</span><span class="p">)</span>
+
+<span class="c1"># ให้โมเดลทำนายค่า y จาก test data</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">tuned_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+
+<span class="c1"># แสดงผล classification ของโมเดล จาก test data</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Test Set: Classification report&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="c1"># คำนวนและแสดงผล confusion matrix จาก test data</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">display</span> <span class="o">=</span> <span class="n">ConfusionMatrixDisplay</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="o">=</span><span class="n">cm</span><span class="p">)</span>
+<span class="n">display</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;[Test Data] </span><span class="se">\n</span><span class="s1">Confusion Matrix: tuned model&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best hyperparameters: {&#39;C&#39;: 10, &#39;penalty&#39;: &#39;l2&#39;, &#39;solver&#39;: &#39;newton-cg&#39;}
+Best cross-validation score: 0.92
+Training Set: Classification report
+              precision    recall  f1-score   support
+
+         0.0       1.00      1.00      1.00        82
+         1.0       0.88      0.90      0.89        79
+         2.0       0.90      0.87      0.88        79
+
+    accuracy                           0.93       240
+   macro avg       0.92      0.92      0.92       240
+weighted avg       0.93      0.93      0.92       240
+
+
+Test Set: Classification report
+              precision    recall  f1-score   support
+
+         0.0       1.00      1.00      1.00        18
+         1.0       0.94      0.71      0.81        21
+         2.0       0.77      0.95      0.85        21
+
+    accuracy                           0.88        60
+   macro avg       0.90      0.89      0.89        60
+weighted avg       0.90      0.88      0.88        60
+</pre></div>
+</div>
+<img alt="../../_images/03addc45cc3da7f6c25813d498ca6f2a0585fba38a169d2aa653b4b21c3b9c4c.png" src="../../_images/03addc45cc3da7f6c25813d498ca6f2a0585fba38a169d2aa653b4b21c3b9c4c.png" />
+</div>
+</div>
+<p>จะสังเกตได้ว่า เมื่อมีการปรับจูน hyperparameters ของโมเดลให้มีความเหมาะสมแล้ว เราได้โมเดลที่เรียนรู้จากข้อมูลชุดเดิม แล้วสามารถทำนาย test data ได้ค่า accuracy ที่สูงขึ้น โดยเมื่อพิจารณา Confusion Matrix จะพบว่า โมเดลสามารถจำแนกข้อมูล class 1 และ class 2 ได้ดีขึ้น</p>
+</section>
+<section id="id1">
+<h3>Decision Boundary<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>เราจะมาลองดู decision boundary ของโมเดลบน training data และ test data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the decision boundaries</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;[Training Data] </span><span class="se">\n</span><span class="s1">Logistic Regression: Decision boundary&#39;</span><span class="p">,</span> <span class="s1">&#39;[Test Data] </span><span class="se">\n</span><span class="s1">Logistic Regression: Decision boundary&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">],</span> <span class="p">[</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">],</span> <span class="n">titles</span><span class="p">,</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()):</span>
+    <span class="n">disp</span> <span class="o">=</span> <span class="n">DecisionBoundaryDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span><span class="n">tuned_clf</span><span class="p">,</span>
+                                                  <span class="n">x</span><span class="p">,</span>
+                                                  <span class="n">response_method</span><span class="o">=</span><span class="s2">&quot;predict&quot;</span><span class="p">,</span>
+                                                  <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_3classes</span><span class="p">,</span>
+                                                  <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                                                  <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+                                                  <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Feature 1&#39;</span><span class="p">,</span>
+                                                  <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Feature 2&#39;</span><span class="p">,</span>
+                                                  <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_3classes</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(())</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(())</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7f69785350dadae367d02cfba141d149a4a511275d16b87f195cd91170433d70.png" src="../../_images/7f69785350dadae367d02cfba141d149a4a511275d16b87f195cd91170433d70.png" />
+</div>
+</div>
+<p>เมื่อชุดข้อมูลประกอบด้วย 3 คลาส decision boundary ของโมเดล logistic regression ยังคงประกอบเส้นตรง เพื่อจำแนกกลุ่มข้อมูลออกจากกัน</p>
+<p><strong>ผู้จัดเตรียม code ใน tutorial</strong>: ดร. กนกกร พิมพ์เจริญ</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Fundamentals/MachineLearning"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro_to_machine_learning.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Machine Learning</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="svm.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Support Vector Machine (SVM)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-simulated-dataset">Generate Simulated Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-boundary">Decision Boundary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression-solver">Logistic Regression เมื่อใช้ <code class="docutils literal notranslate"><span class="pre">solver</span></code> ชนิดต่างๆ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">Regularization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression-pipeline">Logistic Regression Pipeline</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-3-class-dataset">Generate 3-class Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-data-test-data">แบ่งข้อมูลเป็น training data และ test data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardize">ทำการ standardize ข้อมูลทั้งหมด</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#base-model-default-hyperparameter">เทรนโมเดล ด้วย base model (default hyperparameter)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-tuning-gridsearchcv-train">ปรับแต่งโมเดล (Hyperparameter Tuning) ด้วย GridSearchCV และ train โมเดล</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Decision Boundary</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Brain Code Camp Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

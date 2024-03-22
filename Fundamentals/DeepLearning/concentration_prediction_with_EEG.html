@@ -1,0 +1,2103 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Concentration Prediction with EEG &#8212; Brain Code Camp</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=97488244" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Fundamentals/DeepLearning/concentration_prediction_with_EEG';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Classification with Convolutional Neural Network Using PyTorch" href="cnn_cdt_pytorch.html" />
+    <link rel="prev" title="Introduction to Pytorch" href="intro_pytorch.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/bcc-logo.png" class="logo__image only-light" alt="Brain Code Camp - Home"/>
+    <script>document.write(`<img src="../../_static/bcc-logo.png" class="logo__image only-dark" alt="Brain Code Camp - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    About Brain Code Camp
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/schedule.html">Schedule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/on-site-meetups.html">On-Site Meetups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/staff.html">Staff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/OH-teams.html">Office Hour Teams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/graduation_requirements.html">Graduation Requirements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisites</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/BBB.html">Brain Building Blocks</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session1/S1_Intro.html">Welcome to the Brain!</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session1/S1L1_HelloBrain.html">Hello, Brains!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session1/S1L2_EssentialNeuroanatomy.html">Essential Neuroanatomy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session1/S1L3_FunctionalAreaAndNetwork.html">Functional Area &amp; Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session1/S1L4_LanguageOfTheBrain.html">Language of the Brain</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session2/S2_Intro.html">Neuroscience Methods</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session2/S2L1_IntroBrainScienceToolbox.html">Introduction to Brain Science Toolbox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session2/S2L2_EraOfLocalization.html">The Era of Localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session2/S2L3_MeasuringImmeasurable.html">Measuring the Immeasurable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session2/S2L4_SneakPeekInsideTheBlackBox.html">Sneak Peek Inside the Blackbox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session2/S2L5_JourneyIntoTheBrain.html">Journey Into the Brain</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session3/S3_Intro.html">Brain &amp; Behaviors</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session3/S3L1_ConnectingBrainAndBehavior.html">Connecting Brain &amp; Behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session3/S3L2_SingleNeuronStudies.html">Single Neuron Studies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session3/S3L3_EEGStudies.html">EEG Studies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session3/S3L4_fMRIStudies.html">fMRI Studies</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session4/S4_Intro.html">Brain Signals</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session4/S4L1_SolveTheBrainSignal.html">Solve the Brain Signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session4/S4L2_NeuralFiring.html">Neural Firing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session4/S4L3_EEGSignal.html">EEG Signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session4/S4L4_fMRISignal.html">fMRI Signal</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session5/S5_Intro.html">Models of the Mind</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session5/S5L1_TopographicOrganization.html">Topographic Organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session5/S5L2_BiologicalNeuron.html">Biological Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session5/S5L3_NeuralPopulationTuning.html">Neural and Population Tuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session5/S5L4_NeuralRepresentation.html">Neural Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session5/S5L5_HowDoesBrainDecide.html">How Does The Brain Decide?</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session6/S6_Intro.html">Data Modeling</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session6/S6L1_DataHandlingAndExploration.html">Data Handling and Exploration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session6/S6L2_GoalsOfModeling.html">Goals of Modeling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session6/S6L3_TypesOfModeling.html">Types of Modeling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session6/S6L4_ModelEvaluation.html">Model Evaluation</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7_Intro.html">Neuro &amp; AI</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7L1_AIAndBI.html">Artificial Intelligence &amp; Biological Intelligence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7L2_AIAndBI2.html">Artificial Intelligence &amp; Biological Intelligence II</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7L3_SupervisedDeepLearning.html">Supervised Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7L4_ReinforcementLearning.html">Reinforcement Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7L5_UnsupervisedLearning.html">Unsupervised Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7L6_LanguageModels.html">Language Models</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session8/S8_Intro.html">Medical Applications</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session8/S8L1_DiagnosisAndMonitoring.html">Diagnosis and Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session8/S8L4_ComputationalNeuropsychiatry.html">Computational Neuropsychiatry</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session9/S9_Intro.html">Social Applications</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session9/S9L2_BrainComputerInterface.html">Brain Computer Interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Prereqs/BBB2BCC/BBB2BCC.html">From BBB to BCC</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/BBB2BCC/DataVisualization.html">Data Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/BBB2BCC/Modeling.html">Modeling</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Prereqs/IntroToModeling/modeling_front.html">Intro to Modeling and Model Selection</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/IntroToModeling/modeling_intro.html">Welcome to Intro to Modeling and Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/IntroToModeling/modeling_part1_simple_linear_model.html">Simple Linear Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/IntroToModeling/modeling_part2_poly_overfit_regularization.html">Polynomial Regression, Overfitting, and Regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/IntroToModeling/modeling_part3_data_splitting.html">Training, Validation and Test Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/IntroToModeling/modeling_outro.html">Outro</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Dimensionality Reduction (Week 1)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../DimensionalityReduction/dim_reduct_intro.html">Intro to Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DimensionalityReduction/dim_reduct_part1_basics.html">The Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DimensionalityReduction/dim_reduct_part2_pca.html">Principal Component Analysis (PCA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DimensionalityReduction/dim_reduct_part3_pca_CDT_images.html">Applying PCA to CDT Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DimensionalityReduction/dim_reduct_part4_nonlinear_methods.html">Nonlinear Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DimensionalityReduction/dim_reduct_outro.html">Outro</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning (Weeks 2-3)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../MachineLearning/ml_part1_intro.html">ML Part 1 (Week 2)</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MachineLearning/intro_to_machine_learning.html">Introduction to Machine Learning</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../MachineLearning/logistic_regression.html">Logistic Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MachineLearning/svm.html">Support Vector Machine (SVM)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../MachineLearning/ml_part2_intro.html">ML Part 2 (Week 3)</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MachineLearning/decision_tree_random_forest.html">Decision Tree and Random Forest</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../MachineLearning/knn.html">k-Nearest Neighbors (k-NN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MachineLearning/ml_part2_outro.html">Outro</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deep Learning (Week 4)</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="deep_learning_intro.html">Intro to Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deep_learning_fundamentals.html">Fundamentals of Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_pytorch.html">Introduction to Pytorch</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Concentration Prediction with EEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cnn_cdt_pytorch.html">Classification with Convolutional Neural Network Using PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deep_learning_outro.html">Outro</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments (Weeks 6-7)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ModalityExploration/Assignments/EEG-assignment/eeg-assignment.html">EEG (modality 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ModalityExploration/Assignments/fMRI-assignment/fmri-assignment.html">fMRI (modality 2)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications (Weeks 8-12)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Applications/MiniProjects.html">Applying What You Have Learned to Your Project</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Lectures</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_intro.html">Signal Processing</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part1_sampling_averaging.html">Sampling and Signal Averaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part2_dft.html">Discrete Fourier Transform (DFT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part3_STFT.html">Short Time Fourier Transform (STFT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part4_application.html">Audio Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_outro.html">Outro</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/RecurrentNeuralNetwork.html">Recurrent Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/AttentionTransformer.html">Attention Mechanisms and Transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/GraphNeuralNetwork.html">Graph Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/ReinforcementLearning.html">Reinforcement Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/Statistics.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DimensionalityReduction.html">Dimensionality Reduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/HandsOnDeepLearningWithPytorch.html">Hands-On Deep Learning with Pytorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DeepLearningApplications/object_detection_transformer.html">Object Detection with Transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DeepLearningApplications/breast_cancer_segmentation_transformers.html">Breast Cancer Segmentation Using Transformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DeepLearningApplications/thai_food_classification_transformers.html">Image Classification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Previous Offerings</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../PreviousOfferings/BCC2023/bcc2023.html">2023</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../PreviousOfferings/BCC2023/graduates.html">Graduates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreviousOfferings/BCC2023/projects.html">Projects</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ichatnun/brainCodeCamp/blob/main/Fundamentals/DeepLearning/concentration_prediction_with_EEG.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Fundamentals/DeepLearning/concentration_prediction_with_EEG.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Concentration Prediction with EEG</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-required-library-and-download-dataset">Install required library and download dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-demographic-data">Add demographic data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocess-data">Preprocess data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eeg-demography">รวม EEG กับ demography</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-to-one-hot-encoding">Convert to one-hot encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning">Data cleaning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-arrays-from-dataset">Get the arrays from dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data">Split data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-model">Create a model</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="concentration-prediction-with-eeg">
+<h1>Concentration Prediction with EEG<a class="headerlink" href="#concentration-prediction-with-eeg" title="Link to this heading">#</a></h1>
+<p>ตัวอย่างการใช้งาน Neural network
+จากบทที่แล้วเราได้ทำความรู้จักกับ Neural network(NN)ในเบื้องต้นไปแล้วใน notebook นี้เราจะลองสร้าง NN เพื่อดูว่าผู้เข้าทดสอบคนไหนสับสนกับบทเรียนจากสัญญาณ EEG และข้อมูลอื่นๆของผู้เข้าทดสอบ</p>
+<section id="install-required-library-and-download-dataset">
+<h2>Install required library and download dataset<a class="headerlink" href="#install-required-library-and-download-dataset" title="Link to this heading">#</a></h2>
+<p>ใช้ API ของkaggleเพื่อ download dataset</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>kaggle
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: kaggle in /usr/local/lib/python3.10/dist-packages (1.5.13)
+Requirement already satisfied: six&gt;=1.10 in /usr/local/lib/python3.10/dist-packages (from kaggle) (1.16.0)
+Requirement already satisfied: certifi in /usr/local/lib/python3.10/dist-packages (from kaggle) (2023.5.7)
+Requirement already satisfied: python-dateutil in /usr/local/lib/python3.10/dist-packages (from kaggle) (2.8.2)
+Requirement already satisfied: requests in /usr/local/lib/python3.10/dist-packages (from kaggle) (2.27.1)
+Requirement already satisfied: tqdm in /usr/local/lib/python3.10/dist-packages (from kaggle) (4.65.0)
+Requirement already satisfied: python-slugify in /usr/local/lib/python3.10/dist-packages (from kaggle) (8.0.1)
+Requirement already satisfied: urllib3 in /usr/local/lib/python3.10/dist-packages (from kaggle) (1.26.16)
+Requirement already satisfied: text-unidecode&gt;=1.3 in /usr/local/lib/python3.10/dist-packages (from python-slugify-&gt;kaggle) (1.3)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/local/lib/python3.10/dist-packages (from requests-&gt;kaggle) (2.0.12)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/dist-packages (from requests-&gt;kaggle) (3.4)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># อัพโหลด kaggle.json ที่หาได้จาก https://www.kaggle.com/settings (ไปที่หน้านี้แล้วกด &quot;Create New Token&quot; ใน section API)</span>
+<span class="o">!</span>cp<span class="w"> </span>kaggle.json<span class="w"> </span>/root/.kaggle/
+<span class="o">!</span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/root/.kaggle/kaggle.json
+<span class="o">!</span>kaggle<span class="w"> </span>datasets<span class="w"> </span>download<span class="w"> </span>-d<span class="w"> </span>wanghaohan/confused-eeg
+<span class="o">!</span>unzip<span class="w"> </span>confused-eeg.zip
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cp: cannot stat &#39;kaggle.json&#39;: No such file or directory
+chmod: cannot access &#39;/root/.kaggle/kaggle.json&#39;: No such file or directory
+Traceback (most recent call last):
+  File &quot;/usr/local/bin/kaggle&quot;, line 5, in &lt;module&gt;
+    from kaggle.cli import main
+  File &quot;/usr/local/lib/python3.10/dist-packages/kaggle/__init__.py&quot;, line 23, in &lt;module&gt;
+    api.authenticate()
+  File &quot;/usr/local/lib/python3.10/dist-packages/kaggle/api/kaggle_api_extended.py&quot;, line 164, in authenticate
+    raise IOError(&#39;Could not find {}. Make sure it\&#39;s located in&#39;
+OSError: Could not find kaggle.json. Make sure it&#39;s located in /root/.kaggle. Or use the environment method.
+unzip:  cannot find or open confused-eeg.zip, confused-eeg.zip.zip or confused-eeg.zip.ZIP.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">DataLoader</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>อ่านข้อมูลในส่วนของ EEG ก่อนโดยในไฟล์นี้จะประกอบไปด้วย</p>
+<ul class="simple">
+<li><p>SubjectID, VideoID: ID ของวิชาและวิดีโอ</p></li>
+<li><p>Attention: ระดับความใส่ใจ</p></li>
+<li><p>Mediation: ระดับสมาธิ</p></li>
+<li><p>Raw: สัญญาณดิบ</p></li>
+<li><p>EEG ในแต่ละคลื่นความถี่</p></li>
+<li><p>predefinedlabel: ระดับความสับสนที่คาดเดา (ไม่ได้ใช้ในบทนี้) 0 คือไม่เข้าใจ 1 คือเข้าใจ</p></li>
+<li><p>user-definedlabeln: ของระดับความสับสนของนักเรียนหลังจากเรียน 0 คือไม่เข้าใจ 1 คือเข้าใจ</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eeg_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/EEG_data.csv&#39;</span><span class="p">)</span>
+<span class="n">eeg_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-0c0352e4-0f81-483a-9a4a-e5b0e691b1c9">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SubjectID</th>
+      <th>VideoID</th>
+      <th>Attention</th>
+      <th>Mediation</th>
+      <th>Raw</th>
+      <th>Delta</th>
+      <th>Theta</th>
+      <th>Alpha1</th>
+      <th>Alpha2</th>
+      <th>Beta1</th>
+      <th>Beta2</th>
+      <th>Gamma1</th>
+      <th>Gamma2</th>
+      <th>predefinedlabel</th>
+      <th>user-definedlabeln</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>56.0</td>
+      <td>43.0</td>
+      <td>278.0</td>
+      <td>301963.0</td>
+      <td>90612.0</td>
+      <td>33735.0</td>
+      <td>23991.0</td>
+      <td>27946.0</td>
+      <td>45097.0</td>
+      <td>33228.0</td>
+      <td>8293.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>40.0</td>
+      <td>35.0</td>
+      <td>-50.0</td>
+      <td>73787.0</td>
+      <td>28083.0</td>
+      <td>1439.0</td>
+      <td>2240.0</td>
+      <td>2746.0</td>
+      <td>3687.0</td>
+      <td>5293.0</td>
+      <td>2740.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>47.0</td>
+      <td>48.0</td>
+      <td>101.0</td>
+      <td>758353.0</td>
+      <td>383745.0</td>
+      <td>201999.0</td>
+      <td>62107.0</td>
+      <td>36293.0</td>
+      <td>130536.0</td>
+      <td>57243.0</td>
+      <td>25354.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>47.0</td>
+      <td>57.0</td>
+      <td>-5.0</td>
+      <td>2012240.0</td>
+      <td>129350.0</td>
+      <td>61236.0</td>
+      <td>17084.0</td>
+      <td>11488.0</td>
+      <td>62462.0</td>
+      <td>49960.0</td>
+      <td>33932.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>44.0</td>
+      <td>53.0</td>
+      <td>-8.0</td>
+      <td>1005145.0</td>
+      <td>354328.0</td>
+      <td>37102.0</td>
+      <td>88881.0</td>
+      <td>45307.0</td>
+      <td>99603.0</td>
+      <td>44790.0</td>
+      <td>29749.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-0c0352e4-0f81-483a-9a4a-e5b0e691b1c9')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-0c0352e4-0f81-483a-9a4a-e5b0e691b1c9 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-0c0352e4-0f81-483a-9a4a-e5b0e691b1c9');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  </div></div>
+</div>
+</section>
+<section id="add-demographic-data">
+<h2>Add demographic data<a class="headerlink" href="#add-demographic-data" title="Link to this heading">#</a></h2>
+<p>อีกไฟล์จะเป็นไฟล์ที่เป็นข้อมูลของผู้เข้ารับการทดสอบโดยจะประกอบไปด้วย</p>
+<ul class="simple">
+<li><p>ID ของนักเรียน</p></li>
+<li><p>เพศ</p></li>
+<li><p>เชื้อชาติ</p></li>
+<li><p>อายุ</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dem_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/demographic_info.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="preprocess-data">
+<h2>Preprocess data<a class="headerlink" href="#preprocess-data" title="Link to this heading">#</a></h2>
+<p>โดยภาพรวมเราจะนำสองตารางนี้มารวมกันก่อนจะทำการจัดเตรียมในเบื้องต้นเพื่อนำมาลองใช้กับ Neural Network</p>
+<p>เปลี่ยนชื่อเพื่อความง่ายในการใช้งานโดยใช้ <code class="docutils literal notranslate"><span class="pre">.rename()</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dem_df</span> <span class="o">=</span> <span class="n">dem_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;subject ID&#39;</span> <span class="p">:</span> <span class="s1">&#39;SubjectID&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dem_df</span><span class="p">[</span><span class="s1">&#39;SubjectID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dem_df</span><span class="p">[</span><span class="s1">&#39;SubjectID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="n">dem_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-a61f4ecb-7643-4036-a77a-478f765076d2">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SubjectID</th>
+      <th>age</th>
+      <th>ethnicity</th>
+      <th>gender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>25</td>
+      <td>Han Chinese</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.0</td>
+      <td>24</td>
+      <td>Han Chinese</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.0</td>
+      <td>31</td>
+      <td>English</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3.0</td>
+      <td>28</td>
+      <td>Han Chinese</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4.0</td>
+      <td>24</td>
+      <td>Bengali</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5.0</td>
+      <td>24</td>
+      <td>Han Chinese</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>6.0</td>
+      <td>24</td>
+      <td>Han Chinese</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7.0</td>
+      <td>25</td>
+      <td>Han Chinese</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>8.0</td>
+      <td>25</td>
+      <td>Han Chinese</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>9.0</td>
+      <td>24</td>
+      <td>Han Chinese</td>
+      <td>F</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-a61f4ecb-7643-4036-a77a-478f765076d2')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-a61f4ecb-7643-4036-a77a-478f765076d2 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-a61f4ecb-7643-4036-a77a-478f765076d2');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  </div></div>
+</div>
+</section>
+<section id="eeg-demography">
+<h2>รวม EEG กับ demography<a class="headerlink" href="#eeg-demography" title="Link to this heading">#</a></h2>
+<p>โดยใช้  <code class="docutils literal notranslate"><span class="pre">.merge(dem_df,</span> <span class="pre">how='inner',</span> <span class="pre">on='SubjectID</span></code>ซึ่งการ merge แบบ inner จะเลือกเฉพาะ row มี่มีค่าที่เราต้องการ(<code class="docutils literal notranslate"><span class="pre">SubjectID</span></code>)ทั้งคู่เท่านั้น</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eeg_df</span> <span class="o">=</span> <span class="n">eeg_df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dem_df</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s1">&#39;SubjectID&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eeg_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-990f4727-7562-4c9e-84d9-d95eccd518fc">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SubjectID</th>
+      <th>VideoID</th>
+      <th>Attention</th>
+      <th>Mediation</th>
+      <th>Raw</th>
+      <th>Delta</th>
+      <th>Theta</th>
+      <th>Alpha1</th>
+      <th>Alpha2</th>
+      <th>Beta1</th>
+      <th>Beta2</th>
+      <th>Gamma1</th>
+      <th>Gamma2</th>
+      <th>predefinedlabel</th>
+      <th>user-definedlabeln</th>
+      <th>age</th>
+      <th>ethnicity</th>
+      <th>gender</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>56.0</td>
+      <td>43.0</td>
+      <td>278.0</td>
+      <td>301963.0</td>
+      <td>90612.0</td>
+      <td>33735.0</td>
+      <td>23991.0</td>
+      <td>27946.0</td>
+      <td>45097.0</td>
+      <td>33228.0</td>
+      <td>8293.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>25</td>
+      <td>Han Chinese</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>40.0</td>
+      <td>35.0</td>
+      <td>-50.0</td>
+      <td>73787.0</td>
+      <td>28083.0</td>
+      <td>1439.0</td>
+      <td>2240.0</td>
+      <td>2746.0</td>
+      <td>3687.0</td>
+      <td>5293.0</td>
+      <td>2740.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>25</td>
+      <td>Han Chinese</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>47.0</td>
+      <td>48.0</td>
+      <td>101.0</td>
+      <td>758353.0</td>
+      <td>383745.0</td>
+      <td>201999.0</td>
+      <td>62107.0</td>
+      <td>36293.0</td>
+      <td>130536.0</td>
+      <td>57243.0</td>
+      <td>25354.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>25</td>
+      <td>Han Chinese</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>47.0</td>
+      <td>57.0</td>
+      <td>-5.0</td>
+      <td>2012240.0</td>
+      <td>129350.0</td>
+      <td>61236.0</td>
+      <td>17084.0</td>
+      <td>11488.0</td>
+      <td>62462.0</td>
+      <td>49960.0</td>
+      <td>33932.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>25</td>
+      <td>Han Chinese</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>44.0</td>
+      <td>53.0</td>
+      <td>-8.0</td>
+      <td>1005145.0</td>
+      <td>354328.0</td>
+      <td>37102.0</td>
+      <td>88881.0</td>
+      <td>45307.0</td>
+      <td>99603.0</td>
+      <td>44790.0</td>
+      <td>29749.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>25</td>
+      <td>Han Chinese</td>
+      <td>M</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>12806</th>
+      <td>9.0</td>
+      <td>9.0</td>
+      <td>64.0</td>
+      <td>38.0</td>
+      <td>-39.0</td>
+      <td>127574.0</td>
+      <td>9951.0</td>
+      <td>709.0</td>
+      <td>21732.0</td>
+      <td>3872.0</td>
+      <td>39728.0</td>
+      <td>2598.0</td>
+      <td>960.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>24</td>
+      <td>Han Chinese</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <th>12807</th>
+      <td>9.0</td>
+      <td>9.0</td>
+      <td>61.0</td>
+      <td>35.0</td>
+      <td>-275.0</td>
+      <td>323061.0</td>
+      <td>797464.0</td>
+      <td>153171.0</td>
+      <td>145805.0</td>
+      <td>39829.0</td>
+      <td>571280.0</td>
+      <td>36574.0</td>
+      <td>10010.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>24</td>
+      <td>Han Chinese</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <th>12808</th>
+      <td>9.0</td>
+      <td>9.0</td>
+      <td>60.0</td>
+      <td>29.0</td>
+      <td>-426.0</td>
+      <td>680989.0</td>
+      <td>154296.0</td>
+      <td>40068.0</td>
+      <td>39122.0</td>
+      <td>10966.0</td>
+      <td>26975.0</td>
+      <td>20427.0</td>
+      <td>2024.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>24</td>
+      <td>Han Chinese</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <th>12809</th>
+      <td>9.0</td>
+      <td>9.0</td>
+      <td>60.0</td>
+      <td>29.0</td>
+      <td>-84.0</td>
+      <td>366269.0</td>
+      <td>27346.0</td>
+      <td>11444.0</td>
+      <td>9932.0</td>
+      <td>1939.0</td>
+      <td>3283.0</td>
+      <td>12323.0</td>
+      <td>1764.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>24</td>
+      <td>Han Chinese</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <th>12810</th>
+      <td>9.0</td>
+      <td>9.0</td>
+      <td>64.0</td>
+      <td>29.0</td>
+      <td>-49.0</td>
+      <td>1164555.0</td>
+      <td>1184366.0</td>
+      <td>50014.0</td>
+      <td>124208.0</td>
+      <td>10634.0</td>
+      <td>445383.0</td>
+      <td>22133.0</td>
+      <td>4482.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>24</td>
+      <td>Han Chinese</td>
+      <td>F</td>
+    </tr>
+  </tbody>
+</table>
+<p>12811 rows × 18 columns</p>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-990f4727-7562-4c9e-84d9-d95eccd518fc')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-990f4727-7562-4c9e-84d9-d95eccd518fc button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-990f4727-7562-4c9e-84d9-d95eccd518fc');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  </div></div>
+</div>
+</section>
+<section id="convert-to-one-hot-encoding">
+<h2>Convert to one-hot encoding<a class="headerlink" href="#convert-to-one-hot-encoding" title="Link to this heading">#</a></h2>
+<p>จะเปลี่ยนจากข้อมูลที่เป็น “ประเภท” เป็น ตัวเลข โดยใช้ <code class="docutils literal notranslate"><span class="pre">.get_dummies()</span></code><br />
+EX: English, Chinese, Other -&gt; (0,0) (0,1), (0,1) <br />
+Male/Female -&gt; 1 &amp; 0</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eeg_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">eeg_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eeg_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-03e43d01-5309-4572-9729-86a11e2eac6e">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SubjectID</th>
+      <th>VideoID</th>
+      <th>Attention</th>
+      <th>Mediation</th>
+      <th>Raw</th>
+      <th>Delta</th>
+      <th>Theta</th>
+      <th>Alpha1</th>
+      <th>Alpha2</th>
+      <th>Beta1</th>
+      <th>...</th>
+      <th>Gamma1</th>
+      <th>Gamma2</th>
+      <th>predefinedlabel</th>
+      <th>user-definedlabeln</th>
+      <th>age</th>
+      <th>ethnicity_Bengali</th>
+      <th>ethnicity_English</th>
+      <th>ethnicity_Han Chinese</th>
+      <th>gender_F</th>
+      <th>gender_M</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>56.0</td>
+      <td>43.0</td>
+      <td>278.0</td>
+      <td>301963.0</td>
+      <td>90612.0</td>
+      <td>33735.0</td>
+      <td>23991.0</td>
+      <td>27946.0</td>
+      <td>...</td>
+      <td>33228.0</td>
+      <td>8293.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>25</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>40.0</td>
+      <td>35.0</td>
+      <td>-50.0</td>
+      <td>73787.0</td>
+      <td>28083.0</td>
+      <td>1439.0</td>
+      <td>2240.0</td>
+      <td>2746.0</td>
+      <td>...</td>
+      <td>5293.0</td>
+      <td>2740.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>25</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>47.0</td>
+      <td>48.0</td>
+      <td>101.0</td>
+      <td>758353.0</td>
+      <td>383745.0</td>
+      <td>201999.0</td>
+      <td>62107.0</td>
+      <td>36293.0</td>
+      <td>...</td>
+      <td>57243.0</td>
+      <td>25354.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>25</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>47.0</td>
+      <td>57.0</td>
+      <td>-5.0</td>
+      <td>2012240.0</td>
+      <td>129350.0</td>
+      <td>61236.0</td>
+      <td>17084.0</td>
+      <td>11488.0</td>
+      <td>...</td>
+      <td>49960.0</td>
+      <td>33932.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>25</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>44.0</td>
+      <td>53.0</td>
+      <td>-8.0</td>
+      <td>1005145.0</td>
+      <td>354328.0</td>
+      <td>37102.0</td>
+      <td>88881.0</td>
+      <td>45307.0</td>
+      <td>...</td>
+      <td>44790.0</td>
+      <td>29749.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>25</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 21 columns</p>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-03e43d01-5309-4572-9729-86a11e2eac6e')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-03e43d01-5309-4572-9729-86a11e2eac6e button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-03e43d01-5309-4572-9729-86a11e2eac6e');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  </div></div>
+</div>
+</section>
+<section id="data-cleaning">
+<h2>Data cleaning<a class="headerlink" href="#data-cleaning" title="Link to this heading">#</a></h2>
+<p>ทำการนำcolumn ที่ไม่ต้องการออกไปเช่น <code class="docutils literal notranslate"><span class="pre">SubjectID</span></code>, <code class="docutils literal notranslate"><span class="pre">VideoID</span></code> เพราะเราต้องการจะวัดความเข้าใจจากนักเรียนดังนั้นการที่มี วิชา และ video ที่เป็นสิ่งกระตุ้นให้เกิดความไม่เข้าใจนั้นอาจจะทำให้โมเดลของเราคาดเดาผลลัพธ์จากทั้งสอง features แทนที่จะใช้ข้อมูลของตัวนักเรียนเอง</p>
+<p>รวมถึง <code class="docutils literal notranslate"><span class="pre">predefinedlabel</span></code> ที่ไม่จำเป็นและ <code class="docutils literal notranslate"><span class="pre">gender_F</span></code> ที่เป็น columnsที่เกินมาจากการทำ one hot encoding
+โดยใช่ <code class="docutils literal notranslate"><span class="pre">.drop()</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eeg_df</span> <span class="o">=</span> <span class="n">eeg_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;SubjectID&#39;</span><span class="p">,</span> <span class="s1">&#39;VideoID&#39;</span><span class="p">,</span> <span class="s1">&#39;predefinedlabel&#39;</span><span class="p">,</span> <span class="s1">&#39; gender_F&#39;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Mediation</span></code> and <code class="docutils literal notranslate"><span class="pre">Attention</span></code> มีค่าเป็น 0 ซึ่งเป็นข้อผิดพลาดตามที่ผู้เขียนกล่าวในการอภิปรายดังนั้นเราจะเลือกข้อมูลที่ &gt; 0 เท่านั้น</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eeg_df</span> <span class="o">=</span> <span class="n">eeg_df</span><span class="p">[</span><span class="n">eeg_df</span><span class="p">[</span><span class="s1">&#39;Attention&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">]</span>
+<span class="n">eeg_df</span> <span class="o">=</span> <span class="n">eeg_df</span><span class="p">[</span><span class="n">eeg_df</span><span class="p">[</span><span class="s1">&#39;Mediation&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>label มีเพียง 0,1</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eeg_df</span><span class="p">[</span><span class="s1">&#39;user-definedlabeln&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0., 1.])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="get-the-arrays-from-dataset">
+<h2>Get the arrays from dataset<a class="headerlink" href="#get-the-arrays-from-dataset" title="Link to this heading">#</a></h2>
+<p>แยก column ที่เราต้องการทำนายออกมา</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">eeg_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;user-definedlabeln&#39;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">eeg_df</span><span class="p">[</span><span class="s1">&#39;user-definedlabeln&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-preprocessing">
+<h2>Data preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2048.0
+3964663.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>เราจะเห็นว่าค่าแต่ละค่าของ feature นั้นแตกต่างกันมากเนื่องจากแต่ละ featureใช่คนละ scale ดังนั้นเราจึงต้องใช้ <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code>เข้ามาช่วยให้ข้อมูลนั้นอยู่ใน scale เดียวกัน</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-15.829161155386538
+29.216116594451524
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="split-data">
+<h2>Split data<a class="headerlink" href="#split-data" title="Link to this heading">#</a></h2>
+<p>แยกข้อมูลเป็น train-tests โดย <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>เช็คขนาดนของ X, y</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(9110, 16)
+(9110,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2278, 16)
+(2278,)
+</pre></div>
+</div>
+</div>
+</div>
+<p>สร้าง NN ของเราขึ้นมาตาที่เคยเรียนในบทก่อนหน้า</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">StudentDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="c1"># เปลี่ยนให้อยู่ในรูป tensor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">features</span><span class="p">,</span> <span class="n">label</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># สร้าง dataloader สำหรับเทรน</span>
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">StudentDataset</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-a-model">
+<h2>Create a model<a class="headerlink" href="#create-a-model" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">EEGNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="c1"># สร้าง Neural Network ที่มี 2 Linear layer</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_size</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># สร้าง forward porpagation</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">EEGNet</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">model</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EEGNet(
+  (fc1): Linear(in_features=16, out_features=4, bias=True)
+  (fc2): Linear(in_features=4, out_features=1, bias=True)
+)
+</pre></div>
+</div>
+</div>
+</div>
+<p>เรากำหนดให้โมเดลเทรนข้อมูลไป 10 epoch โดยใช้ for loop<br />
+จากนั้นในแต่ละ batch จะทำการ</p>
+<ol class="arabic simple">
+<li><p>ล้าง gradient ของ optimizer ใน iteration ก่อนหน้าด้วย (<code class="docutils literal notranslate"><span class="pre">optimizer.zero_grad()</span></code>)</p></li>
+<li><p>ผ่านข้อมูลเข้าไปในโมเดล</p></li>
+<li><p>คำนวน loss โดย (<code class="docutils literal notranslate"><span class="pre">criterion(outputs,</span> <span class="pre">labels)</span></code>) จะเป็นการเทียบระหว่าง output &amp; labels</p></li>
+<li><p>และจำหา gradient และ ปรับ parameter โดย (<code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code>) และ (<code class="docutils literal notranslate"><span class="pre">optimizer.step()</span></code>) ตามลำดับ</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BCELoss</span><span class="p">()</span>  <span class="c1"># binary cross entropy</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">running_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">train_loader</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">inputs</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="n">running_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">1000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[epoch: </span><span class="si">{</span><span class="n">epoch</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> ] loss: </span><span class="si">{</span><span class="n">running_loss</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">running_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finished Training&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[epoch: 1 ] loss: 0.720
+[epoch: 2 ] loss: 0.688
+[epoch: 3 ] loss: 0.674
+[epoch: 4 ] loss: 0.687
+[epoch: 5 ] loss: 0.654
+[epoch: 6 ] loss: 0.698
+[epoch: 7 ] loss: 0.648
+[epoch: 8 ] loss: 0.665
+[epoch: 9 ] loss: 0.656
+[epoch: 10 ] loss: 0.622
+Finished Training
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>เช็ค accuracy ของผลลัพธ์ที่โมเดลทำนายได้ <code class="docutils literal notranslate"><span class="pre">torch.no_grad()</span></code> จะเป็นการบอกว่าไม่ต้องเก็บ gradient ระหว่างทำงาน ก่อนที่จะนำมาเปรียบเทียบจะต้องนำมา <code class="docutils literal notranslate"><span class="pre">round()</span></code> เสียก่อนเพื่อให้ค่าความน่าจะเป็นที่ออกมาเป็นค่า 0,1</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">round</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy </span><span class="si">{</span><span class="n">accuracy</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy 0.6198419666374012
+</pre></div>
+</div>
+</div>
+</div>
+<p>ในตัวอย่างนี้เราค้องการที่จะแสดงให้เห็นที่ process ในการเขียนและใช้งาน Neural networkในเบื้องต้น แต่ในการใช้งานจริงนั้นจะต้องมีการ design และปรับปรุง hyperparameters ต่างๆเพื่อให้เหมาะสมกับการใช่งานรวมถึงการจัดการกับข้อมูลก่อนนำมาเทรน (preprocessing) ก็เป็นขั้นตอนที่จำเป็นเช่นกัน</p>
+<p><br><br>
+<strong>ผู้จัดเตรียม code ใน tutorial</strong>: นาย กรวิชญ์ โชตยาภา</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Fundamentals/DeepLearning"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro_pytorch.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Pytorch</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cnn_cdt_pytorch.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Classification with Convolutional Neural Network Using PyTorch</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-required-library-and-download-dataset">Install required library and download dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-demographic-data">Add demographic data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocess-data">Preprocess data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eeg-demography">รวม EEG กับ demography</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-to-one-hot-encoding">Convert to one-hot encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning">Data cleaning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-arrays-from-dataset">Get the arrays from dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data">Split data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-model">Create a model</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Brain Code Camp Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

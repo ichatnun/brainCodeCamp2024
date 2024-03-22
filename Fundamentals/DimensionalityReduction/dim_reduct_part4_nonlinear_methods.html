@@ -1,0 +1,1116 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Nonlinear Methods &#8212; Brain Code Camp</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=97488244" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Fundamentals/DimensionalityReduction/dim_reduct_part4_nonlinear_methods';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Outro" href="dim_reduct_outro.html" />
+    <link rel="prev" title="Applying PCA to CDT Images" href="dim_reduct_part3_pca_CDT_images.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/bcc-logo.png" class="logo__image only-light" alt="Brain Code Camp - Home"/>
+    <script>document.write(`<img src="../../_static/bcc-logo.png" class="logo__image only-dark" alt="Brain Code Camp - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    About Brain Code Camp
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">General Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/schedule.html">Schedule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/on-site-meetups.html">On-Site Meetups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/staff.html">Staff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/OH-teams.html">Office Hour Teams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GeneralInfo/graduation_requirements.html">Graduation Requirements</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Prerequisites</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/BBB.html">Brain Building Blocks</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session1/S1_Intro.html">Welcome to the Brain!</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session1/S1L1_HelloBrain.html">Hello, Brains!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session1/S1L2_EssentialNeuroanatomy.html">Essential Neuroanatomy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session1/S1L3_FunctionalAreaAndNetwork.html">Functional Area &amp; Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session1/S1L4_LanguageOfTheBrain.html">Language of the Brain</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session2/S2_Intro.html">Neuroscience Methods</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session2/S2L1_IntroBrainScienceToolbox.html">Introduction to Brain Science Toolbox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session2/S2L2_EraOfLocalization.html">The Era of Localization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session2/S2L3_MeasuringImmeasurable.html">Measuring the Immeasurable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session2/S2L4_SneakPeekInsideTheBlackBox.html">Sneak Peek Inside the Blackbox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session2/S2L5_JourneyIntoTheBrain.html">Journey Into the Brain</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session3/S3_Intro.html">Brain &amp; Behaviors</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session3/S3L1_ConnectingBrainAndBehavior.html">Connecting Brain &amp; Behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session3/S3L2_SingleNeuronStudies.html">Single Neuron Studies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session3/S3L3_EEGStudies.html">EEG Studies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session3/S3L4_fMRIStudies.html">fMRI Studies</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session4/S4_Intro.html">Brain Signals</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session4/S4L1_SolveTheBrainSignal.html">Solve the Brain Signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session4/S4L2_NeuralFiring.html">Neural Firing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session4/S4L3_EEGSignal.html">EEG Signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session4/S4L4_fMRISignal.html">fMRI Signal</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session5/S5_Intro.html">Models of the Mind</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session5/S5L1_TopographicOrganization.html">Topographic Organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session5/S5L2_BiologicalNeuron.html">Biological Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session5/S5L3_NeuralPopulationTuning.html">Neural and Population Tuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session5/S5L4_NeuralRepresentation.html">Neural Representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session5/S5L5_HowDoesBrainDecide.html">How Does The Brain Decide?</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session6/S6_Intro.html">Data Modeling</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session6/S6L1_DataHandlingAndExploration.html">Data Handling and Exploration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session6/S6L2_GoalsOfModeling.html">Goals of Modeling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session6/S6L3_TypesOfModeling.html">Types of Modeling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session6/S6L4_ModelEvaluation.html">Model Evaluation</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7_Intro.html">Neuro &amp; AI</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7L1_AIAndBI.html">Artificial Intelligence &amp; Biological Intelligence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7L2_AIAndBI2.html">Artificial Intelligence &amp; Biological Intelligence II</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7L3_SupervisedDeepLearning.html">Supervised Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7L4_ReinforcementLearning.html">Reinforcement Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7L5_UnsupervisedLearning.html">Unsupervised Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session7/S7L6_LanguageModels.html">Language Models</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session8/S8_Intro.html">Medical Applications</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session8/S8L1_DiagnosisAndMonitoring.html">Diagnosis and Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session8/S8L4_ComputationalNeuropsychiatry.html">Computational Neuropsychiatry</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session9/S9_Intro.html">Social Applications</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Prereqs/BrainBuildingBlocks/Session9/S9L2_BrainComputerInterface.html">Brain Computer Interface</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Prereqs/BBB2BCC/BBB2BCC.html">From BBB to BCC</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/BBB2BCC/DataVisualization.html">Data Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/BBB2BCC/Modeling.html">Modeling</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Prereqs/IntroToModeling/modeling_front.html">Intro to Modeling and Model Selection</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/IntroToModeling/modeling_intro.html">Welcome to Intro to Modeling and Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/IntroToModeling/modeling_part1_simple_linear_model.html">Simple Linear Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/IntroToModeling/modeling_part2_poly_overfit_regularization.html">Polynomial Regression, Overfitting, and Regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/IntroToModeling/modeling_part3_data_splitting.html">Training, Validation and Test Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Prereqs/IntroToModeling/modeling_outro.html">Outro</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Dimensionality Reduction (Week 1)</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="dim_reduct_intro.html">Intro to Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dim_reduct_part1_basics.html">The Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dim_reduct_part2_pca.html">Principal Component Analysis (PCA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dim_reduct_part3_pca_CDT_images.html">Applying PCA to CDT Images</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Nonlinear Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dim_reduct_outro.html">Outro</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning (Weeks 2-3)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../MachineLearning/ml_part1_intro.html">ML Part 1 (Week 2)</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MachineLearning/intro_to_machine_learning.html">Introduction to Machine Learning</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../MachineLearning/logistic_regression.html">Logistic Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MachineLearning/svm.html">Support Vector Machine (SVM)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../MachineLearning/ml_part2_intro.html">ML Part 2 (Week 3)</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../MachineLearning/decision_tree_random_forest.html">Decision Tree and Random Forest</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../MachineLearning/knn.html">k-Nearest Neighbors (k-NN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MachineLearning/ml_part2_outro.html">Outro</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Deep Learning (Week 4)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../DeepLearning/deep_learning_intro.html">Intro to Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DeepLearning/deep_learning_fundamentals.html">Fundamentals of Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DeepLearning/intro_pytorch.html">Introduction to Pytorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DeepLearning/concentration_prediction_with_EEG.html">Concentration Prediction with EEG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DeepLearning/cnn_cdt_pytorch.html">Classification with Convolutional Neural Network Using PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DeepLearning/deep_learning_outro.html">Outro</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments (Weeks 6-7)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ModalityExploration/Assignments/EEG-assignment/eeg-assignment.html">EEG (modality 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ModalityExploration/Assignments/fMRI-assignment/fmri-assignment.html">fMRI (modality 2)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications (Weeks 8-12)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Applications/MiniProjects.html">Applying What You Have Learned to Your Project</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Lectures</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_intro.html">Signal Processing</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part1_sampling_averaging.html">Sampling and Signal Averaging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part2_dft.html">Discrete Fourier Transform (DFT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part3_STFT.html">Short Time Fourier Transform (STFT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_part4_application.html">Audio Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ExtraResources/SignalProcessing/signal_processing_outro.html">Outro</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/RecurrentNeuralNetwork.html">Recurrent Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/AttentionTransformer.html">Attention Mechanisms and Transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/GraphNeuralNetwork.html">Graph Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/ReinforcementLearning.html">Reinforcement Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/Statistics.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DimensionalityReduction.html">Dimensionality Reduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/HandsOnDeepLearningWithPytorch.html">Hands-On Deep Learning with Pytorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DeepLearningApplications/object_detection_transformer.html">Object Detection with Transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DeepLearningApplications/breast_cancer_segmentation_transformers.html">Breast Cancer Segmentation Using Transformers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ExtraResources/DeepLearningApplications/thai_food_classification_transformers.html">Image Classification</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Previous Offerings</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../PreviousOfferings/BCC2023/bcc2023.html">2023</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../PreviousOfferings/BCC2023/graduates.html">Graduates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../PreviousOfferings/BCC2023/projects.html">Projects</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ichatnun/brainCodeCamp/blob/main/Fundamentals/DimensionalityReduction/dim_reduct_part4_nonlinear_methods.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Fundamentals/DimensionalityReduction/dim_reduct_part4_nonlinear_methods.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Nonlinear Methods</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">ตัวอย่างแรก</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">ตัวอย่างที่ 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Nonlinear methods</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="nonlinear-methods">
+<h1>Nonlinear Methods<a class="headerlink" href="#nonlinear-methods" title="Link to this heading">#</a></h1>
+<p>ใน tutorial ก่อนหน้า เราได้เห็นถึงความสามารถของเทคนิค PCA ในการ transform ข้อมูล รวมถึงความสามารถในการลดมิติลงอย่างมีประสิทธิภาพ แต่ก็ยังมีข้อมูลอีกจำนวนมากที่ไม่เหมาะกับเทคนิค PCA</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7vthm-ZZhaQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p><a class="reference external" href="https://github.com/ichatnun/brainCodeCamp2023_lectures/blob/main/DimensionalityReduction/dim_reduction_part4_nonlinear.pdf">Slides: Nonlinear Dimensionality Reduction</a></p>
+<section id="id1">
+<h2>ตัวอย่างแรก<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>เราจะลองใช้ PCA กับข้อมูลชุดใหม่ที่ถูกสร้างไว้ตาม code ด้านล่าง</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">colors</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># ตั้งค่า random seed เอาไว้ เพื่อให้การรันโค้ดนี้ได้ผลเหมือนเดิม</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num_points</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># สร้างจุดขึ้นมาเป็นจำนวน num_points จุด ซึ่งมาจาก multi-variate normal distribution สำหรับ class 1</span>
+<span class="n">data_class1</span> <span class="o">=</span> <span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">],</span> <span class="n">cov</span><span class="o">=</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]],</span> <span class="n">size</span><span class="o">=</span><span class="n">num_points</span><span class="p">)</span>
+
+<span class="c1"># สร้างจุดขึ้นมาเป็นจำนวน num_points จุด ซึ่งมาจาก multi-variate normal distribution สำหรับ class 2</span>
+<span class="n">data_class2</span> <span class="o">=</span> <span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">cov</span><span class="o">=</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]],</span> <span class="n">size</span><span class="o">=</span><span class="n">num_points</span><span class="p">)</span>
+
+<span class="c1"># รวมข้อมูลจากทั้ง 2 class มาเก็บไว้ในตัวแปร data และเก็บ label (class) เอาไว้ในตัวแปรชื่อ labels</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">data_class1</span><span class="p">,</span> <span class="n">data_class2</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_points</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="p">)</span>
+<span class="n">labels</span><span class="p">[</span><span class="n">num_points</span><span class="p">:]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># เตรียมแสดงผล</span>
+<span class="n">x_disp</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">]</span> <span class="c1"># ค่าต่ำสูงและสูงสุดของ x สำหรับแสดงผล</span>
+<span class="n">y_disp</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">]</span> <span class="c1"># ค่าต่ำสูงและสูงสุดของ y สำหรับแสดงผล</span>
+
+<span class="c1"># ใช้สีน้ำเงินสำหรับแสดงจุดข้อมูลที่มาจาก class 1 (label=0) และใช้สีแดงสำหรับแสดงจุดข้อมูลที่มาจาก class 2 (label=1)</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">ListedColormap</span><span class="p">([</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="s2">&quot;red&quot;</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># แสดงรูปข้อมูลเริ่มต้น</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y_disp</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">)</span> <span class="c1"># Plot แกน y</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_disp</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">)</span> <span class="c1"># Plot แกน x</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Original data&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d17a59a121fa7e4d24c8c65d1f3d57021427ea4b68c5cf38e5e8eb47b07da8ab.png" src="../../_images/d17a59a121fa7e4d24c8c65d1f3d57021427ea4b68c5cf38e5e8eb47b07da8ab.png" />
+</div>
+</div>
+<p>ต่อมาเราจะลองใช้เทคนิค PCA เพื่อลดจำนวนมิติของข้อมูลนี้กัน</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># สร้าง PCA สำหรับตัวอย่างนี้เราจะไม่ whiten ข้อมูลของเรา โดยการกำหนด whiten=False แต่ในการใช้งานจริง การทำ whitening เป็นสิ่งที่ค่อนข้างมีความสำคัญมาก</span>
+<span class="n">model_PCA</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">whiten</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># การทำ PCA เราไม่ใช้ข้อมูลว่าจุดข้อมูลไหนมาจาก class ไหนเลย (หรืออาจมองว่า PCA มองทุกจุดเป็นสีเดียวกันก็ได้)</span>
+<span class="n">model_PCA</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># ดึงเอา principal component (pc) ออกมา</span>
+<span class="n">pc1</span> <span class="o">=</span> <span class="n">model_PCA</span><span class="o">.</span><span class="n">components_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">pc2</span> <span class="o">=</span> <span class="n">model_PCA</span><span class="o">.</span><span class="n">components_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># คำนวณหาความชันของเส้นตรงที่วิ่งผ่านจุด (0,0) และว่ิงไปในทิศทางเดียวกับ principal component -&gt; y = m*x</span>
+<span class="n">m_pc1</span> <span class="o">=</span> <span class="n">pc1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">pc1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">m_pc2</span> <span class="o">=</span> <span class="n">pc2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">pc2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># คำนวณพิกัดใหม่ของทุกจุดข้อมูล</span>
+<span class="n">data_pca</span> <span class="o">=</span> <span class="n">model_PCA</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># แสดงรูปข้อมูลเริ่มต้น</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y_disp</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">)</span> <span class="c1"># Plot แกน y</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_disp</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">)</span> <span class="c1"># Plot แกน x</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Original data&quot;</span><span class="p">)</span>
+
+<span class="c1"># แสดงรูปข้อมูลเริ่มต้นโดยมี principal component ทั้ง 2 อันแสดงอยู่ด้วย</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_disp</span><span class="p">,</span> <span class="p">[</span><span class="n">m_pc1</span><span class="o">*</span><span class="n">x_disp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">m_pc1</span><span class="o">*</span><span class="n">x_disp</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># แสดง pc1 โดยใช้สมการ y = m1*x</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_disp</span><span class="p">,</span> <span class="p">[</span><span class="n">m_pc2</span><span class="o">*</span><span class="n">x_disp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">m_pc2</span><span class="o">*</span><span class="n">x_disp</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span> <span class="c1"># แสดง pc2 โดยใช้สมการ y = m2*x</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Original data with the principal components shown&quot;</span><span class="p">)</span>
+
+<span class="c1"># แสดงข้อมูลหลังถูก transform ด้วย PCA (หน้าตาจะเหมือนกับรูปที่แล้ว แต่มีการหมุนแกน)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data_pca</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data_pca</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_disp</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># แสดงผลโดยการหมุนแกน pc1 ให้มาอยู่ที่ตำแหน่งแกน x</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y_disp</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span> <span class="c1"># แสดงผลโดยการหมุนแกน pc2 ให้มาอยู่ที่ตำแหน่งแกน y</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;PC1 score (explained var = </span><span class="si">{</span><span class="n">model_PCA</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2"> 0.2f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">,</span>
+          <span class="n">ylabel</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;PC2 score (explained var = </span><span class="si">{</span><span class="n">model_PCA</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2"> 0.2f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;PCA-tranformed data&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">x_disp</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">y_disp</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="c1"># Plot ข้อมูลที่ลดมิติโดยการตัดแกน PC2 ทิ้งไป</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data_pca</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">data_pca</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_disp</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># แสดงผลโดยการหมุนแกน pc1 ให้มาอยู่ที่ตำแหน่งแกน x</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">x_disp</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Data in the resulting 1-dimensional space (PC1)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+
+<span class="c1"># Plot ข้อมูลที่ลดมิติโดยการตัดแกน PC1 ทิ้งไป</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data_pca</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">data_pca</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_disp</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span> <span class="c1"># แสดงผลโดยการหมุนแกน pc2 ให้มาอยู่ที่ตำแหน่งแกน x</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">x_disp</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Data in the resulting 1-dimensional space (PC2)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;% variance captured by PC1 = </span><span class="si">{</span><span class="n">model_PCA</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2"> 0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;% variance captured by PC2 = </span><span class="si">{</span><span class="n">model_PCA</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2"> 0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/adf1033928abd41bdc3c9593933190ee06d9dc3834cd55d9c4a9638933f8c038.png" src="../../_images/adf1033928abd41bdc3c9593933190ee06d9dc3834cd55d9c4a9638933f8c038.png" />
+<img alt="../../_images/401bf0835dd7595847743679acddc45235d6bdd7b037da30b42f65465a4468b4.png" src="../../_images/401bf0835dd7595847743679acddc45235d6bdd7b037da30b42f65465a4468b4.png" />
+<img alt="../../_images/b521e914b5863b6edf4243d5785bd25ba4a116a6932d63c9cfaecf4c8badf868.png" src="../../_images/b521e914b5863b6edf4243d5785bd25ba4a116a6932d63c9cfaecf4c8badf868.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>% variance captured by PC1 =  84.71
+% variance captured by PC2 =  15.29
+</pre></div>
+</div>
+</div>
+</div>
+<p>เทคนิค PCA เลือกแกน PC1 ที่อธิบายการกระจายตัวในข้อมูลสูง (มากกว่า 80%) วัดด้วยค่า variance แต่เมื่อลดมิติลงมาแล้วพบว่า PC1 score ของทั้งสอง classes มาซ้อนทับกัน</p>
+<p>แต่ถ้าเราลดมิติลงโดยการเก็บ PC2 ไว้แทน จะพบว่าข้อมูลจากทั้งสอง class จะแยกออกจากกันได้ดีกว่า</p>
+<p>ในข้อมูลชุดนี้จะเห็นได้ว่าแกนที่อธิบาย variance ได้สูงกว่า ก็อาจจะไม่ได้เป็นแกนที่จะทำให้ข้อมูลจากต่าง class กระจายตัวออกจากกันได้ดีกว่าเสมอไป</p>
+<p>ในกรณีที่เราต้องการลดจำนวนมิติโดยต้องการให้ข้อมูลจากต่าง class กระจายตัวออกจากกัน เราอาจจะต้องไปทดลองใช้เทคนิคประเภท supervised learning เช่น linear discriminant analysis (LDA) แทน ซึ่งเทคนิคเหล่านี้สามารถนำเอาข้อมูล labels (ข้อมูลไหนมาจาก class อะไร) มาใช้ในกระบวนการลดจำนวนมิติได้</p>
+</section>
+<section id="id2">
+<h2>ตัวอย่างที่ 2<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>เรามาลองดูอีกตัวอย่างหนึ่ง ซึ่งเป็น dataset ที่เป็นรูปภาพตัวเลข 0 ถึง 9</p>
+<p>ที่มาของโค้ดสำหรับ download ชุดข้อมูล: <a class="reference external" href="https://umap-learn.readthedocs.io/en/latest/basic_usage.html#digits-data">https://umap-learn.readthedocs.io/en/latest/basic_usage.html#digits-data</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_digits</span>
+<span class="n">digits</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>ดูตัวอย่างภาพ</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># เอาข้อมูลมาเก็บไว้ใน variables</span>
+<span class="n">images_flatten</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">data</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span>
+
+<span class="n">num_classes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">labels</span><span class="p">)))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Images: </span><span class="si">{</span><span class="n">images_flatten</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Labels: </span><span class="si">{</span><span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="n">images_flatten</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> samples.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="n">num_classes</span><span class="si">}</span><span class="s2"> classes.&quot;</span><span class="p">)</span>
+
+<span class="c1"># ดูตัวอย่างภาพ</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">count</span><span class="p">,</span> <span class="n">idx_img</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">100</span><span class="p">)):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">count</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">images_flatten</span><span class="p">[</span><span class="n">idx_img</span><span class="p">,</span> <span class="p">:],</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">)))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Images: (1797, 64)
+Labels: (1797,)
+There are 1797 samples.
+There are 10 classes.
+</pre></div>
+</div>
+<img alt="../../_images/465408156b4ae3141b3dad8cb7a6125987e364de23dd74b2d0d97877abb7c3ea.png" src="../../_images/465408156b4ae3141b3dad8cb7a6125987e364de23dd74b2d0d97877abb7c3ea.png" />
+</div>
+</div>
+<p>เรียกใช้ <code class="docutils literal notranslate"><span class="pre">sklearn.decomposition.PCA</span></code> เหมือนในตัวอย่างก่อนหน้า แต่เราจะลองให้ PCA หาแกนมาเป็นจำนวนเท่ากับจำนวนมิติตั้งต้นเลย (64 แกน)</p>
+<p>ในที่นี้จะเห็นได้ว่า PCA แปลงข้อมูลโดยไม่ได้ใช้ข้อมูล labels เลย</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_components</span> <span class="o">=</span> <span class="n">images_flatten</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">model_PCA</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_components</span><span class="p">,</span> <span class="n">whiten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">images_PCA</span> <span class="o">=</span> <span class="n">model_PCA</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">images_flatten</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>ลองดูว่าแต่ละแกนที่ PCA หามาสามารถอธิบาย variance ได้เท่าไหร่กันบ้าง</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Plot ดูว่า PC แต่ละตัวสามารถอธิบาย variance ได้กี่ %</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_components</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">model_PCA</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;PC indices&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">% e</span><span class="s1">xplained variance&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Plot ดูว่าการเอา PC มารวมกันหลาย ๆ ตัว (เริ่มจากตัวแรก เรียงไป) จะสามารถอธิบาย variance รวมได้กี่ %</span>
+<span class="n">cumulative_exp_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">model_PCA</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_components</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">cumulative_exp_var</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Number of PCs used&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Cumulative </span><span class="si">% e</span><span class="s1">xplained variance&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;% variance captured by PC1 = </span><span class="si">{</span><span class="n">model_PCA</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2"> 0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;% variance captured by PC2 = </span><span class="si">{</span><span class="n">model_PCA</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2"> 0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; It takes </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">cumulative_exp_var</span><span class="o">&gt;</span><span class="mi">95</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> top PCs to be able to explain 95% of the variance&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6c906ac15c3cf4fb6993b5e7be335a1d83a897bf5c9a764199ee419cdf22d2b0.png" src="../../_images/6c906ac15c3cf4fb6993b5e7be335a1d83a897bf5c9a764199ee419cdf22d2b0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>% variance captured by PC1 =  14.89
+% variance captured by PC2 =  13.62
+ It takes 29 top PCs to be able to explain 95% of the variance
+</pre></div>
+</div>
+</div>
+</div>
+<p>ลองนำผลลัพธ์ที่ได้มา plot ดูว่าข้อมูลจากแต่ละ class มีการกระจายตัวหรือกระจุกตัวกันอย่างไร โดยในที่นี้เราจะใช้สีที่แตกต่างกันเพื่อแสดงให้ดูว่าข้อมูลจาก class ไหน อยู่บริเวณใดใน space 2 มิติ</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">sp</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">images_PCA</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">images_PCA</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="s1">&#39;datalim&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;PC1 score&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;PC2 score&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Data in the PCA-transformed space&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">boundaries</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_classes</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_classes</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/97124f15f879893e15b257070f57a49e274ce6220aae44688e42cb98a143029d.png" src="../../_images/97124f15f879893e15b257070f57a49e274ce6220aae44688e42cb98a143029d.png" />
+</div>
+</div>
+<p>ข้อมูลที่ถูกลดจำนวนมิติลงมาเหลือ 2 มิติด้วย PCA มีข้อสังเกตดังนี้</p>
+<ul class="simple">
+<li><p>ข้อมูลที่มาจาก class เดียวกัน (ตัวเลขเดียวกัน) จะเกาะกลุ่มกัน เช่น กลุ่มของ
+ภาพเลข 0 (สีม่วง)</p></li>
+<li><p>ข้อมูลที่มาจากคนละ class มีการกระจายตัวออกจากกันบ้างในบาง class เช่น กลุ่มเลข 0 กลุ่มเลข 6 และ กลุ่มเลข 4 ซ้อนทับกันเพียงเล็กน้อย</p></li>
+<li><p>ข้อมูลจาก class ที่เหลือ ซ้อนทับกันมาก โดยเฉพาะ กลุ่มเลข 5 และเลข 9</p></li>
+</ul>
+<p>ถ้าหากว่าผู้เรียนมีเวลาว่าง อยากให้ลองไปหาวิธี visualize ดูว่าบริเวณจุดที่ซ้อนทับกันเยอะ ๆ มีข้อมูลก่อนลดมิติหน้าตาคล้ายคลึงกันหรือไม่ (เป็นภาพ 8 x 8 มิติ ที่มีความคล้ายคลึงกันหรือไม่)</p>
+<p><strong>หมายเหตุ</strong> ขอย้ำอีกครั้งว่า PCA ไม่ได้ใช้ข้อมูล labels ในการลดจำนวนมิติเลย</p>
+<p><br><br></p>
+<p>เราอาจจะเคยเรียนมาในคณิตศาสตร์ระดับมัธยมว่าเราสามารถคำนวณระยะห่างระหว่างจุด 2 จุด <span class="math notranslate nohighlight">\((x_1, y_1)\)</span> และ <span class="math notranslate nohighlight">\((x_2, y_2)\)</span> ได้ด้วยสูตร <span class="math notranslate nohighlight">\(d = \sqrt{(x_1-x_2)^2 + (y_1-y_2)^2}\)</span> ซึ่งค่า <span class="math notranslate nohighlight">\(d\)</span> ที่เราคำนวณได้ ก็คือความยาวของเส้นตรงที่ลากเชื่อม จุด <span class="math notranslate nohighlight">\((x_1, y_1)\)</span> และ <span class="math notranslate nohighlight">\((x_2, y_2)\)</span> เข้าด้วยกัน การวัดระยะห่างแบบเส้นตรงในลักษณะนี้มีชื่อทางเทคนิคว่า Euclidean distance (ใน 2 มิติ)</p>
+<p>code ใน cell ถัดมาจะแสดง Euclidean distance ระหว่างจุดสองคู่</p>
+<ol class="arabic simple">
+<li><p>คู่แรกจะเป็นตัวอย่างจุด 2 จุดที่อยู่ใน class เดียวกัน โดยเราสามารถแสดง Euclidean distance ระหว่างจุดทั้งสองด้วยเส้นตรงสีส้ม</p></li>
+<li><p>คู่ที่สองจะเป็นตัวอย่างจุด 2 จุดที่มาจากคนละ class โดยเราสามารถแสดง Euclidean distance ระหว่างจุดทั้งสองด้วยเส้นตรงสีเขียว</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Code ในส่วนนี้เป็น code ที่ปรับแก้มาจาก tutorial ที่แล้วเพียงเล็กน้อย ผู้เรียนไม่ต้องกังวลเกี่ยวกับรายละเอียดของ code ใน cell นี้ ซึ่งจะใช้ในการอธิบาย concept เท่านั้น ไม่ได้คำนึงถึงการเขียนให้ optimize performance</span>
+
+<span class="k">def</span> <span class="nf">euclidean_distance_PCA_example</span><span class="p">():</span>
+    <span class="n">num_points</span> <span class="o">=</span> <span class="mi">20</span>
+
+    <span class="c1"># สร้างจุดขึ้นมาเป็นจำนวน num_points จุด ซึ่งมาจาก multi-variate normal distribution สำหรับ class 1</span>
+    <span class="n">data_class1</span> <span class="o">=</span> <span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">cov</span><span class="o">=</span><span class="p">[[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">size</span><span class="o">=</span><span class="n">num_points</span><span class="p">)</span>
+
+    <span class="c1"># สร้างจุดขึ้นมาเป็นจำนวน num_points จุด ซึ่งมาจาก multi-variate normal distribution สำหรับ class 2</span>
+    <span class="n">data_class2</span> <span class="o">=</span> <span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">cov</span><span class="o">=</span><span class="p">[[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">size</span><span class="o">=</span><span class="n">num_points</span><span class="p">)</span>
+
+    <span class="c1"># รวมข้อมูลจากทั้ง 2 class มาเก็บไว้ในตัวแปร data และเก็บ label (class) เอาไว้ในตัวแปรชื่อ labels</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">data_class1</span><span class="p">,</span> <span class="n">data_class2</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_points</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="p">)</span>
+    <span class="n">labels</span><span class="p">[</span><span class="n">num_points</span><span class="p">:]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1"># สร้าง PCA สำหรับตัวอย่างนี้เราจะไม่ whiten ข้อมูลของเรา โดยการกำหนด whiten=False แต่ในการใช้งานจริง การทำ whitening เป็นสิ่งที่ค่อนข้างมีความสำคัญมาก</span>
+    <span class="n">model_PCA</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">whiten</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># การทำ PCA เราไม่ใช้ข้อมูลว่าจุดข้อมูลไหนมาจาก class ไหนเลย (หรืออาจมองว่า PCA มองทุกจุดเป็นสีเดียวกันก็ได้)</span>
+    <span class="n">model_PCA</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c1"># คำนวณพิกัดใหม่ของทุกจุดข้อมูล</span>
+    <span class="n">data_pca</span> <span class="o">=</span> <span class="n">model_PCA</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c1"># เตรียมแสดงผล</span>
+    <span class="n">x_disp</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">]</span> <span class="c1"># ค่าต่ำสูงและสูงสุดของ x สำหรับแสดงผล</span>
+    <span class="n">y_disp</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">]</span> <span class="c1"># ค่าต่ำสูงและสูงสุดของ y สำหรับแสดงผล</span>
+
+    <span class="c1"># ใช้สีน้ำเงินสำหรับแสดงจุดข้อมูลที่มาจาก class 1 (label=0) และใช้สีแดงสำหรับแสดงจุดข้อมูลที่มาจาก class 2 (label=1)</span>
+    <span class="n">cmap</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">ListedColormap</span><span class="p">([</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="s2">&quot;red&quot;</span><span class="p">])</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+    <span class="c1"># แสดงรูปข้อมูลเริ่มต้น</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y_disp</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">)</span> <span class="c1"># Plot แกน y</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_disp</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">)</span> <span class="c1"># Plot แกน x</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">)</span> <span class="c1"># Plot จุดเชื่อมระหว่างจุด 1 คู่จาก class เดียวกัน</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">num_points</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">num_points</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">num_points</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">num_points</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span> <span class="c1"># Plot จุดเชื่อมระหว่างจุด 1 คู่ การคนละ class</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Original data&quot;</span><span class="p">)</span>
+
+
+    <span class="c1"># แสดงข้อมูลหลังถูก transform ด้วย PCA (หน้าตาจะเหมือนกับรูปที่แล้ว แต่มีการหมุนแกน)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data_pca</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data_pca</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_disp</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># แสดงผลโดยการหมุนแกน pc1 ให้มาอยู่ที่ตำแหน่งแกน x</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y_disp</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span> <span class="c1"># แสดงผลโดยการหมุนแกน pc2 ให้มาอยู่ที่ตำแหน่งแกน y</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_pca</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data_pca</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">)</span> <span class="c1"># Plot จุดเชื่อมระหว่างจุด 1 คู่จาก class เดียวกัน</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_pca</span><span class="p">[</span><span class="n">num_points</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">num_points</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data_pca</span><span class="p">[</span><span class="n">num_points</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">num_points</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span> <span class="c1"># Plot จุดเชื่อมระหว่างจุด 1 คู่ การคนละ class</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;PC1 score (explained var = </span><span class="si">{</span><span class="n">model_PCA</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2"> 0.2f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">,</span>
+              <span class="n">ylabel</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;PC2 score (explained var = </span><span class="si">{</span><span class="n">model_PCA</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2"> 0.2f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;PCA-tranformed data&quot;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">x_disp</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">y_disp</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">euclidean_distance_PCA_example</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/545af7a1d07ce4c71aa71df7b4daf3e0d67253f63ae38b9f65b52e1f63231d5e.png" src="../../_images/545af7a1d07ce4c71aa71df7b4daf3e0d67253f63ae38b9f65b52e1f63231d5e.png" />
+</div>
+</div>
+<p>จากตัวอย่างนี้จะเห็นได้ว่าการหมุนแกนโดย PCA จะไม่เปลี่ยนค่า Euclidean distance ระหว่างคู่จุดใด ๆ ในข้อมูลเลย (เส้นตรงสีส้มในภาพด้านซ้ายมีขนาดเท่ากับเส้นตรงสีส้มในภาพด้านขวา และ เส้นตรงสีเขียวในภาพด้านซายมีขนาดเท่ากับเส้นตรงสีเขียวในภาพด้านขวาทุกประการ)</p>
+<p>หรือพูดอีกอย่างนึงก็คือ PCA รักษา Euclidean distance ซึ่งแปลว่าสมมติฐานที่สำคัญมาก ๆ ของ PCA ก็คือ การวัดระยะระหว่างจุดข้อมูลด้วย Euclidean distance เป็นสิ่งที่มีความเหมาะสมมากที่สุดสำหรับโจทย์ข้อนี้</p>
+<p><br><br></p>
+<p>PCA เป็นเทคนิคที่ใช้งานง่ายและได้ผลที่ดีในหลาย ๆ กรณี ทำให้เป็นเทคนิคที่มักจะถูกนำไปใช้เป็นเทคนิคแรกเวลาเราต้องการลดจำนวนมิติของข้อมูล
+แต่ PCA ก็มีข้อกำจัดหลายประการ เช่น</p>
+<ol class="arabic simple">
+<li><p>เป็นเทคนิคประเภท linear ซึ่งทำให้ได้ผลไม่ค่อยดีเวลาเจอข้อมูลที่มีความซับซ้อนและมีความเป็น nonlinearity สูงมาก</p></li>
+<li><p>เป็นเทคนิคที่อ้างอิงการวัดระยะห่างด้วย Euclidean distance เท่านั้น ซึ่งเป็นการวัดที่เราอาจจะคุ้นเคยมากที่สุด แต่ถ้าเกิดว่าการวัดระยะห่างด้วย Euclidean distance นั้นไม่มีความเหมาะสม PCA ก็จะเป็นเทคนิคที่ไม่ค่อยเหมาะนัก</p></li>
+</ol>
+<p>ในหลายสถานการณ์ การวัดระยะห่างระหว่างจุด 2 จุด อาจต้องใช้ distance ประเภทอื่น นอกเหนือไปจาก Euclidean distance ที่วัดระยะห่างเป็นเส้นตรง</p>
+<p><img alt="distances.webp" src="data:image/webp;base64,UklGRkB0AABXRUJQVlA4WAoAAAAYAAAAzwIA1QIAQUxQSGYBAAABgFtt2/LkHylDJOt4cHbwHTICnVYcSqic2t3hi0v54ldEKGzbtqGAHJCOI7IvdSu3e0fBtXfbyH+hK+ROWwG23fpal9JHcL221t++0r2mVorun3hvbba+l+M//uM//uM//uM//uM//uM//uM//uM//uM//uM//uM//uM//uM//uM//uM//uM//uM//uM//uM/tOG/5ntr9Zt5vLZ2v5elZmv5e9lHq5XxH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xH//xn9rw38tHCrCPl9G9pwh7Hb3sAO9X3/huLqufPFxcBdfF805xZnp4s8XG+/lVeD3MVUZse2L2+jq8G3ba2soAVlA4IPJxAABQ0wGdASrQAtYCPm0ylUgkIqIhI/IbuIANiWdu6dDMgXAD+q1HvZX5PT9adysA/Gf3T9vvNC3f2H+t/sj/ef2e+fmuv1/+z/on+5/st8xPFLsXzYvG/0b/Z/4T8mvnz/uvVD+of/F7gP6af6j+6f6b9p/jD/1X9g9zfmA/pn+L/ar3iv87/2P8Z7iv7p/w/2e+AD+h/6L/5eu/7CX+f/6///9wD+X/6//1+0B/yv3C+Dv+r/7r9vf+P8if7G//32AP/V6gH/g9QD1d+oP9P/IzwO/uP+J/ZD+w/sx7t/i/zP9u/tv7B/3H/z/5/43P6Pxg+p/2/7N+pf8g+zH3f+9f4v/X/2j9vvvD+2/5r+2/tZ/nv3C9m/zf96/1X+O/an/GfIL+R/yr+6f3P9of7n+6Xu67KTbf9l/svUF9dPnn+R/uP+Z/5H+T+Az3b+7f439nP7v///kn7Cf5P8z/9P///wA/lf9G/xn9u/dL+5////5feH/I/33i7fb/9j/2v9f+MH2A/x/+mf7D+4f5//2/4X/////8Zv43/l/5D/S/+j/U////zfFn80/wP/K/x3+e/+v+i///4E/yT+kf6z+8/5j/zf5r////L7sf+b7fv2+/7nuZfr7/6v24//5QkVeutW0MA7PDBNCkjAXDq6ZU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" /></p>
+<p>แหล่งที่มาของภาพ: <a class="reference external" href="https://towardsdatascience.com/9-distance-measures-in-data-science-918109d069fa">9 Distance Measures in Data Science</a></p>
+<p>จากภาพข้างบน จะเห็นได้ว่ามีวิธีการวัดความเหมือน ความคล้าย ระยะห่างระหว่างของ 2 สิ่งหลายวิธี ซึ่งแต่ละอันก็เหมาะสมกับโจทย์หรือสถานการณ์ที่แตกต่างกัน เช่น</p>
+<ul class="simple">
+<li><p>ถ้าเราต้องการวัดค่าความเหมือนของจุด 2 จุดด้วยมุมระหว่างจุดทั้งสอง เราอาจจะเลือกใช้ cosine similarity ได้</p></li>
+<li><p>ถ้าเกิดว่าเรามีจุดข้อมูลที่เป็น set 2 อัน แล้วเราต้องการจะดูว่าทั้งสองอันมันเหมือนกันแค่ไหน เราก็สามารถเลือกใช้ Jaccard index ในการวัดได้ เช่น เวลาเราตรวจข้อสอบเข้ากิจกรรม Brain Code Camp ที่เป็นแบบปรนัย (multiple choices) ที่เราให้ผู้สอบตอบทุกตัวเลือกที่มีความถูกต้อง เราก็สามารถใช้ Jaccard index เป็นตัววัดความเหมือนระหว่าง set คำตอบของผู้สอบกับ set เฉลยของผู้สอนได้</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>Nonlinear methods<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>ในส่วนที่เหลือเราจะลองใช้เทคนิคประเภท nonlinear ดูว่าจะสามารถลดจำนวนมิติได้ดีกว่า PCA ซึ่งเป็นเทคนิคประเภท linear สำหรับข้อมูลชุดนี้ได้หรือไม่</p>
+<p>เทคนิคประเภท nonlinear มีหลายประเภท เช่น Multidimensional scaling (MDS), <a class="reference external" href="https://www.jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf?fbcl">t-distributed Stochastic Neighbor Embedding (t-SNE)</a>, <a class="reference external" href="https://arxiv.org/abs/1802.03426">Uniform Manifold Approximation and Projection (UMAP)</a> และ <a class="reference external" href="https://www.nature.com/articles/s41587-019-0336-3">PHATE</a> ซึ่งหลายเทคนิคในนี้สามารถรองรับการวัดระยะระหว่างจุดข้อมูลได้หลายรูปแบบ ไม่จำเป็นต้องเป็น Euclidean distance ก็ได้</p>
+<p><strong>หมายเหตุ</strong> เนื่องจากผู้เรียนจำนวนหนึ่งอาจไม่มีพื้นฐานทางคณิตศาสตร์ที่เพียงพอต่อการเข้าใจเทคนิค nonlinear หลายประเภทที่ถูกใช้อย่างกว้างขวาง ใน tutorial นี้เราจะเน้นการนำเอาเทคนิคบางอันไปทดลองใช้งานมากกว่า</p>
+<p><br><br></p>
+<p>เรามาลองใช้ UMAP กัน</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ติดตั้ง UMAP</span>
+<span class="err">!</span><span class="p">{</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">}</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">umap</span><span class="o">-</span><span class="n">learn</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/
+Requirement already satisfied: umap-learn in /usr/local/lib/python3.10/dist-packages (0.5.3)
+Requirement already satisfied: numpy&gt;=1.17 in /usr/local/lib/python3.10/dist-packages (from umap-learn) (1.22.4)
+Requirement already satisfied: scikit-learn&gt;=0.22 in /usr/local/lib/python3.10/dist-packages (from umap-learn) (1.2.2)
+Requirement already satisfied: scipy&gt;=1.0 in /usr/local/lib/python3.10/dist-packages (from umap-learn) (1.10.1)
+Requirement already satisfied: numba&gt;=0.49 in /usr/local/lib/python3.10/dist-packages (from umap-learn) (0.56.4)
+Requirement already satisfied: pynndescent&gt;=0.5 in /usr/local/lib/python3.10/dist-packages (from umap-learn) (0.5.10)
+Requirement already satisfied: tqdm in /usr/local/lib/python3.10/dist-packages (from umap-learn) (4.65.0)
+Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/local/lib/python3.10/dist-packages (from numba&gt;=0.49-&gt;umap-learn) (0.39.1)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.10/dist-packages (from numba&gt;=0.49-&gt;umap-learn) (67.7.2)
+Requirement already satisfied: joblib&gt;=0.11 in /usr/local/lib/python3.10/dist-packages (from pynndescent&gt;=0.5-&gt;umap-learn) (1.2.0)
+Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /usr/local/lib/python3.10/dist-packages (from scikit-learn&gt;=0.22-&gt;umap-learn) (3.1.0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Import <code class="docutils literal notranslate"><span class="pre">umap</span></code> มาใช้งาน</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">umap</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>สร้างและใช้ UMAP ในการลดจำนวนมิติของข้อมูล โดยที่ไม่ได้ใช้ข้อมูล labels สำหรับลดจำนวนมิติลง</p>
+<p><strong>หมายเหตุ</strong> UMAP มี parameters ที่เราต้องลองปรับค่าดู เช่น <code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code>, <code class="docutils literal notranslate"><span class="pre">min_dist</span></code>, <code class="docutils literal notranslate"><span class="pre">n_components</span></code> และ <code class="docutils literal notranslate"><span class="pre">metric</span></code> ซึ่งเราสามารถไปลองศึกษาเพิ่มเติมได้จาก <a class="reference external" href="https://umap-learn.readthedocs.io/en/latest/parameters.html#min-dist">https://umap-learn.readthedocs.io/en/latest/parameters.html#min-dist</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model_umap</span> <span class="o">=</span> <span class="n">umap</span><span class="o">.</span><span class="n">UMAP</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">,</span> <span class="n">min_dist</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">images_UMAP</span> <span class="o">=</span> <span class="n">model_umap</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">images_flatten</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">images_UMAP</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1797, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plot ผลที่ได้จาก UMAP มาเทียบกับ PCA โดยในที่นี้เราจะใช้สีที่แตกต่างกันเพื่อแสดงให้ดูว่าข้อมูลจาก class ไหน อยู่บริเวณใดใน space 2 มิติ</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Plot ผลของ PCA</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">images_PCA</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">images_PCA</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="s1">&#39;datalim&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;PC1 score&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;PC2 score&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Data in the PCA-transformed space&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot ผลของ UMAP</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">images_UMAP</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">images_UMAP</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="s1">&#39;datalim&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Reduced dimension 1&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Reduced dimension 2&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Data in the UMAP-transformed space&#39;</span><span class="p">)</span>
+
+<span class="c1"># ใช้สีที่แตกต่างกันสำหรับแสดงจุดข้อมูลในสองมิติ จากคนละ class กัน (มี 10 classes จึงใช้ 10 สี)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">boundaries</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_classes</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_classes</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b0a63fb1f9eac372050a0f4009df8cc2e89cb4fdb8dceab0ce29111c24e2e283.png" src="../../_images/b0a63fb1f9eac372050a0f4009df8cc2e89cb4fdb8dceab0ce29111c24e2e283.png" />
+</div>
+</div>
+<p>จะเห็นได้ว่าข้อมูลจากเทคนิค UMAP ส่งผลให้ข้อมูลจาก class เดียวกันเกาะกลุ่มกันได้ ในขณะที่ข้อมูลจากคนละ class (คนละสี) มีการกระจายตัวออกจากกันมากกว่าสิ่งที่ได้รับจาก PCA</p>
+<p>ถึงแม้ว่าในตัวอย่างนี้ UMAP จะดูได้ผลที่ดีกว่า PCA แต่ก็ต้องรำลึกไว้เสมอว่าเทคนิคแต่ละเทคนิคก็มีข้อดี/ข้อเสีย และมีสมมติฐานที่แตกต่างกัน บางสถานการณ์อาจจะเหมาะกับเทคนิคประเภทนึงมากกว่าเทคนิคอีกประเภทนึง</p>
+<p>เช่น</p>
+<ul class="simple">
+<li><p>PCA เป็นเทคนิคที่มีสมมติฐานน้อยมาก และ PCA มักจะเอาข้อมูลที่ correlate กัน ยุบไปรวมกันอยู่บนมิติเดียวกัน ทำให้ PCA มักจะถูกนำไปใช้ในขั้นตอน preprocessing ก่อนที่จะเอาข้อมูลไปใช้วิเคราะห์ด้วยเทคนิคอื่น ๆ ต่อไป</p></li>
+<li><p>เนื่องจาก PCA เป็นโมเดลแบบ linear ทำให้เราสามารถตีความข้อมูลได้ค่อนข้างง่ายกว่าเทคนิคที่เป็น nonlinear  แต่ด้วยความเป็น linear เทคนิคนี้ก็จะไม่เหมาะสมกับข้อมูลที่มีความเป็น nonlinear สูงเช่นกัน</p></li>
+<li><p>PCA วัดความห่างของข้อมูลด้วย Euclidean distance ถ้าหากเราต้องการวัดข้อมูลด้วย distance แบบอื่น PCA ก็จะไม่ค่อยเหมาะแล้ว อาจจะต้องไปใช้เทคนิคอื่น ๆ เช่น multi-dimensional scaling (MDS), Generalized MDS, t-SNE และ UMAP</p></li>
+</ul>
+<p>ถ้าหากต้องการศึกษาเพิ่มเติมเกี่ยวกับเทคนิคเหล่านี้เป็นภาษาไทย สามารถเข้าไปดูได้ที่ <a class="reference external" href="https://youtu.be/wq-F-CVDerk">MTEC machine learning mini-lecture: Session 2- Principals of unsupervised techniques</a> ซึ่งเป็นส่วนนึงของ <a class="reference external" href="https://youtube.com/playlist?list=PLJIJClalm2xOsbu69R_yRG3RPVU3gIQKa">MTEC Machine Learning Workshop</a></p>
+<p><strong>ผู้จัดเตรียม code ใน tutorial</strong>: ดร. อิทธิ ฉัตรนันทเวช</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Fundamentals/DimensionalityReduction"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="dim_reduct_part3_pca_CDT_images.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Applying PCA to CDT Images</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="dim_reduct_outro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Outro</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">ตัวอย่างแรก</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">ตัวอย่างที่ 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Nonlinear methods</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Brain Code Camp Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
