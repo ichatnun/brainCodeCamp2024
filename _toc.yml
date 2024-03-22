@@ -70,12 +70,14 @@ parts:
 
   - caption: Prerequisites
     chapters:
-      - file: Prereqs/BrainBuildingBlocks/Session1/S1_Intro
+      - file: Prereqs/BrainBuildingBlocks/BBB
         sections:
-          - file: Prereqs/BrainBuildingBlocks/Session1/S1L1_HelloBrain
-          - file: Prereqs/BrainBuildingBlocks/Session1/S1L2_EssentialNeuroanatomy
-          - file: Prereqs/BrainBuildingBlocks/Session1/S1L3_FunctionalAreaAndNetwork
-          - file: Prereqs/BrainBuildingBlocks/Session1/S1L4_LanguageOfTheBrain
+          - file: Prereqs/BrainBuildingBlocks/Session1/S1_Intro
+            sections:
+              - file: Prereqs/BrainBuildingBlocks/Session1/S1L1_HelloBrain
+              - file: Prereqs/BrainBuildingBlocks/Session1/S1L2_EssentialNeuroanatomy
+              - file: Prereqs/BrainBuildingBlocks/Session1/S1L3_FunctionalAreaAndNetwork
+              - file: Prereqs/BrainBuildingBlocks/Session1/S1L4_LanguageOfTheBrain
 
       - file: Prereqs/BBB2BCC/PrereqBCC
         sections:
