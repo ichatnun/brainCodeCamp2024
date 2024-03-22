@@ -1,5 +1,7 @@
 # Graduation Requirements
 
+ผู้เรียนที่เข้าร่วม Office Hour อย่างสม่ำเสมอ (ไม่น้อยกว่า 75%) และทำ mini project ผ่านเกณฑ์ของโครงการจะได้รับ certificate
+
 ## 1. Final Presentation
 
 - **Date/Time**: 30 ต.ค. 2567 เวลา 7pm-9pm
